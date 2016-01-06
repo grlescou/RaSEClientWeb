@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GeoJSON</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.12.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.12.1/build/ol.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="libs/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
+
+  <!-- Underscore -->
+  <script type="text/javascript" src="libs/underscore/underscore-min.js"></script>
+
+  <!-- JQueryUI -->
+  <script src="libs/jquery-ui-1.10.3/ui/i18n/jquery.ui.datepicker-fr.js"></script>
+  <script src="libs/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+  
+
+    <!-- Api files-->
+  <script type="text/javascript" src="js/api/ApiServer.js"></script>
+  <script type="text/javascript" src="js/api/CasMaladie.js"></script>
+  <script type="text/javascript" src="js/api/GeoLocation.js"></script>
+  <script type="text/javascript" src="js/api/Maladie.js"></script>
+  <script type="text/javascript" src="js/api/Profession.js"></script>
+  <script type="text/javascript" src="js/api/Symptome.js"></script>
+  <script type="text/javascript" src="js/api/User.js"></script>
+   <style>
+      .ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 280px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "x";
+      }
+    </style>
+
+
+    <script type="text/template" id="infobulle">
+  <div id="infobulle" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div id="infos_malade" class="panel-heading">
+      <strong>Section Communale :<%= val.nom_SECTIO %></strong> <br>
+      <strong>Departement : <%= val.departemen %></strong><br>
+      <strong>Commune : <%= val.commune %></strong>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Population : </strong>
+        <span id="detail_populatiom"><%= val.population %> <br>(Femmes : <%= val.femmes %>, Hommes : <%= val.hommes %>)</span>
+      </li>
+      <li class="list-group-item">
+        <strong>Aire : </strong>
+        <span id="detail_air"><%= val.aire_KM2 %> Km2</span>
+      </li>
+      <li class="list-group-item">
+        <strong>Densite de population :</strong>
+        <span  id="detail_densite"><%= val.pop_DENS %></span>
+      </li>
+    </ul>
+  </div>
+</script>
+
+
+
+
+
+
+
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
+    <script>
+
+
+
+    /**
+       * Elements that make up the popup.
+       */
+      var container = document.getElementById('popup');
+      var content = document.getElementById('popup-content');
+      var closer = document.getElementById('popup-closer');
+
+
+
+      /**
+       * Create an overlay to anchor the popup to the map.
+       */
+      var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+          duration: 250
+        }
+      }));
+
+
+
+
+
+
+
+
+
+
+      var image = new ol.style.Circle({
+        radius: 5,
+        fill: null,
+        stroke: new ol.style.Stroke({color: 'red', width: 1})
+      });
+
+      var styles = {
+        'Point': new ol.style.Style({
+          image: image
+        }),
+        'LineString': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'green',
+            width: 1
+          })
+        }),
+        'MultiLineString': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'green',
+            width: 1
+          })
+        }),
+        'MultiPoint': new ol.style.Style({
+          image: image
+        }),
+        'MultiPolygon': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'yellow',
+            width: 1
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 0, 0.1)'
+          })
+        }),
+        'Polygon': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: '#4A4A48',
+            width: 1
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 138, 20, 0.2)'
+          })
+        }),
+        'GeometryCollection': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'magenta',
+            width: 2
+          }),
+          fill: new ol.style.Fill({
+            color: 'magenta'
+          }),
+          image: new ol.style.Circle({
+            radius: 10,
+            fill: null,
+            stroke: new ol.style.Stroke({
+              color: 'magenta'
+            })
+          })
+        }),
+        'Circle': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'red',
+            width: 2
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.2)'
+          })
+        }),
+        'FeatureCollection': new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'magenta',
+            width: 2
+          }),
+          fill: new ol.style.Fill({
+            color: 'magenta'
+          }),
+          image: new ol.style.Circle({
+            radius: 10,
+            fill: null,
+            stroke: new ol.style.Stroke({
+              color: 'magenta'
+            })
+          })
+        }),
+      };
+
+      var styleFunction = function(feature, resolution) {
+         console.log(feature.getGeometry().getType());
+        return styles[feature.getGeometry().getType()];
+      };
+
+      var apiServer = new ApiServer();
+
+      var geojsonObject = {"type":"FeatureCollection",
+      'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326'}
+          },
+          "features":[] };
+
+
+   var vectorSource = new ol.source.Vector({
+        features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
+      });
+
+    apiServer.getDemographie(function(data){
+    console.log("load_demographie");
+    if(data){
+     console.log(data);
+    // geojsonObject.features = data;
+      $.each(data, function(key, val) {
+       console.log(val);
+        vectorSource.addFeature(new ol.Feature(new ol.geom.Polygon( val.geometry.coordinates )));
+
+       //geojsonObject.features.push(val) ;
+      
+       });
+    } 
+
+  });
+
+    console.log("geojsonObject");
+    console.log(geojsonObject);
+
+
+   
+
+    //  vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([-72.30497360229492,18.5478128256271], 0.15)));
+
+        console.log(geojsonObject.features);
+
+      
+  
+
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+        style: styleFunction
+      });
+
+
+
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          vectorLayer
+        ],
+        overlays: [overlay],
+        target: 'map',
+        controls: ol.control.defaults({
+          attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+            collapsible: false
+          })
+        }),
+        view: new ol.View({
+          projection: 'EPSG:4326',
+          center: [-72.30497360229492,18.5478128256271],
+          zoom: 8
+        })
+      });
+
+
+      /**
+       * Add a click handler to the map to render the popup.
+       */
+      // map.on('singleclick', function(evt) {
+      //   var coordinate = evt.coordinate;
+      //   var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+      //       coordinate, 'EPSG:3857', 'EPSG:4326'));
+
+      //   content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
+      //       '</code>';
+      //   overlay.setPosition(coordinate);
+      // });
+
+
+
+
+        var highlight;
+      var displayFeatureInfo = function(pixel,donnee) {
+
+        var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+          return feature;
+        });
+
+        
+        if(donnee){
+        console.log("layer or feature ")
+         console.log(donnee);
+
+         var compiled = _.template($("#infobulle").html());
+         var comp = compiled({val: donnee});
+
+       
+        if (feature) {
+
+          content.innerHTML = comp ;          
+        } else {
+          content.innerHTML = '&nbsp;';
+        }
+
+      }// end !donnee ;
+
+        if (feature !== highlight) {
+          if (highlight) {
+            vectorLayer.getSource().removeFeature(highlight);
+          }
+          if (feature) {
+            vectorLayer.getSource().addFeature(feature);
+          }
+          highlight = feature;
+        }
+
+      };
+
+
+
+
+      /**
+       * Add a click handler to hide the popup.
+       * @return {boolean} Don't follow the href.
+       */
+
+       var donnee;
+       var coordinate ;
+      closer.onclick = function() {
+        coordinate = null;
+        donnee = null;
+        overlay.setPosition(undefined);
+      
+          //displayFeatureInfo(pixeler,null);
+        closer.blur();
+        return false;
+      };
+
+
+
+       // map.on('pointermove', function(evt) {
+       //   if (evt.dragging) {
+       //    return;
+       //  }
+       //   var pixel = map.getEventPixel(evt.originalEvent);
+       //   displayFeatureInfo(pixel);
+       // });
+
+
+
+        /**
+       * Add a click handler to the map to render the popup.
+       */
+       /**
+       * Add a click handler to show the popup.
+       * 
+       */
+
+      map.on('singleclick', function(evt) {
+         coordinate = evt.coordinate;
+         donnee = null;
+         console.log("var coordinate")
+         console.log(coordinate);
+         var lon = coordinate[0];
+         var lat = coordinate[1];
+        //  var lon = "-72.30497360229492";
+        // var lat = "18.5478128256271";
+
+    apiServer.getDemographieByCoordonnee(lat,lon,function(data){
+    console.log("load_demographieCoord");
+    if(data){
+        console.log(data);
+        donnee = data.properties;
+        console.log("properties");
+        console.log(donnee);
+        displayFeatureInfo(evt.pixel,donnee);
+         overlay.setPosition(coordinate);
+     }
+
+   });
+         
+        
+        
+   });
+
+
+
+      /**
+      *  adding control to map
+      */
+
+      var zoomslider = new ol.control.ZoomSlider();
+      map.addControl(zoomslider);
+
+      var ZoomExtent = new ol.control.ZoomToExtent({
+            extent: [
+              -72.3394775390625,19.932041306115536,
+              -72.75146484374999,18.187606552494625
+            ]
+          });
+
+      map.addControl(ZoomExtent);
+
+      var overView = new ol.control.OverviewMap();
+
+         map.addControl(overView);
+
+    </script>
+  </body>
+</html>

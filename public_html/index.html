@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RaSE-Client de visualisation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		html {
+			height: 100%;
+		}
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#map-canvas {
+			height: 90%;
+			width: 99%;
+		}
+		#droite {
+			position: absolute;
+			margin: 20px;
+			right: 0px;
+			top: 50px;
+			width: 27%;
+		}
+		#droiteLieu {
+			position: absolute;
+			margin: 20px;
+			right: 0px;
+			width: 27%;
+		}
+		#search h1 {
+			margin-top: 0px;
+			text-align: center;
+		}
+		#infos_malade h1 {
+			text-align: center;
+			margin-bottom: 0px;
+			bottom: 0;
+		}
+	</style>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="libs/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
+
+	<!-- JQueryUI -->
+	<script src="libs/jquery-ui-1.10.3/ui/i18n/jquery.ui.datepicker-fr.js"></script>
+	<script src="libs/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+	
+
+	<!-- Jquery AdressPicker-->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGM8uLt8xjr99D4HA4y-nCO6SN3bDFMgY"></script>
+	<link rel="stylesheet" href="libs/jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
+	<script src="libs/jqueryAdressPicker/jquery.ui.addresspicker.js"></script>
+	<script src="js/ext/markerclusterer.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="libs/jquery-ui-1.10.3/themes/base/jquery-ui.css">
+
+	<!-- Star Rating -->
+	<script type="text/javascript" src="libs/rating/jquery.raty.js"></script>
+
+	<!-- Noty -->
+	<script type="text/javascript" src="libs/noty/jquery.noty.packaged.min.js"></script>
+
+	<!-- Underscore -->
+	<script type="text/javascript" src="libs/underscore/underscore-min.js"></script>
+
+	<!-- slider -->
+	<script type="text/javascript" src="js/bootstrap-slider.js"></script>
+	<link href="css/slider.css" rel="stylesheet">
+	
+	<!-- ngprogess -->
+	<link href="libs/ngprogess/nprogress.css" rel="stylesheet">
+	<script type="text/javascript" src="libs/ngprogess/nprogress.js"></script>
+	<!-- geoJson for google map -->
+	<script type="text/javascript" src="libs/geojson-google-maps/GeoJSON.js"></script>
+
+	<!-- handler -->
+	<script type="text/javascript"  src="js/async_functionsLoader.js"></script>
+
+	<script type="text/javascript" src="js/init.js"></script>
+
+	<!-- Api files-->
+	<script type="text/javascript" src="js/api/ApiServer.js"></script>
+	<script type="text/javascript" src="js/api/CasMaladie.js"></script>
+	<script type="text/javascript" src="js/api/GeoLocation.js"></script>
+	<script type="text/javascript" src="js/api/Maladie.js"></script>
+	<script type="text/javascript" src="js/api/Profession.js"></script>
+	<script type="text/javascript" src="js/api/Symptome.js"></script>
+	<script type="text/javascript" src="js/api/User.js"></script>
+	
+
+	<!-- Star Rating -->
+	<script type="text/javascript" src="libs/rating/jquery.raty.js"></script>
+
+</script>
+
+<script type="text/template" id="infobulle">
+	<div id="infobulle" class="panel panel-default">
+		<!-- Default panel contents -->
+		<div id="infos_malade" class="panel-heading">
+			<strong><%= val.date %></strong>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<strong>Position : </strong>
+				<span id="detail_position"><%= val.location %>(<%= val.location[1] %>,<%= val.location[0] %>)</span>
+			</li>
+			<li class="list-group-item">
+				<strong>Maladie : </strong>
+				<span id="detail_maladie"><%= val.maladie.nom %>(<%= val.maladie.id %>)</span>
+			</li>
+			<li class="list-group-item">
+				<strong>Sympomes : </strong>
+				<span  id="detail_symptome">
+				<% _.each(val.listeSymptome, function(sympt) {
+					%><%=sympt.nom %>(<%= sympt.id %>), <%
+				}) %>
+				</span>
+			</li>
+			<li class="list-group-item">
+				<strong>Notation : </strong>
+				<span id="detail_confiance" class="notation_3"><%= val.note %>/5</span>
+			</li>
+			<li class="list-group-item">
+				<strong>Reporteur : </strong>
+				<span id="detail_reporter"><%= val.user.profession.nom %></span>
+			</li>
+		</ul>
+	</div>
+</script>
+</head>
+<body>
+
+	<!-- MAP -->
+	<div id="map-canvas"></div>
+
+	
+</body>
+<script src="libs/chosen/chosen.jquery.js" type="text/javascript"></script>
+<script src="libs/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var config = {
+		'.chosen-select' : {},
+		'.chosen-select-deselect' : {
+			allow_single_deselect : true
+		},
+		'.chosen-select-no-single' : {
+			disable_search_threshold : 10
+		},
+		'.chosen-select-no-results' : {
+			no_results_text : 'Oops, nothing found!'
+		},
+		'.chosen-select-width' : {
+			width : "95%"
+		}
+	}
+	for (var selector in config) {
+		$(selector).chosen(config[selector]);
+	}
+</script>
+</html>
