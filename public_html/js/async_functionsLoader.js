@@ -373,7 +373,7 @@ map.data.setStyle(function(feature) {
 
  // When the user clicks, open an infowindow
   map.data.addListener('click', function(event) {
-          var donnee = event.feature.N;
+          var donnee = event.feature.R;
       //infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
          // infowindow.setPosition(event.feature.getGeometry().get());
       //infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
