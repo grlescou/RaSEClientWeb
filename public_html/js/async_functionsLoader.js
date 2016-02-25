@@ -151,6 +151,36 @@ $.each (data, function(i, elem){
 
 });
 
+map.data.setStyle(function(feature) {
+    var color = 'gray';
+    var pop = 1;
+    if (feature.getProperty('population')) {
+      pop = feature.getProperty('population');
+      
+      if (pop< 10000 )
+      {
+          color = "green";
+      }
+      else if(pop >10000 && pop < 40000)
+      {
+          color = "yellow";
+      }
+      else if(pop >40000 && pop < 60000){
+          color = "orange";
+      }
+      else {
+          color = "red";
+      }
+    
+    }
+    return /** @type {google.maps.Data.StyleOptions} */({
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 2
+    });
+  });
+
+
 }
 
 function clearMap(currentFeature_or_Features,infowindow){
@@ -203,7 +233,7 @@ function showFeature(geojson, style, map,currentFeature_or_Features,infowindow){
 					}
 				}
 			}else{
-				currentFeature_or_Features.setMap(map)
+				currentFeature_or_Features.setMap(map);
 				if (currentFeature_or_Features.geojsonProperties) {
 					setInfoWindow(currentFeature_or_Features,infowindow);
 				}
@@ -216,11 +246,34 @@ function showFeature(geojson, style, map,currentFeature_or_Features,infowindow){
 function setInfoWindow (feature,infowindow) {
 	console.log("Set InfoWindow demographie");
 			google.maps.event.addListener(feature, "click", function(event) {
-				var content = "<div id='infoBox'><strong>GeoJSON Feature Properties</strong><br />";
-				for (var j in this.geojsonProperties) {
-					content += j + ": " + this.geojsonProperties[j] + "<br />";
-				}
-				content += "</div>";
+				var content = "";
+				//for (var j in this.geojsonProperties) {
+					var donnee= this.geojsonProperties ;
+                                        // --------------------------------------------
+                                
+                                 if(donnee){
+                                     console.log("layer or feature ");
+                                     console.log(donnee);
+
+                                     var compiled = _.template($("#infobulle").html());
+                                     var comp = compiled({val: donnee});
+
+
+                                   
+                                      content += comp ;          
+                                  
+
+                                  }// end !donnee ;
+                                
+                                //------------------------------------------
+                                        
+				//}
+				
+                                
+                                
+                                
+                                
+                                
 				infowindow.setContent(content);
 				infowindow.setPosition(event.latLng);
 				infowindow.open(map);
@@ -232,4 +285,147 @@ function clear_markers() {
 		marker.setMap(null);
 	});
 	//markerCluster.setMap(null);
+}
+
+
+
+
+
+
+function load_demographie_2(data, map) {
+	console.log("Loading demographie");
+
+
+  var geojsonObject = {"type":"FeatureCollection",
+      'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326'}
+          },
+          "features":[] };
+
+
+
+  
+    console.log("load_demographie");
+    if(data){
+     console.log(data);
+    // geojsonObject.features = data;
+      $.each(data, function(key, val) {
+       console.log(val);
+       
+
+       geojsonObject.features.push(val) ;
+      
+       });
+    } 
+
+ 
+
+    console.log("geojsonObject");
+    console.log(geojsonObject);
+
+    map.data.addGeoJson(geojsonObject);
+
+ 
+    
+    var infowindow = new google.maps.InfoWindow();
+
+  
+  var zoneStyle ={
+        strokeColor: '#4A4A48',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FAFAD2',
+        fillOpacity: 0.8
+      };
+  
+
+map.data.setStyle(function(feature) {
+    var color = 'gray';
+    var pop = 1;
+    if (feature.getProperty('population')) {
+      pop = feature.getProperty('population');
+      
+      if (pop< 10000 )
+      {
+          color = "green";
+      }
+      else if(pop >10000 && pop < 40000)
+      {
+          color = "yellow";
+      }
+      else if(pop >40000 && pop < 60000){
+          color = "orange";
+      }
+      else {
+          color = "red";
+      }
+    
+    }
+    return /** @type {google.maps.Data.StyleOptions} */({
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 2
+    });
+  });
+
+
+ // When the user clicks, open an infowindow
+  map.data.addListener('click', function(event) {
+          var donnee = event.feature.N;
+      //infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
+         // infowindow.setPosition(event.feature.getGeometry().get());
+      //infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+         // infowindow.open(map);
+          
+          
+          console.log("show donnee");
+          console.log(donnee);
+          
+          
+          
+          
+          
+          
+          
+          var content = "";
+				//for (var j in this.geojsonProperties) {
+					//var donnee= this.geojsonProperties ;
+                                        // --------------------------------------------
+                                
+                                 if(donnee){
+                                     console.log("layer or feature ");
+                                     console.log(donnee);
+
+                                     var compiled = _.template($("#infobulle").html());
+                                     var comp = compiled({val: donnee});
+
+
+                                   
+                                      content += comp ;          
+                                  
+
+                                  }// end !donnee ;
+                                
+                                //------------------------------------------
+                                        
+				//}
+				
+                                
+                                
+                                
+                                
+                                
+				infowindow.setContent(content);
+				infowindow.setPosition(event.latLng);
+				infowindow.open(map);
+          
+          
+          
+          
+          
+          
+  });    
+
 }

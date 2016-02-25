@@ -5,8 +5,12 @@ function ApiServer() {
 
 	// Constantes des URLS avec le ApiServer
 	//
-	this.prefix = "http://";
-	this.IP = "localhost";
+	//this.prefix = "http://";
+	//this.IP = "localhost";
+        
+        this.prefix = "http://";
+	this.IP = "192.168.127.140";
+        
 	this.PORT = "8080";
 	this.ressources = "/RASE_HAITI_Server/api/v1";
 	
