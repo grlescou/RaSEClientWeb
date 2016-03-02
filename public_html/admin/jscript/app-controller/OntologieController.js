@@ -23,9 +23,36 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
         }
     };
   
+    var apiServer = new ApiServer();
+
+    
+       // get Categorie
+       $http.get(apiServer.getURLCategeorie(),conf)
+        .success(function (data, status, headers, conf)
+        {
+        	 $scope.message= " i'm in";
+          console.log(data);
+           $scope.listCategorie= data;
+         
+      if (data.leng){
+        console.log(data);
+        $scope.message = "read";
+        //$location.path('/home');
+      }
+      else{
+        $scope.message = data.message
+      }
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+        });
+        
+        
+  /*      
 
     // get maladie
-    $http.get("http://192.168.127.140:8080/rasehtserver/api/v1/maladie/",conf)
+    $http.get(apiServer.getURLMaladie(),conf)
         .success(function (data, status, headers, conf)
         {
         	 $scope.message= " i'm in";
@@ -49,31 +76,10 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
 
 
 
-       // get Categorie
-       $http.get("http://192.168.127.140:8080/rasehtserver/api/v1/categorie/",conf)
-        .success(function (data, status, headers, conf)
-        {
-        	 $scope.message= " i'm in";
-          console.log(data);
-           $scope.listCategorie= data;
-         
-      if (data.leng){
-        console.log(data);
-        $scope.message = "read";
-        //$location.path('/home');
-      }
-      else{
-        $scope.message = data.message
-      }
-        })
-        .error(function (data, status, headers, conf)
-        {
-          $scope.message = "SUBMIT ERROR";
-        });
 
 
         // get Symptome
-       $http.get("http://192.168.127.140:8080/rasehtserver/api/v1/symptome/",conf)
+       $http.get(apiServer.getURLSymptome(),conf)
         .success(function (data, status, headers, conf)
         {
         	 $scope.message= " i'm in";
@@ -95,7 +101,7 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
         });
 
 
- 
+ */
 
  
    
@@ -106,6 +112,92 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
 
         	$scope.tab = [false,false,false];
         	$scope.tab[$tab] = true;
+                
+                
+                if($tab === 0)
+                {
+                                // get Categorie
+                    $http.get(apiServer.getURLCategeorie(),conf)
+                     .success(function (data, status, headers, conf)
+                     {
+                              $scope.message= " i'm in";
+                       console.log(data);
+                        $scope.listCategorie= data;
+
+                   if (data.leng){
+                     console.log(data);
+                     $scope.message = "read";
+                     //$location.path('/home');
+                   }
+                   else{
+                     $scope.message = data.message
+                   }
+                     })
+                     .error(function (data, status, headers, conf)
+                     {
+                       $scope.message = "SUBMIT ERROR";
+                     });
+
+   
+                }
+                 if($tab === 1)
+                {
+                    
+                                    // get maladie
+                  $http.get(apiServer.getURLMaladie(),conf)
+                      .success(function (data, status, headers, conf)
+                      {
+                               $scope.message= " i'm in";
+                        console.log(data);
+                        $scope.listMaladie= data;
+
+
+                    if (data.leng){
+                      console.log(data);
+                      $scope.message = "read";
+                      //$location.path('/home');
+                    }
+                    else{
+                      $scope.message = data.message
+                    }
+                      })
+                      .error(function (data, status, headers, conf)
+                      {
+                        $scope.message = "SUBMIT ERROR";
+                      });
+
+                    
+                }
+                 if($tab === 2)
+                {
+                    
+                                // get Symptome
+                  $http.get(apiServer.getURLSymptome(),conf)
+                   .success(function (data, status, headers, conf)
+                   {
+                            $scope.message= " i'm in";
+                     console.log(data);
+                      $scope.listSymptome= data;
+
+                 if (data.leng){
+                   console.log(data);
+                   $scope.message = "read";
+                   //$location.path('/home');
+                 }
+                 else{
+                   $scope.message = data.message
+                 }
+                   })
+                   .error(function (data, status, headers, conf)
+                   {
+                     $scope.message = "SUBMIT ERROR";
+                   });
+
+
+                    
+                }
+                
+                
 			
 
 

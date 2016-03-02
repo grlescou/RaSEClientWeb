@@ -15,9 +15,13 @@ app.controller('userCntr', function($scope,$location, $http ) {
             'Content-Type' : 'application/json'
         }
     };
-  
+    
+    var apiServer = new ApiServer();
+    
+    
 
-    $http.get("http://192.168.127.140:8080/rasehtserver/api/v1/utilisateur/",conf)
+
+    $http.get(apiServer.getURLUtilisateur(),conf)
         .success(function (data, status, headers, conf)
         {
         	 $scope.message= " i'm in";

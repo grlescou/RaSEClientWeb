@@ -29,24 +29,21 @@ Left side column. contains the sidebar
         <div class="modal-header">
             <h3 class="modal-title"> Edit- Maladie</h3>
         </div>
-        <div class="modal-body">
-          
-
-
-            <form class="form-horizontal">
+      <div class="modal-body">
+           <form class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                    <input type="text" class="form-control" ng-model="items.m.id" id="inputNom" placeholder="Id" readonly="">
                   </div>
                 </div>
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                    <input type="text" class="form-control" ng-model="items.m.nom" id="inputNom" placeholder="Nom">
                   </div>
                 </div>
                  <div class="form-group">
@@ -54,20 +51,20 @@ Left side column. contains the sidebar
 
                   <div class="col-sm-10">
                   
-                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                    <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Enter Description"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" ng-model="items.seuil" id="inputEmail3" placeholder="Email">
+                    <input type="number" class="form-control" ng-model="items.m.seuil" id="inputEmail3" placeholder="Email">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2  control-label">Type Seuil</label>
                  <div class="col-sm-10">
-                 <select class="form-control select2"  ng-model="items.typeSeuil"  style="width: 100%;">
+                 <select class="form-control select2"  ng-model="items.m.typeSeuil"  style="width: 100%;">
                   <option value="" selected="selected">--Choix Type Seuil--</option>
                   <option value='popolation'>Par % population</option>
                   <option value='cas'>Par nombre de cas</option>
@@ -79,10 +76,9 @@ Left side column. contains the sidebar
                  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
 
-                	 <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.categorie"  style="width: 100%;">
-                  <option value="" selected="selected">--Choix Categorie--</option>
-                  <option value='Virus'>Virus</option>
+                   <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.m.categorie"  ng-options="c.nom for c in items.selectCategories track by c.id"  style="width: 100%;">
+               
                 </select>
                   </div>
                 </div>
@@ -101,7 +97,7 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok();">Modifer</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -111,10 +107,74 @@ Left side column. contains the sidebar
             <h3 class="modal-title"> Nouvelle Maladie</h3>
         </div>
         <div class="modal-body">
-           Nouveau
+           <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
+
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-model="items.m.seuil" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2  control-label">Type Seuil</label>
+                 <div class="col-sm-10">
+                 <select class="form-control select2"  ng-model="items.m.typeSeuil"  style="width: 100%;">
+                  <option value="" selected="selected">--Choix Type Seuil--</option>
+                  <option value='popolation'>Par % population</option>
+                  <option value='cas'>Par nombre de cas</option>
+                </select>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
+
+                	 <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.m.categorie" ng-options="c.nom for c in items.selectCategories"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Ajouter</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok();">Ajouter</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -156,12 +216,11 @@ Left side column. contains the sidebar
                  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label" >Categorie</label>
 
-                	 <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.categorie"  style="width: 100%;" disabled="true">
-                  <option value="" selected="selected">--Choix Categorie--</option>
-                  <option value='Virus'>Virus</option>
-                </select>
+                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="items.categorie.nom" id="inputEmail3" placeholder="Categorie" readonly="">
                   </div>
+        
                 </div>
 
 
@@ -171,11 +230,11 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Supprimer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Snnuler</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
-
+    
 
     <script type="text/ng-template" id="detailsmodal.html">
         <div class="modal-header">
@@ -231,12 +290,13 @@ Left side column. contains the sidebar
                  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
 
-                	 <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.categorie"  style="width: 100%;" disabled="true">
-                  <option value="" selected="selected">--Choix Categorie--</option>
-                  <option value='Virus'>Virus</option>
-                </select>
+          
+        
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="items.categorie.nom" id="inputEmail3" placeholder="Categorie" readonly="">
                   </div>
+        
+        
                 </div>
 
             
@@ -315,7 +375,7 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Modifer</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -325,10 +385,50 @@ Left side column. contains the sidebar
             <h3 class="modal-title"> Nouvelle Categorie</h3>
         </div>
         <div class="modal-body">
-           Nouveau
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Categorie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Ajouter</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Ajouter</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -373,8 +473,8 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Supprimer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Snnuler</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
 
@@ -490,7 +590,7 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Modifer</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -499,11 +599,51 @@ Left side column. contains the sidebar
         <div class="modal-header">
             <h3 class="modal-title"> Nouvelle Symptome</h3>
         </div>
-        <div class="modal-body">
-           Nouveau
+         <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Symptome</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Ajouter</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Ajouter</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -548,8 +688,8 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Supprimer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Snnuler</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
 
@@ -614,7 +754,97 @@ Left side column. contains the sidebar
         </div>
     </script>
 
+   
 
+    <!-- Ajouter dans la la liste des symptomes a une maladie -->
+
+        
+    
+    
+      <script type="text/ng-template" id="AddSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Ajouter un Symptome a: {{items.maladie.nom}}</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            
+            <!-- liste des symptomes associes a la maladie  -->
+             <div>
+             
+             
+             
+              <table id="example1" datatable="ng" dt-instance="ListSymptomeInstance" class="row-border hover">
+                <thead>
+                <tr>
+                	<th > 
+                        
+            
+            
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Symptome</label>
+
+  
+          	 <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.symp" ng-options="c.nom for c in items.listSymptomes track by c.id"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>
+              
+              
+            
+              </div>
+           
+            </form>
+            
+                        </th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="items.maladie.symptomes.push(items.symp);" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Nom symptome</th>
+  
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="m in items.maladie.symptomes">
+                  <td>{{m.nom}}</td>
+               
+                   
+                  <td>
+                    <button type="button" ng-click="items.maladie.symptomes.splice($index,1); $index=$index+1;" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                </td>
+                </tr>
+               
+                
+                </tbody>
+         
+              </table>
+
+
+             
+             
+             
+             </div>
+     
+
+
+        </div>
+        <div class="modal-footer">
+         
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.maladie; ok();">Valider</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
 
 
 
@@ -636,7 +866,7 @@ Left side column. contains the sidebar
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Gestion des utilisateurs
+        Gestion de l'ontologie
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -652,15 +882,17 @@ Left side column. contains the sidebar
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Ontologie</h3>
+          <h3 class="box-title"></h3>
 
           <div class="box-tools pull-right">
            
           </div>
         </div>
+          <div class="alert alert-success" role="alert" ng-show="success===true" ng-bind="message" ></div>
+          <div class="alert alert-danger" role="alert" ng-show="success===false" ng-bind="message" ></div>
         <div class="box-body">
 
-
+            
 
 
      <uib-tabset justified="true"  >
@@ -669,9 +901,9 @@ Left side column. contains the sidebar
      <br>
     <br>
 
-    Categorie
+   
 
-    <table id="example1" datatable="ng" class="row-border hover">
+    <table id="example1" datatable="ng" dt-instance="categorieInstance" class="row-border hover">
                 <thead>
                 <tr>
                 	<th colspan="2"> </th>
@@ -697,7 +929,7 @@ Left side column. contains the sidebar
                   <td>{{m.description}}</td>
                    
                   <td>
-                  <button type="button" ng-click="openDetailsCategorie('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                 <!-- <button type="button" ng-click="openDetailsCategorie('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>-->
                     <button type="button" ng-click="openEditCategorie('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
                     <button type="button" ng-click="openDelCategorie('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 
@@ -729,17 +961,17 @@ Left side column. contains the sidebar
          <table id="example2" datatable="ng" class="row-border hover">
                 <thead>
                 <tr>
-                	<th colspan="4"> </th>
+                	<th colspan="5"> </th>
                 	<th>
                     <div class="form-group">
-                        <button type="submit" ng-click="openNew('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                        <button type="submit" ng-click="openNewMaladide('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
                     </div>
                 </th>
                 </tr>
                 <tr>
                   <th>Nom</th>
                   <th>Categorie</th>
-                  <!--<th>Description</th>-->
+                  <th>Liste Symptomes</th>
                   <th>Seuil</th>
                    <th>Type Seuil</th>
                   <th>action</th>
@@ -749,14 +981,14 @@ Left side column. contains the sidebar
 
                 <tr ng-repeat="m in listMaladie">
                   <td>{{m.nom}}</td>
-                  <td>{{m.categorie}}</td>
-                  <!--<td>{{m.description}}</td>-->
+                  <td>{{m.categorie.nom}}</td>
+                  <td> <button type="button" ng-click="openAjouterSymptomeMaladide('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button></td>
                    <td>{{m.seuil}}</td>
                     <td>{{m.typeSeuil}}</td>
                   <td>
-                  <button type="button" ng-click="openDetails('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
-                    <button type="button" ng-click="openEdit('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                    <button type="button" ng-click="openDel('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" ng-click="openDetailsMaladide('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                    <button type="button" ng-click="openEditMaladide('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDelMaladide('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 
                 </td>
                 </tr>
@@ -778,7 +1010,7 @@ Left side column. contains the sidebar
 
     </uib-tab>
     <uib-tab heading="Symptomes" ng-click="onClick(2)" active="tab[2]" >
-    Symptomes
+   
 
     <br>
     <br>

@@ -181,6 +181,7 @@ angular.module('RaseApp').controller('ModalInstanceCtrl', function ($scope, $uib
 
 
 
+
 $scope.EditSave= function(){
  		console.log("edit save action");
     	console.log($scope.items);

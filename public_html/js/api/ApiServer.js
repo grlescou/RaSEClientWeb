@@ -6,27 +6,35 @@ function ApiServer() {
 	// Constantes des URLS avec le ApiServer
 	//
 	this.prefix = "http://";
-	this.IP = "localhost";
+	//this.IP = "localhost";
      
         //this.prefix = "http://";
-	//this.IP = "192.168.127.140";
+	this.IP = "192.168.127.140";
         
 	this.PORT = "8080";
 	this.ressources = "/rasehtserver/api/v1";
 	
+        this.URL_categorie = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/categorie/";
 	this.URL_maladie = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/maladie/";
 	this.URL_symptome = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/symptome/";
 	this.URL_profession = this.prefix + this.IP + ":" + this.PORT + this.ressources+  "/profession/";
 	this.URL_casMaladie = this.prefix + this.IP + ":" + this.PORT + this.ressources+  "/casMaladie/";
 	this.URL_maladieSymptomes = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/maladieSymptomes/";
 	this.URL_demographie = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/demographie/";
+        this.URL_utilisateur = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/utilisateur /";
 
 	
+        
+        // Recuperation des categories
+	//
+	ApiServer.prototype.getcategorie = function(callback) {
+		$.getJSON(this.URL_categorie, callback);
+	}
 
 	// Recuperation des maladies
 	//
 	ApiServer.prototype.getMaladie = function(callback) {
-		$.getJSON(this.URL_maladies, callback);
+		$.getJSON(this.URL_maladie, callback);
 	}
 	// Recupération des symtômes
 	//
@@ -82,7 +90,10 @@ function ApiServer() {
 
 
 	// *** Accesseurs de consultation *** //
-	//
+        // 
+        ApiServer.prototype.getURLCategeorie = function() {
+		return this.URL_categorie;
+	}
 	ApiServer.prototype.getURLMaladie = function() {
 		return this.URL_maladie;
 	}
@@ -102,6 +113,10 @@ function ApiServer() {
 
 	ApiServer.prototype.getURLDemographie = function() {
 		return this.URL_demographie;
+	}
+        
+        ApiServer.prototype.getURLUtilisateur = function() {
+		return this.URL_utilisateur;
 	}
 
 

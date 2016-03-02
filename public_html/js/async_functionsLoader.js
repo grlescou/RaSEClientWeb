@@ -340,7 +340,7 @@ function load_demographie_2(data, map) {
         fillOpacity: 0.8
       };
   
-
+//  style regle couleur pour la carte 
 map.data.setStyle(function(feature) {
     var color = 'gray';
     var pop = 1;
