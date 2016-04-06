@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Bootstrap -->
+		<link href="../../libs/bootstrap/css/bootstrap.flaty.min.css" rel="stylesheet">
+
+		<!-- Font Awesome -->
+		<link href="../../libs/font-awesome-4.0.3/css/font-awesome.css" rel="stylesheet">
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../../libs/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
+
+		<!-- JQueryUI -->
+		<script src="../../libs/jquery-ui-1.10.3/ui/i18n/jquery.ui.datepicker-fr.js"></script>
+		<script src="../../libs/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+		<script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Choosen -->
+		<link rel="stylesheet" href="../../libs/chosen/chosen.css">
+
+		<link rel="stylesheet" href="../../libs/jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
+
+		<link rel="stylesheet" href="../../libs/jquery-ui-1.10.3/themes/base/jquery-ui.css">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGM8uLt8xjr99D4HA4y-nCO6SN3bDFMgY&sensor=true"></script>
+
+		<!-- Jquery AdressPicker-->
+		<script src="../../libs/jqueryAdressPicker/jquery.ui.addresspicker.js"></script>
+
+		<!-- Star Rating -->
+		<script type="text/javascript" src="../../libs/rating/jquery.raty.js"></script>
+
+		<!-- Noty -->
+		<script type="text/javascript" src="../../libs/noty/jquery.noty.packaged.min.js"></script>
+
+		<!-- ngprogess -->
+		<link href="../../libs/ngprogess/nprogress.css" rel="stylesheet">
+		<script type="text/javascript" src="../../libs/ngprogess/nprogress.js"></script>
+
+        	<script type="text/javascript" src="../js/controller.js"></script>
+		<script type="text/javascript" src="../js/view.js"></script>
+		<script type="text/javascript" src="../js/initUi.js"></script>
+		<script type="text/javascript" src="../js/init_components.js"></script>
+		<script type="text/javascript" src="../js/init_components_online.js"></script>
+
+		<link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="">Projet RaSE</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav"> 
+					<li class="active">
+						<a href="">Nouveau cas</a>
+					</li>
+					<li >
+						<a href="#">Visualisation</a>
+					</li>
+					<li>
+						<a href="#">Modifier l'ontologie</a>
+					</li>
+					<li>
+						<a href="#">Client mobile</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="" id="disp_menu" class="dropdown-toggle" data-toggle="dropdown">Bonjour <span id="identifiant_user"></span><b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li data-toggle="modal" data-target="#ParamModal">
+								<a href="#"><span id="disp_connexion">Connexion</span></a>
+							</li>
+							<li id="statistiques" data-toggle="modal" data-target="#StatModal">
+								<a href="#"><span id="disp_stat"><i class="fa fa-bar-chart-o"></i> Statistiques <span class="badge" id="badge_stat">42</span></span></a>
+							<li id="disp_deco">
+								<a href="#" id="btn_deco"><i class="fa fa-power-off"></i> Deconnexion</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		
+		<a href="../../common/chrome/rase/RASE.crx"><img src="img/rase.png" alt="Installer l'extension chrome" id="rase_ext" style="position:absolute; bottom:0px; height:50px; width:50px;"></a>
+		
+    </body>
+</html>

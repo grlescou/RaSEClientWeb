@@ -1,0 +1,214 @@
+
+
+        <link href="../../libs/bootstrap/css/bootstrap.flaty.min.css" rel="stylesheet">
+
+		<!-- Font Awesome -->
+		<link href="../../libs/font-awesome-4.0.3/css/font-awesome.css" rel="stylesheet">
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="../../libs/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
+
+		<!-- JQueryUI -->
+		<script src="../../libs/jquery-ui-1.10.3/ui/i18n/jquery.ui.datepicker-fr.js"></script>
+		<script src="../../libs/jquery-ui-1.10.3/ui/jquery-ui.js"></script>
+		<script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Choosen -->
+		<link rel="stylesheet" href="../../libs/chosen/chosen.css">
+
+		<link rel="stylesheet" href="../../libs/jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
+
+		<link rel="stylesheet" href="../../libs/jquery-ui-1.10.3/themes/base/jquery-ui.css">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGM8uLt8xjr99D4HA4y-nCO6SN3bDFMgY&sensor=true"></script>
+
+		<!-- Jquery AdressPicker-->
+		<script src="../../libs/jqueryAdressPicker/jquery.ui.addresspicker.js"></script>
+
+		<!-- Star Rating -->
+		<script type="text/javascript" src="../../libs/rating/jquery.raty.js"></script>
+
+		<!-- Noty -->
+		<script type="text/javascript" src="../../libs/noty/jquery.noty.packaged.min.js"></script>
+
+		<!-- ngprogess -->
+		<link href="../../libs/ngprogess/nprogress.css" rel="stylesheet">
+		<script type="text/javascript" src="../../libs/ngprogess/nprogress.js"></script>
+
+<!-- Site wrapper -->
+<div class="wrapper"   ng-controller="reportCntr"  ng-init="message">
+<header class="main-header" ng-include='"../../templates/header.html"' ng-show="toshow" >  </header>
+    <div id="panneau_client">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<center>
+						<h2><i class="fa fa-hospital-o"></i> Client de saisie v0.8.4
+						<i style="float:right;" alt="Vous êtes connecté !"class="fa fa-signal" id="connect" style="float:right;"></i>
+						<i style="float:right; display:none;" alt="Vous êtes deconnecté !"class="fa fa-download" id="deconnect" style="float:right;"></i>
+					</center>
+				</div>
+
+    <div class="panel-body">
+
+					<!-- Saisie d'une maladie -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">Maladie rencontr&eacute;e </h4>
+						</div>
+						<div class="panel-body">
+							<select tabindex="1" id="list_maladie_chosen" style="width:100%;" class="form-control">
+								
+							</select>
+						</div>
+					</div>
+
+					<!-- Saisie des symtômes -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+                                                    <h4 class="panel-title">Sympt&ocirc;mes visibles </h4>
+						</div>
+						<div class="panel-body">
+							<select tabindex="2" id="list_symtome_chosen" data-placeholder="Choisissez les symtômes" style="width:100%;" multiple class="form-control chosen-select" tabindex="8"></select>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-plus"></i> El&eacute;ments suppl&eacute;mentaires </a></h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body">
+
+								<div class="form-group">
+									<label for="adresspicker_sup" style="display:block;"><i class="fa fa-map-marker"></i> Lieu</label>
+									<input type="text" class="form-control" placeholder="Ex: Nice, France" id="adresspicker_sup" style="display: inline;width: 90%;">
+									<h3 style="display:inline;"><i style="cursor:pointer;" class="fa fa-crosshairs" id="locate" title="Localiser automatiquement"></i></h3>
+									<input type="text" class="form-control" placeholder="Latitude" id="latitude" style="display: inline;width: 39%;">
+									<input type="text" class="form-control" placeholder="Longitude" id="longitude" style="display: inline;width: 50%;">
+									<input type="text" class="form-control" placeholder="Longitude" id="ville" style="display: none;width: 50%;">
+								</div>
+
+								<div class="form-group">
+									<label for="datepicker_sup"><i class="fa fa-calendar"></i> Date</label>
+									<input type="text" class="form-control" placeholder="Ex: 12 janvier 2013" id="datepicker_sup">
+								</div>
+
+								<div class="form-group">
+									<label for="exampleInputEmail1"><i class="fa fa-users"></i> Nombre de cas</label>
+									<select id="select_nb_cas"></select>
+								</div>
+
+								<div class="form-group">
+									<label for="list_profession_chose2"><i class="fa fa-eye"></i> Observateur</label>
+									<select tabindex="100" id="list_profession_chose2" data-placeholder="Choisissez la profession" style="width:100%;" class="form-control chosen-select"></select>
+								</div>
+
+								<div class="form-group">
+									<label for="exampleInputEmail1"><i class="fa fa-info"></i> Remarque</label>
+									<textarea class="form-control" rows="3" id="remarque"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Notation -->
+					<div class="panel panel-default" id="panel_notation">
+						<div class="panel-heading">
+							<h4 class="panel-title">Notation</h4>
+						</div>
+						<center>
+							<div id="notation" tabindex="3"></div>
+						</center>
+					</div>
+
+					<a href="#" id="btn_annuler" class="btn btn-default enabled" role="button">Annuler</a>
+					<a href="#" tabindex="4" style="float: right;" id="btn_envoyer" class="btn btn-primary enabled" role="button">Envoyer</a>
+
+				</div>
+                        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+  <!-- /.content-wrapper -->
+<!-- 
+    <div  ng-include='"templates/footer.html"'></div>
+
+    <aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'   ></aside>
+
+     /.control-sidebar
+   Add the sidebar's background. This div must be placed
+       immediately after the control sidebar 
+  <div class="control-sidebar-bg"></div> -->
+
+
+
+
+
+
+
+<footer class="main-footer" ng-include='"templates/footer.html"' ng-show="toshow"> </footer>
+<aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'  ng-show="toshow" ></aside>
+
+     <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg" ng-show="toshow"></div>
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+ 
+
+
+
+
+

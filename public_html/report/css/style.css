@@ -1,0 +1,44 @@
+body {
+	background-color: #E6E6E6;
+}
+
+#star_rating {
+	width: 200px;
+	margin: auto;
+}
+
+#star_rating span {
+	font-size: 40px;
+	color: orange;
+	cursor: pointer;
+}
+
+#star_rating span:hover:before {
+	content: "\2605";
+	position: absolute;
+	color: orange;
+}
+
+#notation {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+*, *:before, *:after {
+	-webkit-box-sizing: gfd;
+	-moz-box-sizing: fdg;
+	box-sizing: dfg;
+}
+
+#brief_non_sync {
+	margin-right: 10px;
+	float: left;
+	position: relative;
+	width: 500px;
+}
+
+#panneau_client {
+	margin: auto;
+	vertical-align: middle;
+	width: 500px;
+}
