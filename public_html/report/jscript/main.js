@@ -17,13 +17,13 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
 
   $routeProvider
     // Home
-    .when("/", {templateUrl: "../partials/home.html", controller: "MainCtrl"})
+    .when("/", {templateUrl: "partials/home.html", controller: "MainCtrl"})
     
     // Pages
-    .when("/home", {templateUrl: "../partials/home.html", controller: "MainCtrl"})
-    .when("/gesReport", {templateUrl: "../partials/GestionReport.html", controller: "reportCntr"})
+    .when("/home", {templateUrl: "partials/home.html", controller: "MainCtrl"})
+    .when("/gesReport", {templateUrl: "partials/GestionReport.html", controller: "reportCntr"})
 
-   .when("/login", {templateUrl: "login.html", controller: "formCtrl"})
+   //.when("/login", {templateUrl: "login.html", controller: "formCtrl"})
     // else 404
     .otherwise("/404", {redirectTo: '/new' });
 
@@ -67,14 +67,14 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
  * Controls all other Pages
  */
 app.controller('MainCtrl', function ($scope, $location, $http ) {
-  $scope.toshow = true;
-  
-  if($location.path() == "/login"){
-    
-    
-    $location.path("/login");
-    $scope.toshow = false;
-  }
+//  $scope.toshow = true;
+//  
+//  if($location.path() == "/login"){
+//    
+//    
+//    $location.path("/login");
+//    $scope.toshow = false;
+ // }
   console.log("Page Controller reporting for duty2.");
 
 });

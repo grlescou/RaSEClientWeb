@@ -1,6 +1,6 @@
+<!-- Appel des fichiers bootstrap -->
 
-
-        <link href="../../libs/bootstrap/css/bootstrap.flaty.min.css" rel="stylesheet">
+                <link href="../../libs/bootstrap/css/bootstrap.flaty.min.css" rel="stylesheet">
 
 		<!-- Font Awesome -->
 		<link href="../../libs/font-awesome-4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -33,17 +33,21 @@
 		<!-- ngprogess -->
 		<link href="../../libs/ngprogess/nprogress.css" rel="stylesheet">
 		<script type="text/javascript" src="../../libs/ngprogess/nprogress.js"></script>
+<!-- fin appel -->
 
 <!-- Site wrapper -->
 <div class="wrapper"   ng-controller="reportCntr"  ng-init="message">
-<header class="main-header" ng-include='"../../templates/header.html"' ng-show="toshow" >  </header>
+<header class="main-header" ng-include='"../templates/header.html"' >  </header>
+
+
     <div id="panneau_client">
 			<div class="panel panel-primary">
+                            <a href="../templates/header.html"></a>
 				<div class="panel-heading">
 					<center>
-						<h2><i class="fa fa-hospital-o"></i> Client de saisie v0.8.4
-						<i style="float:right;" alt="Vous êtes connecté !"class="fa fa-signal" id="connect" style="float:right;"></i>
-						<i style="float:right; display:none;" alt="Vous êtes deconnecté !"class="fa fa-download" id="deconnect" style="float:right;"></i>
+						<h2><i class="fa fa-hospital-o"></i> Report d'un cas de maladie
+						<i style="float: right;" alt="Vous êtes connecté !"class="fa fa-signal" id="connect" ></i>
+						<i style="float: right; display:none;" alt="Vous êtes deconnecté !"class="fa fa-download" id="deconnect" ></i>
 					</center>
 				</div>
 
@@ -54,9 +58,9 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">Maladie rencontr&eacute;e </h4>
 						</div>
-						<div class="panel-body">
-							<select tabindex="1" id="list_maladie_chosen" style="width:100%;" class="form-control">
-								
+                                            <div class="panel-body" ng-controller="reportCntr">
+                                                <select tabindex="1" ng-model="items." style="width:100%;" class="form-control">
+								 
 							</select>
 						</div>
 					</div>
