@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="RaseApp">
+    <head>
+        <base href="/raseclientweb/report/"> 
+        <title>RaSE | Report d'un cas de maladie</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+         <link rel="stylesheet" href="css/style.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <!--<link rel="stylesheet" href="dist/css/AdminLTE.min.css"> -->
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+        <!-- iCheck -->
+        <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+
+
+        <!-- for datatable css  -->
+
+
+
+        <link rel="stylesheet"   href="../libs/vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet"  href="../libs/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+        <link rel="stylesheet"  href="../libs/vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables/media/css/jquery.dataTables.min.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-colreorder/css/dataTables.colReorder.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-colvis/css/dataTables.colVis.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-responsive/css/dataTables.responsive.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-scroller/css/dataTables.scroller.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-buttons/css/buttons.dataTables.css">
+        <link rel="stylesheet"  href="../libs/vendor/datatables-select/css/select.dataTables.css">
+        <link rel="stylesheet"  href="../libs/vendor/backtotop/backtotop.min.css">
+        <link rel="stylesheet"  href="../libs/vendor/highlightjs/styles/github.css">
+        <link rel="stylesheet" href="../libs/angular-datatables/plugins/bootstrap/datatables.bootstrap.min.css">
+
+        <!-- ...............pour le Web service........................  -->
+        <script src="../js/api/ApiServer.js" type="text/javascript"></script>
+  
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+       <ng-view ></ng-view>
+
+
+
+        <!-- app script  -->
+        <!-- jQuery 2.2.0 -->
+        <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <!-- SlimScroll -->
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- FastClick -->
+        <script src="plugins/fastclick/fastclick.js"></script>
+        <!-- Report App -->
+        <script src="dist/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="dist/js/demo.js"></script>
+        <!-- iCheck -->
+        <script src="plugins/iCheck/icheck.min.js"></script>
+
+
+
+
+        <script src="../libs/Angularjs/angular-1.5.0/angular.js"></script>
+        <script src="../libs/Angularjs/angular-1.5.0/angular-loader.js"></script>
+        <script src="../libs/Angularjs/angular-1.5.0/angular-resource.js"></script>
+        <script src="../libs/Angularjs/angular-1.5.0/angular-route.js"></script>
+        <script src="../libs/Angularjs/angular-1.5.0/angular-cookies.js"></script>
+        <script src="../libs/Angularjs/angular-1.5.0/angular-animate.js"></script>
+
+        <script src="../libs/angular-datatables/angular-datatables.js"></script>
+
+
+
+        <!-- for datatable -->
+        <script src="../libs/vendor/highlightjs/highlight.pack.js"></script>
+        <script src="../libs/vendor/backtotop/backtotop.min.js"></script>
+        <script src="../libs/vendor/datatables/media/js/jquery.dataTables.js"></script>
+        <script src="../libs/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+        <script src="../libs/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+        <script src="../libs/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+        <script src="../libs/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+        <script src="../libs/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+        <script src="../libs/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+        <script src="../libs/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+        <script src="../libs/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+        <script src="../libs/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+        <script src="../libs/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+        <script src="../libs/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+        <script src="../libs/vendor/datatables-buttons/js/buttons.flash.js"></script>
+        <script src="../libs/vendor/datatables-buttons/js/buttons.html5.js"></script>
+        <script src="../libs/vendor/datatables-buttons/js/buttons.print.js"></script>
+        <script src="../libs/vendor/datatables-select/js/dataTables.select.js"></script>
+        <script src="../libs/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../libs/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="../libs/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="../libs/vendor/angular-translate/angular-translate.min.js"></script>
+
+
+        <script src="../libs/ui-bootstrap-tpls-1.1.2.js"></script>
+
+        <!-- my app -->
+
+<script src="jscript/main.js"></script>
+<script src="jscript/app-controller/ReportCasMaladieController.js"></script>
+
+    </body>
+</html>
