@@ -1,5 +1,12 @@
+var limitAdm = "departement";
 
-
+function SelectChangeAdmLimit(){
+    limitAdm = document.getElementById("IdSelectLimitAdm").value;
+    console.log("choix :"+ limitAdm);
+    console.log("add evnet to map");
+    initialize();
+     console.log("all done!!");
+}
 
 // initialiser 
 console.log("in init file");
@@ -36,18 +43,67 @@ function initialize() {
 	// });
 
 
-
-	apiServer.getDemographie(function(data){
+          if (limitAdm === "departement") {
+	
+        apiServer.getDemographieDepartement(2,function(data){
 		console.log(data);
 		if(data){
 			console.log(data);
-			load_demographie_2 (data, map);
+                
+			load_demographie_Departement (data, map);
 			NProgress.done();
+                
+                    
 		} else{
 			$("#center").click();
 		}
 
 	});
+        
+        
+       }
+          if (limitAdm === "commune"){
+           
+             apiServer.getDemographieCommune(2,function(data){
+		console.log(data);
+		if(data){
+			console.log(data);
+                
+			load_demographie_Commnune (data, map);
+			NProgress.done();
+                
+                    
+		} else{
+			$("#center").click();
+		}
+
+	});
+        
+        
+      }
+                    
+          if(limitAdm === "sectionCommuale"){
+                   
+         apiServer.getDemographieSectionCommunale(2,function(data){
+		console.log(data);
+		if(data){
+			console.log(data);
+                
+			load_demographie_SectionCommnunale (data, map);
+			NProgress.done();
+                
+                    
+		} else{
+			$("#center").click();
+		}
+
+	});
+        
+      }
+                    
+
+
+	
 
 
 	    // Create the DIV to hold the control and call the CenterControl() constructor

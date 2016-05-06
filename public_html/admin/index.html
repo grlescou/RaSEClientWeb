@@ -5,7 +5,7 @@
  <base href="/raseclientweb/admin/"> 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Blank Page</title>
+  <title>AdminRaSE | Blank Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -27,24 +27,24 @@
 
   <!-- for datatable css  -->
 
+  <link href="../libs/vendor/datatables-select/css/select.dataTables.css" rel="stylesheet" type="text/css"/>
 
-
-<link rel="stylesheet"  href="jscript/libs/vendor/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables/media/css/jquery.dataTables.min.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-colreorder/css/dataTables.colReorder.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-colvis/css/dataTables.colVis.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-responsive/css/dataTables.responsive.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-scroller/css/dataTables.scroller.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-buttons/css/buttons.dataTables.css">
-  <link rel="stylesheet"  href="jscript/libs/vendor/datatables-select/css/select.dataTables.css">
-    <link rel="stylesheet"  href="jscript/libs/vendor/backtotop/backtotop.min.css">
-    <link rel="stylesheet"  href="jscript/libs/vendor/highlightjs/styles/github.css">
-    <link rel="stylesheet" href="jscript/libs/angular-datatables/plugins/bootstrap/datatables.bootstrap.min.css">
+<link rel="stylesheet"  href="../libs/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet"  href="../libs/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+  <link rel="stylesheet"  href="../libs/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables/media/css/jquery.dataTables.min.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-colreorder/css/dataTables.colReorder.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-colvis/css/dataTables.colVis.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-responsive/css/dataTables.responsive.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-scroller/css/dataTables.scroller.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-buttons/css/buttons.dataTables.css">
+  <link rel="stylesheet"  href="../libs/vendor/datatables-select/css/select.dataTables.css">
+    <link rel="stylesheet"  href="../libs/vendor/backtotop/backtotop.min.css">
+    <link rel="stylesheet"  href="../libs/vendor/highlightjs/styles/github.css">
+    <link rel="stylesheet" href="../libs/angular-datatables/plugins/bootstrap/datatables.bootstrap.min.css">
 
     <!-- ...............pour le Web service........................  -->
     <script src="../js/api/ApiServer.js" type="text/javascript"></script>
@@ -78,55 +78,81 @@
 <script src="plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
 
 
 
 
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular.js"></script>
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular-loader.js"></script>
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular-resource.js"></script>
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular-route.js"></script>
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular-cookies.js"></script>
-<script src="jscript/libs/Angularjs/angular-1.5.0/angular-animate.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular-loader.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular-resource.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular-route.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular-cookies.js"></script>
+<script src="../libs/Angularjs/angular-1.5.0/angular-animate.js"></script>
 
-<script src="jscript/libs/angular-datatables/angular-datatables.js"></script>
+<script src="../libs/angular-datatables/angular-datatables.js"></script>
 
 
 
 <!-- for datatable -->
 
 
-<script src="jscript/libs/vendor/highlightjs/highlight.pack.js"></script>
-    <script src="jscript/libs/vendor/backtotop/backtotop.min.js"></script>
-  <script src="jscript/libs/vendor/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="jscript/libs/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
-  <script src="jscript/libs/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
-  <script src="jscript/libs/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-    <script src="jscript/libs/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
-    <script src="jscript/libs/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
-    <script src="jscript/libs/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
-    <script src="jscript/libs/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
-    <script src="jscript/libs/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
-    <script src="jscript/libs/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
-    <script src="jscript/libs/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
-    <script src="jscript/libs/vendor/datatables-buttons/js/buttons.colVis.js"></script>
-    <script src="jscript/libs/vendor/datatables-buttons/js/buttons.flash.js"></script>
-    <script src="jscript/libs/vendor/datatables-buttons/js/buttons.html5.js"></script>
-    <script src="jscript/libs/vendor/datatables-buttons/js/buttons.print.js"></script>
-    <script src="jscript/libs/vendor/datatables-select/js/dataTables.select.js"></script>
-  <script src="jscript/libs/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="jscript/libs/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
-  <script src="jscript/libs/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="jscript/libs/vendor/angular-translate/angular-translate.min.js"></script>
+<script src="../libs/vendor/highlightjs/highlight.pack.js"></script>
+    <script src="../libs/vendor/backtotop/backtotop.min.js"></script>
+  <script src="../libs/vendor/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="../libs/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+  <script src="../libs/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+  <script src="../libs/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <script src="../libs/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="../libs/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+    <script src="../libs/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+    <script src="../libs/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+    <script src="../libs/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+    <script src="../libs/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+    <script src="../libs/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="../libs/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="../libs/vendor/datatables-buttons/js/buttons.flash.js"></script>
+    <script src="../libs/vendor/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="../libs/vendor/datatables-buttons/js/buttons.print.js"></script>
+    <script src="../libs/vendor/datatables-select/js/dataTables.select.js"></script>
+  <script src="../libs/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../libs/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="../libs/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="../libs/vendor/angular-translate/angular-translate.min.js"></script>
 
 
-<script src=" jscript/libs/ui-bootstrap-tpls-1.1.2.js"></script>
+<script src=" ../libs/ui-bootstrap-tpls-1.1.2.js"></script>
 
  
+<!-- NEW ADDED   -->
+
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- daterangepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- datepicker -->
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- Slimscroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+
+
+
 
 
 

@@ -292,7 +292,7 @@ function clear_markers() {
 
 
 
-function load_demographie_2(data, map) {
+function load_demographie_SectionCommnunale(data, map) {
 	console.log("Loading demographie");
 
 
@@ -373,11 +373,22 @@ map.data.setStyle(function(feature) {
 
  // When the user clicks, open an infowindow
   map.data.addListener('click', function(event) {
-          var donnee = event.feature.R;
+          var donnee = {} ;//event.feature.H;
       //infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
          // infowindow.setPosition(event.feature.getGeometry().get());
       //infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
          // infowindow.open(map);
+          
+          
+            donnee.departemen = event.feature.getProperty("departemen");
+            donnee.commune = event.feature.getProperty("commune");
+            donnee.non_SECTIO = event.feature.getProperty("non_SECTIO");
+            donnee.casMaladieValue = event.feature.getProperty("casMaladieValue");
+            donnee.population = event.feature.getProperty("population");
+            donnee.hommes = event.feature.getProperty("hommes");
+            donnee.femmes = event.feature.getProperty("femmes");
+            donnee.moins_5_AN = event.feature.getProperty("moins_5_AN");
+            donnee.section = event.feature.getProperty("section");
           
           
           console.log("show donnee");
@@ -395,7 +406,7 @@ map.data.setStyle(function(feature) {
                                         // --------------------------------------------
                                 
                                  if(donnee){
-                                     console.log("layer or feature ");
+                                     console.log("layer or feature");
                                      console.log(donnee);
 
                                      var compiled = _.template($("#infobulle").html());
@@ -429,3 +440,319 @@ map.data.setStyle(function(feature) {
   });    
 
 }
+
+
+
+
+
+
+// ---------------------------load for departement -------------------------
+
+
+
+function load_demographie_Departement(data, map) {
+	console.log("Loading demographie");
+
+
+  var geojsonObject = {"type":"FeatureCollection",
+      'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326'}
+          },
+          "features":[] };
+
+
+
+  
+    console.log("load_departement");
+    if(data){
+     console.log(data);
+    // geojsonObject.features = data;
+      $.each(data, function(key, val) {
+       console.log(val);
+       
+
+       geojsonObject.features.push(val) ;
+      
+       });
+    } 
+
+ 
+
+    console.log("geojsonObject");
+    console.log(geojsonObject);
+
+    map.data.addGeoJson(geojsonObject);
+
+ 
+    
+    var infowindow = new google.maps.InfoWindow();
+
+  
+  var zoneStyle ={
+        strokeColor: '#4A4A48',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FAFAD2',
+        fillOpacity: 0.8
+      };
+  
+//  style regle couleur pour la carte 
+map.data.setStyle(function(feature) {
+    var color = 'gray';
+    var pop = 1;
+    var demogr = {};
+    if (feature.getProperty('demographieValue')) {
+      demogr = feature.getProperty('demographieValue');
+      pop = demogr.populationValue.population ;
+      
+      if (pop< 100000 )
+      {
+          color = "green";
+      }
+      else if(pop >100000 && pop < 500000)
+      {
+          color = "yellow";
+      }
+      else if(pop >500000 && pop < 1000000){
+          color = "orange";
+      }
+      else {
+          color = "red";
+      }
+    
+    }
+    return /** @type {google.maps.Data.StyleOptions} */({
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 2
+    });
+  });
+
+
+ // When the user clicks, open an infowindow
+  map.data.addListener('click', function(event) {
+          var donnee = {};
+          
+          //donnee=  event.feature.H;
+          
+          donnee.adm1 = event.feature.getProperty("adm1");
+          donnee.casMaladieValue = event.feature.getProperty("casMaladieValue");
+          donnee.demographieValue = event.feature.getProperty("demographieValue");
+          donnee.id_ADM1 = event.feature.getProperty("id_ADM1");
+          
+          
+          
+      //infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
+         // infowindow.setPosition(event.feature.getGeometry().get());
+      //infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+         // infowindow.open(map);
+          
+          
+          console.log("show donnee");
+          console.log(donnee);
+          
+          
+          
+          
+          
+          
+          
+          var content = "";
+				//for (var j in this.geojsonProperties) {
+					//var donnee= this.geojsonProperties ;
+                                        // --------------------------------------------
+                                
+                                 if(donnee){
+                                     console.log("layer or feature ");
+                                     console.log(donnee);
+
+                                     var compiled = _.template($("#infobulle_departement").html());
+                                     var comp = compiled({val: donnee});
+
+
+                                   
+                                      content += comp ;          
+                                  
+
+                                  }// end !donnee ;
+                                
+                                //------------------------------------------
+                                        
+				//}
+				
+                                
+                                
+                                
+                                
+                                
+				infowindow.setContent(content);
+				infowindow.setPosition(event.latLng);
+				infowindow.open(map);
+          
+          
+          
+          
+          
+          
+  });    
+
+}
+
+
+
+//-----------------------------load for Commune ---------------------------------
+
+
+function load_demographie_Commnune(data, map) {
+	console.log("Loading Commune");
+
+
+  var geojsonObject = {"type":"FeatureCollection",
+      'crs': {
+          'type': 'name',
+          'properties': {
+            'name': 'EPSG:4326'}
+          },
+          "features":[] };
+
+
+
+  
+    console.log("load_Commune");
+    if(data){
+     console.log(data);
+    // geojsonObject.features = data;
+      $.each(data, function(key, val) {
+       console.log(val);
+       
+
+       geojsonObject.features.push(val) ;
+      
+       });
+    } 
+
+ 
+
+    console.log("geojsonObject");
+    console.log(geojsonObject);
+
+    map.data.addGeoJson(geojsonObject);
+
+ 
+    
+  var infowindow = new google.maps.InfoWindow();
+
+  
+  var zoneStyle ={
+        strokeColor: '#4A4A48',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FAFAD2',
+        fillOpacity: 0.8
+      };
+  
+//  style regle couleur pour la carte 
+map.data.setStyle(function(feature) {
+    var color = 'gray';
+    var pop = 1;
+    var demogr ={};
+    if (feature.getProperty('demographieValue')) {
+       demogr = feature.getProperty('demographieValue');
+      pop = demogr.populationValue.population ;
+      
+      if (pop< 10000 )
+      {
+          color = "green";
+      }
+      else if(pop >10000 && pop < 40000)
+      {
+          color = "yellow";
+      }
+      else if(pop >40000 && pop < 60000){
+          color = "orange";
+      }
+      else {
+          color = "red";
+      }
+    
+    }
+    return /** @type {google.maps.Data.StyleOptions} */({
+      fillColor: color,
+      strokeColor: color,
+      strokeWeight: 2
+    });
+  });
+
+
+ // When the user clicks, open an infowindow
+  map.data.addListener('click', function(event) {
+          var donnee = {} ; // event.feature.H;
+      //infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
+         // infowindow.setPosition(event.feature.getGeometry().get());
+      //infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+         // infowindow.open(map);
+          
+            donnee.adm1 = event.feature.getProperty("adm1");
+            donnee.adm2 = event.feature.getProperty("adm2");
+            donnee.adm3 = event.feature.getProperty("adm3");
+            donnee.casMaladieValue = event.feature.getProperty("casMaladieValue");
+            donnee.demographieValue = event.feature.getProperty("demographieValue");
+            donnee.id_ADM1 = event.feature.getProperty("id_ADM1");
+            donnee.id_ADM2 = event.feature.getProperty("id_ADM2");
+            donnee.id_ADM3 = event.feature.getProperty("id_ADM3");
+            donnee.nom_ADM3 = event.feature.getProperty("nom_ADM3");
+          
+          console.log("show donnee");
+          console.log(donnee);
+          
+          
+          
+          
+          
+          
+          
+          var content = "";
+				//for (var j in this.geojsonProperties) {
+					//var donnee= this.geojsonProperties ;
+                                        // --------------------------------------------
+                                
+                                 if(donnee){
+                                     console.log("layer or feature ");
+                                     console.log(donnee);
+
+                                     var compiled = _.template($("#infobulle_commune").html());
+                                     var comp = compiled({val: donnee});
+
+
+                                   
+                                      content += comp ;          
+                                  
+
+                                  }// end !donnee ;
+                                
+                                //------------------------------------------
+                                        
+				//}
+				
+                                
+                                
+                                
+                                
+                                
+				infowindow.setContent(content);
+				infowindow.setPosition(event.latLng);
+				infowindow.open(map);
+          
+          
+          
+          
+          
+          
+  });    
+
+}
+
+
+

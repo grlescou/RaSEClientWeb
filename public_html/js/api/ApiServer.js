@@ -9,7 +9,7 @@ function ApiServer() {
 	//this.IP = "localhost";
      
         //this.prefix = "http://";
-	this.IP = "192.168.127.140";
+	this.IP = "192.168.127.142";
         
 	this.PORT = "8080";
 	this.ressources = "/rasehtserver/api/v1";
@@ -17,13 +17,26 @@ function ApiServer() {
         this.URL_categorie = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/categorie/";
 	this.URL_maladie = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/maladie/";
 	this.URL_symptome = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/symptome/";
-	this.URL_profession = this.prefix + this.IP + ":" + this.PORT + this.ressources+  "/profession/";
+	this.URL_mention = this.prefix + this.IP + ":" + this.PORT + this.ressources+  "/mention/";
 	this.URL_casMaladie = this.prefix + this.IP + ":" + this.PORT + this.ressources+  "/casMaladie/";
-	this.URL_maladieSymptomes = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/maladieSymptomes/";
-	this.URL_demographie = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/demographie/";
-        this.URL_utilisateur = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/utilisateur /";
+	//this.URL_maladieSymptomes = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/maladieSymptomes/";
+	//this.URL_demographie = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/demographie/";
+        this.URL_utilisateur = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/utilisateur/";
 
-	
+	this.URL_demographieDepartement = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/departement/";
+        this.URL_demographieCommune = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/commune/";
+        this.URL_demographieSectionCommunale = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/sectionCommunale/";
+        
+        
+        this.URL_administrateur = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/administrateur/";
+        
+        this.URL_role = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/role/";
+        
+        this.URL_souscription = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/souscription/";
+        
+        this.URL_groupeIndividu = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/groupeIndividu/";
+        
+        
         
         // Recuperation des categories
 	//
@@ -41,10 +54,10 @@ function ApiServer() {
 	ApiServer.prototype.getSymptomes = function(callback) {
 		$.getJSON(this.URL_symptome, callback);
 	}
-	// Recupération des professions
+	// Recupération des mentions
 	//
-	ApiServer.prototype.getProfessions = function(callback) {
-		$.getJSON(this.URL_profession, callback);
+	ApiServer.prototype.getMentions = function(callback) {
+		$.getJSON(this.URL_mention, callback);
 	}
 	// Recupération des cas Maladie
 	//
@@ -60,9 +73,48 @@ function ApiServer() {
 
 	// Recupération des demographie
 	//
-	ApiServer.prototype.getDemographie = function(callback) {
-		$.getJSON(this.URL_demographie, callback);
+	ApiServer.prototype.getDemographieDepartement = function(id,callback) {
+		$.getJSON(this.URL_demographieDepartement+id, callback);
 	}
+        
+        
+        ApiServer.prototype.getDemographieCommune = function(id,callback) {
+		$.getJSON(this.URL_demographieCommune+id, callback);
+	}
+        
+        
+        ApiServer.prototype.getDemographieSectionCommunale = function(id,callback) {
+		$.getJSON(this.URL_demographieSectionCommunale+id, callback);
+	}
+        
+        // Recupération des Roles
+	//
+	ApiServer.prototype.getRole = function(callback) {
+		$.getJSON(this.URL_role, callback);
+	}
+        
+        
+        // Recupération des Souscriptions
+	//
+	ApiServer.prototype.getSouscription = function(callback) {
+		$.getJSON(this.URL_souscription, callback);
+	}
+        
+        
+         // Recupération des GroupeIndividus
+	//
+	ApiServer.prototype.getGroupeIndividu = function(callback) {
+		$.getJSON(this.URL_groupeIndividu, callback);
+	}
+        
+        
+         // Recupération des Administrateurs
+	//
+	ApiServer.prototype.getAdministrateur = function(callback) {
+		$.getJSON(this.URL_administrateur, callback);
+	}
+        
+        
 
 	// Recupération des demographie par point
 	//
@@ -100,24 +152,49 @@ function ApiServer() {
 	ApiServer.prototype.getURLSymptome  = function() {
 		return this.URL_symptome;
 	}
-	ApiServer.prototype.getURLProfession = function() {
-		return this.URL_profession;
+	ApiServer.prototype.getURLMention = function() {
+		return this.URL_mention;
 	}
 	
 	ApiServer.prototype.getURLCasMaladie = function() {
 		return this.URL_casMaladie;
 	}
-	ApiServer.prototype.getURLSymptomeMaladie = function() {
-		return this.URL_maladieSymptoms;
-	}
+	
 
-	ApiServer.prototype.getURLDemographie = function() {
-		return this.URL_demographie;
+	ApiServer.prototype.getURLDemographieDepartement = function() {
+		return this.URL_demographieDepartement;
+	}
+        
+        ApiServer.prototype.getURLDemographieCommune = function() {
+		return this.URL_demographieCommune;
+	}
+        
+        ApiServer.prototype.getURLDemographieSectionCommunale = function() {
+		return this.URL_demographieSectionCommunale;
 	}
         
         ApiServer.prototype.getURLUtilisateur = function() {
 		return this.URL_utilisateur;
 	}
+
+
+        ApiServer.prototype.getURLRole = function() {
+		return this.URL_role;
+	}
+        
+        ApiServer.prototype.getURLSouscription = function() {
+		return this.URL_souscription;
+	}
+        
+        ApiServer.prototype.getURLGroupeIndividu = function() {
+		return this.URL_groupeIndividu;
+	}
+
+         ApiServer.prototype.getURLAdministrateur = function() {
+		return this.URL_administrateur;
+	}
+
+
 
 
 	ApiServer.prototype.setIp = function(ip) {

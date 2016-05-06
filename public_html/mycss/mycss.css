@@ -1,0 +1,286 @@
+
+html {
+        height: 100%;
+}
+body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+}
+#map-canvas {
+        height: 100%;
+
+}
+
+
+#Container{
+     height: 89%;
+}
+
+
+header {
+  
+    display: block;
+    color: #FFF;
+    background-color: #3276B1;
+    border-color: #285E8E;
+    height: 50px;
+}
+
+#droite {
+        position: absolute;
+        margin: 20px;
+        right: 0px;
+        top: 50px;
+        #width: 27%;
+}
+#droiteLieu {
+        position: absolute;
+        margin: 20px;
+        right: 0px;
+        #width: 27%;
+}
+#search h1 {
+        margin-top: 0px;
+        text-align: center;
+}
+#infos_malade h1 {
+        text-align: center;
+        margin-bottom: 0px;
+        bottom: 0;
+}
+
+
+#upSideMap{
+     
+}
+
+#LimitAdm{
+ position: absolute;
+ z-index: 1001;
+  border:0px red solid;
+  margin-left: 8%;
+  margin-top: 8px;  
+}
+
+#ControlRight{
+ position: absolute;
+ 
+  z-index: 1001;
+  border:0px red solid;
+  margin-left: 50%;
+  margin-top: 8px;  
+}
+
+
+.toggle-modal {
+	
+
+
+
+}
+ .beatydialog {
+    background: #222222 !important;
+     width: 300px;
+     height: 200px;
+     color: #ffffff;
+	filter: alpha(opacity=60);
+	-moz-opacity: 0.6;
+	-khtml-opacity: 0.6;
+	opacity: 0.6;
+     margin-left: 20px;
+
+
+}
+.modal-dialog-left{
+    margin-left: 20px;
+    margin-top: 22px;
+     
+
+}
+.scrolling{
+    overflow: auto;
+}
+
+.green-black{
+    width: 15px;
+    height: 5px;
+    background: #00FF00;
+}
+
+.green-light{
+    width: 15px;
+    height: 5px;
+    background: #00FF99;
+}
+
+.yellow{
+    width: 15px;
+    height: 5px;
+    background: #FFFF33;
+}
+
+.red{
+    width: 15px;
+    height: 5px;
+    background: #FF0000;
+}
+
+ 
+ 
+
+.toggle-filter {
+    
+}
+
+.filter{
+    
+    
+}
+ 
+
+footer {
+  
+    display: block;
+    color: #FFF;
+    background-color: #3276B1;
+    border-color: #285E8E;
+    height: 38px;
+    border-bottom: 8px #285E8E solid; 
+}
+
+/* ******* semi-popup******* */
+
+.semi_popup header{
+	background:#3276B1;
+	background:rgba(0,60,113,0.7);
+	border-radius:2px 2px 0 0;
+	padding:10px 10px 7px 10px;
+	color:#fff;
+	font-family:MuseoSlab-300;
+	font-weight:normal;
+	font-style:normal
+}
+
+
+#close_legend{
+	z-index:60;
+	display:none;
+	position:absolute;
+	top:4px;
+	right:-25px;
+	cursor:pointer
+}
+
+.semi_info{
+	width:700px;
+	padding:20px
+}
+
+.semi_popup sup{
+	color:#fff
+}
+
+#trends_near_you{
+	max-height:300px;
+	overflow-y:auto
+}
+
+.semi_content{
+	padding:10px;
+	float:left;
+	background-color:#fff;
+	width:340px
+}
+
+#map_icons{
+	z-index:15;
+	float:right;
+	margin-top:25px
+}
+
+#add_container{
+	margin-right:21px
+}
+
+
+
+
+
+
+
+
+
+.semi_popup{
+	position:absolute;
+	margin-bottom:115px;
+	top:100px;
+	margin-right:40px;
+	right:0;
+	width:340px;
+	height:auto;
+	display:none;
+	border-radius:0 0 2px 2px;
+	padding:20px;
+	z-index:1000
+}
+
+
+.map_icons_content{
+	position:relative;
+	overflow:auto;
+	height:inherit;
+	width:inherit;
+	float:left;
+	-webkit-box-shadow:0 0 15px 0 rgba(0,0,0,0.1);
+	box-shadow:0 0 15px 0 rgba(0,0,0,0.1)
+}
+
+.drag_container header{
+	cursor:move
+}
+
+#legend_block .drag_container .semi_content .p{
+	width:72%;
+	float:left;
+	margin:0;
+	padding:0 4%
+}
+
+#legend_content img[src$="lg4_noshadow.png"]{
+	margin-left:-1px
+}
+
+#toggle_box li{
+	list-style-type:none
+}
+
+#legend_block table td img{
+	vertical-align:middle
+}
+
+#legend_block table td{
+	width:16%;
+	margin:0;
+	text-align:center
+}
+
+#legend_block table td:last-child{
+	width:20%
+}
+
+#legend_block table{
+	width:100%;
+	padding-top:5px
+}
+
+#legend_block table td:last-child{
+	text-align:right;
+	color:#999
+}
+
+#legend_block table tr{
+	border-top:1px solid #eee
+}
+
+

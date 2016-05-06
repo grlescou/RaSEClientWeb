@@ -4,43 +4,18 @@
 	<title>RaSE-Client de visualisation</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		html {
-			height: 100%;
-		}
-		body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-		#map-canvas {
-			height: 90%;
-			width: 99%;
-		}
-		#droite {
-			position: absolute;
-			margin: 20px;
-			right: 0px;
-			top: 50px;
-			width: 27%;
-		}
-		#droiteLieu {
-			position: absolute;
-			margin: 20px;
-			right: 0px;
-			width: 27%;
-		}
-		#search h1 {
-			margin-top: 0px;
-			text-align: center;
-		}
-		#infos_malade h1 {
-			text-align: center;
-			margin-bottom: 0px;
-			bottom: 0;
-		}
-	</style>
-
+	
+        <link href="mycss/mycss.css" rel="stylesheet" type="text/css"/>
+      
+        
+        <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        
+        
+        
+        
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="libs/jquery-ui-1.10.3/jquery-1.9.1.js"></script>
 
@@ -50,7 +25,8 @@
 	
 
 	<!-- Jquery AdressPicker-->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGM8uLt8xjr99D4HA4y-nCO6SN3bDFMgY"></script>
+       <!--  <script src="libs/google.map.api.v3.js?key=?key=AIzaSyDlMT9EWMJsxf614b-_eWNhVT8acFzoxdA" type="text/javascript"></script>-->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlMT9EWMJsxf614b-_eWNhVT8acFzoxdA"></script>
 	<link rel="stylesheet" href="libs/jquery-ui-1.10.3/themes/base/jquery.ui.all.css">
 	<script src="libs/jqueryAdressPicker/jquery.ui.addresspicker.js"></script>
 	<script src="js/ext/markerclusterer.js" type="text/javascript"></script>
@@ -63,7 +39,7 @@
 	<script type="text/javascript" src="libs/noty/jquery.noty.packaged.min.js"></script>
 
 	 <!-- Underscore -->
-  <script type="text/javascript" src="libs/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="libs/underscore/underscore-min.js"></script>
 
 	<!-- slider -->
 	<script type="text/javascript" src="js/bootstrap-slider.js"></script>
@@ -101,7 +77,7 @@
   <div id="infobulle" class="panel panel-default">
     <!-- Default panel contents -->
     <div id="infos_malade" class="panel-heading">
-      <strong>Section Communale :<%= val.nom_SECTIO %></strong> <br>
+      <strong>Section Communale :<%= val.section %></strong> <br>
       <strong>Departement : <%= val.departemen %></strong><br>
       <strong>Commune : <%= val.commune %></strong>
     </div>
@@ -114,20 +90,268 @@
         <strong>Aire : </strong>
         <span id="detail_air"><%= val.aire_KM2 %> Km2</span>
       </li>
+    </ul>
+  </div>
+</script>
+
+<script type="text/template" id="infobulle_departement">
+  <div id="infobulle_departement" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div id="infos_malade" class="panel-heading">
+     
+      <strong>Departement : <%= val.adm1 %></strong><br>
+     
+    </div>
+    <ul class="list-group">
       <li class="list-group-item">
-        <strong>Densite de population :</strong>
-        <span  id="detail_densite"><%= val.pop_DENS %></span>
+        <strong>Population : </strong>
+        <span id="detail_populatiom"><%= val.demographieValue.populationValue.population %> <br>(Femmes : <%= val.demographieValue.populationValue.femmes %>, Hommes : <%= val.demographieValue.populationValue.hommes %>)</span>
+      </li>
+      <li class="list-group-item">
+        <strong>nombre de cas:</strong>
+        <span id="NombreCas"><%= val.casMaladieValue.count %></span>
       </li>
     </ul>
   </div>
 </script>
+
+<script type="text/template" id="infobulle_commune">
+  <div id="infobulle_commune2" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div id="infos_malade" class="panel-heading">
+      <strong>Commune : <%= val.adm3 %></strong><br>
+     
+      <strong>Departement : <%= val.adm1 %></strong><br>
+     
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>Population : </strong>
+        <span id="detail_populatiom"><%= val.demographieValue.populationValue.population %> <br>(Femmes : <%= val.demographieValue.populationValue.femmes %>, Hommes : <%= val.demographieValue.populationValue.hommes %>)</span>
+      </li>
+      
+    </ul>
+  </div>
+</script>
+
 </head>
-<body>
+<body ng-app="RaseClient" >
+    <header class="col-md-12"  ng-include='"templates/header.html"' ></header>
+       
+    <div id="Container"> 
+    
+   
+    <!--<div id="upSideMap" class="col-md-9"> -->
+    
+    <!-- TOp of Map -->
+    <div  id="LimitAdm">
+        <select id="IdSelectLimitAdm" onchange="SelectChangeAdmLimit()" class="form-control select2 select2-hidden-accessible" >
+                <option value="departement">Departement</option>
+                <option value="commune">Commune</option>
+                <option value="sectionCommuale">Section Communale</option>
+            </select>
+    </div>
+    
+    <div id="ControlRight">
+       
+ 
+        
+       <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
+       
+       <button type="button" class="btn btn-primary"><i class="fa fa-bar-chart-o"></i></button>
+       
+       <button type="button" class="btn btn-primary"><i class="fa fa-map-marker"></i></button>
+        
+     
+       <button id="legend_btn" type="button" class="btn btn-primary"><i class="fa fa-key"></i></button>
+       
+<!--        <button type="button" class="btn btn-primary"  ng-click="isFilterCollapsed = !isFilterCollapsed"><i class="fa fa-search"></i></button>-->
+        
+       
+       
+       
+       
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade" style="background: transparent" >
+      <div class="modal-dialog modal-dialog-left">
+        <div  class="modal-content beatydialog">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: red">×</button>
+            <h4 class="modal-title">Légende</h4>
+          </div>
+          <div class="modal-body scrolling">
+              <ul>
 
+                  
+                    
+                          <li><span class="green-black">&nbsp;&nbsp;&nbsp;&nbsp;</span>&emsp;Faible</li>
+                          <!--<li><span class="green-light">&nbsp;&nbsp;&nbsp;&nbsp;</span>&emsp;#3</li>-->
+                          <li><span class="yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>&emsp;Modéré</li>
+                          <li><span class="red">&nbsp;&nbsp;&nbsp;&nbsp;</span>&emsp;Fort</li>
+                    
+
+                    
+                
+
+              </ul>
+          </div>
+         
+		 
+		 
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->    
+     
+    
+    
+    
+    <section style="display: block;" id="legend_block" class="semi_popup ui-draggable">
+        <span style="display: inline;" id="close_legend" class="close_icons">
+       <i class="fa fa-times-circle"></i>
+        </span>
+        <div id="legend_content" class="map_icons_content">
+        <div class="drag_container">
+        <header>Légende<a class="inline" href="#ai_info"><sup><i class="icon-info-sign"></i></sup></a></header>
+
+        <section id="activity_index" class="semi_content">
+        <div class="p">
+        
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                     <th>Couleur</th>
+                    <th>Niveau</th>
+                   
+                </tr>
+            </thead>
+        <tbody>
+        <tr>
+        <td><span class="green-black">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        
+        <td>Faible</td>
+        </tr>
+        <tr>
+        <td><span class="yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        
+        <td>Faible</td>
+        </tr>
+         <tr>
+        <td><span class="red">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+        
+        <td>Faible</td>
+        </tr>
+        </tbody>
+        </table>
+        
+    
+        </section>
+
+        </div><!--drag_container-->
+        </div><!--legend_content-->
+    </section>
+    
+    
+    
+    
+    <script>
+        
+        
+         // if popup is visible by default - before clicking on icon - make it draggable
+    $('.semi_popup').draggable({ handle: ".drag_container header" });
+    
+    // map icons
+    $('#ControlRight button').click(function() {
+        $(".semi_popup").css("display","none");
+        var iconcat = (this.id).replace("_btn", "");
+        $('#ControlRight button').removeClass('act');
+        // don't expand content for add alert since that has a fancybox
+        if(iconcat != "add") {
+            $('#' + iconcat + '_block').fadeIn(500).draggable({ handle: ".drag_container header" });
+            $('#close_' + iconcat).show();
+            $(this).addClass('act');
+        }
+    });
+
+    $('.close_icons').click(function() {
+        var iconcat = (this.id).replace("close_", "");
+        $('#' + iconcat + '_block').fadeOut(500);
+        $('#ControlRight button').removeClass('act');
+        $(this).hide();
+    });
+
+        
+        
+    </script>
+    
+        
+    </div>
+    
+    <!--</div> -->
+      
 	<!-- MAP -->
-	<div id="map-canvas"></div>
+        <div id="map-canvas" class="col-md-9"> </div>
+        
+        
+        
+     
+       
+  	<div id="SideFilter" class="col-md-3"  >
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<strong>Affiner la recherche <span class="badge" id="badge-nb"></span></strong>
+			</div>
 
+			<!-- List group -->
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div style="width:45%; float:right;">
+						<label style="display:block;" for="datepickerfin">Date fin :</label>
+						<input class="form-control ng-pristine ng-valid" type="text" id="datepickerfin">
+					</div>
+					<div style="width:45%;">
+						<label style="display:block;" for="datepickerdeb">Date debut :</label>
+						<input class="form-control ng-pristine ng-valid" type="text" id="datepickerdeb">
+					</div>
+				</li>
+				<li class="list-group-item">
+					<label style="display:block;" for="list_maladie_chosen">Maladie :</label>
+					<select tabindex="1" id="list_maladie_chosen" data-placeholder="Choisissez la maladie" style="width:100%;" class="form-control chosen-select" multiple tabindex="7"></select>
+				</li>
+				<li class="list-group-item">
+					<label style="display:block;" for="list_symtome_chosen">Symptômes :</label>
+					<select tabindex="2" id="list_symtome_chosen" data-placeholder="Choisissez les symtômes" style="width:100%;" multiple class="form-control chosen-select" tabindex="8"></select>
+				</li>
+				<li class="list-group-item">
+					<label style="display:block;" for="list_maladie_chosen">Professions :</label>
+					<select tabindex="1" id="list_profession_chosen" data-placeholder="Choisissez la profession" style="width:100%;" class="form-control chosen-select" multiple tabindex="7"></select>
+				</li>
+
+				<li class="list-group-item">
+					<label style="display:block;" for="notation">Notation : </label>
+					<center><input type="text" class="span2" value="" data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="[3,4]" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show" id="notation"></center>
+				</li>
+				
+				<li class="list-group-item">
+					<button type="button" class="btn btn-default" id="btn_annuler">
+						Annuler
+					</button>
+					<button type="button" id="search" class="btn btn-primary" style="float:right;">
+						Rechercher
+					</button>
+				</li>
+
+			 </ul>
+		</div>
+	</div>
 	
+     
+        </div> 
+  
+        
+   <footer class="col-md-12"  ng-include='"templates/footer.html"' > </footer>
 </body>
 
 <script type="text/javascript">
@@ -149,5 +373,86 @@
 	for (var selector in config) {
 		$(selector).chosen(config[selector]);
 	}
+        
+        
+        
+        
+    $('.toggle-modal').click(function(){
+            $('#myModal').modal({
+            show : true,
+            keyboard : true,
+            backdrop : false
+        });
+        });
+        $('#myModal').modal({
+            show : true,
+            keyboard : true,
+            backdrop : true
+        });
+
+
+
+
+
+        
+        
+        
 </script>
+
+
+
+
+
+<script src="libs/Angularjs/angular-1.5.0/angular.js"></script>
+<script src="libs/Angularjs/angular-1.5.0/angular-loader.js"></script>
+<script src="libs/Angularjs/angular-1.5.0/angular-resource.js"></script>
+<script src="libs/Angularjs/angular-1.5.0/angular-route.js"></script>
+<script src="libs/Angularjs/angular-1.5.0/angular-cookies.js"></script>
+<script src="libs/Angularjs/angular-1.5.0/angular-animate.js"></script>
+
+<script src="libs/angular-datatables/angular-datatables.js"></script>
+
+
+
+<!-- for datatable -->
+
+
+<script src="libs/vendor/highlightjs/highlight.pack.js"></script>
+    <script src="libs/vendor/backtotop/backtotop.min.js"></script>
+  <script src="libs/vendor/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="libs/vendor/datatables-colreorder/js/dataTables.colReorder.js"></script>
+  <script src="libs/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+  <script src="libs/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+    <script src="libs/vendor/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="libs/vendor/datatables-scroller/js/dataTables.scroller.js"></script>
+    <script src="libs/vendor/datatables-columnfilter/js/dataTables.columnFilter.js"></script>
+    <script src="libs/vendor/datatables-light-columnfilter/dist/dataTables.lightColumnFilter.min.js"></script>
+    <script src="libs/vendor/datatables-fixedcolumns/js/dataTables.fixedColumns.js"></script>
+    <script src="libs/vendor/datatables-fixedheader/js/dataTables.fixedHeader.js"></script>
+    <script src="libs/vendor/datatables-buttons/js/dataTables.buttons.js"></script>
+    <script src="libs/vendor/datatables-buttons/js/buttons.colVis.js"></script>
+    <script src="libs/vendor/datatables-buttons/js/buttons.flash.js"></script>
+    <script src="libs/vendor/datatables-buttons/js/buttons.html5.js"></script>
+    <script src="libs/vendor/datatables-buttons/js/buttons.print.js"></script>
+    <script src="libs/vendor/datatables-select/js/dataTables.select.js"></script>
+  <script src="libs/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="libs/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="libs/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="libs/vendor/angular-translate/angular-translate.min.js"></script>
+
+
+<script src=" libs/ui-bootstrap-tpls-1.1.2.js"></script>
+
+ 
+
+
+
+<!-- my app -->
+
+<script src="jscript/main.js"></script>
+
+
+
+
+
 </html>

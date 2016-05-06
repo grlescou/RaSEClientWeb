@@ -1,0 +1,1167 @@
+
+
+
+
+
+<!-- Site wrapper -->
+<div class="wrapper"   ng-controller="ontoCntr"  ng-init="message">
+<header class="main-header" ng-include='"templates/header.html"' ng-show="toshow" >  </header>
+
+<aside class="main-sidebar" ng-include='"templates/side.html"' ng-show="toshow"> </aside>
+
+
+
+<!-- 
+<div ng-include='"templates/header.html"'>  </div>
+
+
+Left side column. contains the sidebar
+<div  ng-include='"templates/side.html"'> </div>
+ -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"   ng-controller="ModalOntoCtrl">
+   
+   
+<div >
+   
+	<!-- ..................modal maladie.................... -->
+     <script type="text/ng-template" id="editmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Edit- Maladie</h3>
+        </div>
+      <div class="modal-body">
+           <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
+
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-model="items.m.seuil" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2  control-label">Type Seuil</label>
+                 <div class="col-sm-10">
+                 <select class="form-control select2"  ng-model="items.m.typeSeuil"  style="width: 100%;">
+                  <option value="" selected="selected">--Choix Type Seuil--</option>
+                  <option value='popolation'>Par % population</option>
+                  <option value='cas'>Par nombre de cas</option>
+                </select>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
+
+                   <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.m.categorie"  ng-options="c.nom for c in items.selectCategories track by c.id"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok();">Modifer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="newmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Nouvelle Maladie</h3>
+        </div>
+        <div class="modal-body">
+           <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.m.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
+
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-model="items.m.seuil" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2  control-label">Type Seuil</label>
+                 <div class="col-sm-10">
+                 <select class="form-control select2"  ng-model="items.m.typeSeuil"  style="width: 100%;">
+                  <option value="" selected="selected">--Choix Type Seuil--</option>
+                  <option value='popolation'>Par % population</option>
+                  <option value='cas'>Par nombre de cas</option>
+                </select>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
+
+                	 <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.m.categorie" ng-options="c.nom for c in items.selectCategories"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok();">Ajouter</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="delmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Supprimer Maldie</h3>
+        </div>
+        <div class="modal-body">
+           
+
+
+		<div class="form-horizontal">
+              <div class="box-body">
+
+         <div class="form-group">
+        <h4 class="col-sm-10">Voulez-vous supprimer cette Maladie ?</h4>
+        </div>
+
+			  <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label" >Categorie</label>
+
+                
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="items.categorie.nom" id="inputEmail3" placeholder="Categorie" readonly="">
+                  </div>
+        
+                </div>
+
+
+       </div>
+       </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+    
+
+    <script type="text/ng-template" id="detailsmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Details- Maladie</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Maladie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description" readonly=""></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
+
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" ng-model="items.seuil" id="inputEmail3" placeholder="Email" readonly="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2  control-label" >Type Seuil</label>
+                 <div class="col-sm-10">
+                 <select class="form-control select2"  ng-model="items.typeSeuil"  style="width: 100%;" disabled="true">
+                  <option value="" selected="selected">--Choix Type Seuil--</option>
+                  <option value='popolation'>Par % population</option>
+                  <option value='cas'>Par nombre de cas</option>
+                </select>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Categorie</label>
+
+          
+        
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="items.categorie.nom" id="inputEmail3" placeholder="Categorie" readonly="">
+                  </div>
+        
+        
+                </div>
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+         
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+<!-- ..................modal Categorie.................... -->
+     <script type="text/ng-template" id="editCategoriemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Edit- Categorie</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Categorie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Modifer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="newCategoriemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Nouvelle Categorie</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Categorie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Ajouter</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="delCategoriemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Supprimer Categorie</h3>
+        </div>
+        <div class="modal-body">
+           
+
+
+		<div class="form-horizontal">
+              <div class="box-body">
+
+         <div class="form-group">
+        <h4 class="col-sm-10">Voulez-vous supprimer cette Categorie ?</h4>
+        </div>
+
+			  <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Categorie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                
+
+
+       </div>
+       </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="detailsCategoriemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Details- Categorie</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Categorie</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description" readonly=""></textarea>
+                  </div>
+                </div>
+               
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+         
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+
+
+<!-- ..................modal Symptome.................... -->
+     <script type="text/ng-template" id="editSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Edit- Symptome</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Symptome</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Modifer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="newSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Nouvelle Symptome</h3>
+        </div>
+         <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Symptome</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description"></textarea>
+                  </div>
+                </div>
+                
+
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Ajouter</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="delSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Supprimer Symptome</h3>
+        </div>
+        <div class="modal-body">
+           
+
+
+		<div class="form-horizontal">
+              <div class="box-body">
+
+         <div class="form-group">
+        <h4 class="col-sm-10">Voulez-vous supprimer cette Symptome ?</h4>
+        </div>
+
+			  <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Symptome</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                
+
+
+       </div>
+       </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="detailsSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Details- Symptome</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Symptome</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                  <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Enter Description" readonly=""></textarea>
+                  </div>
+                </div>
+               
+            
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+         
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+   
+
+    <!-- Ajouter dans la la liste des symptomes a une maladie -->
+
+        
+    
+    
+      <script type="text/ng-template" id="AddSymptomemodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Ajouter un Symptome a: {{items.maladie.nom}}</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            
+            <!-- liste des symptomes associes a la maladie  -->
+             <div>
+             
+             
+             
+              <table id="example1" datatable="ng" dt-instance="ListSymptomeInstance" class="row-border hover">
+                <thead>
+                <tr>
+                	<th > 
+                        
+            
+            
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Symptome</label>
+
+  
+          	 <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.symp" ng-options="c.nom for c in items.listSymptomes track by c.id"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>
+              
+              
+            
+              </div>
+           
+            </form>
+            
+                        </th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="items.maladie.symptomes.push(items.symp);" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Nom symptome</th>
+  
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="m in items.maladie.symptomes">
+                  <td>{{m.nom}}</td>
+               
+                   
+                  <td>
+                    <button type="button" ng-click="items.maladie.symptomes.splice($index,1); $index=$index+1;" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                </td>
+                </tr>
+               
+                
+                </tbody>
+         
+              </table>
+
+
+             
+             
+             
+             </div>
+     
+
+
+        </div>
+        <div class="modal-footer">
+         
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.maladie; ok();">Valider</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Gestion de l'ontologie
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title"></h3>
+
+          <div class="box-tools pull-right">
+           
+          </div>
+        </div>
+          <div class="alert alert-success" role="alert" ng-show="success===true" ng-bind="message" ></div>
+          <div class="alert alert-danger" role="alert" ng-show="success===false" ng-bind="message" ></div>
+        <div class="box-body">
+
+            
+
+
+     <uib-tabset justified="true"  >
+
+     <uib-tab heading="Categories" ng-click="onClick(0)" active="tab[0]" >
+     <br>
+    <br>
+
+   
+
+    <table id="example1" datatable="ng" dt-instance="categorieInstance" class="row-border hover">
+                <thead>
+                <tr>
+                	<th colspan="2"> </th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="openNewCategorie('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Nom</th>
+              
+                  <th>Description</th>
+                 
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="m in listCategorie">
+                  <td>{{m.nom}}</td>
+                  
+                  <td>{{m.description}}</td>
+                   
+                  <td>
+                 <!-- <button type="button" ng-click="openDetailsCategorie('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>-->
+                    <button type="button" ng-click="openEditCategorie('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDelCategorie('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+
+                </td>
+                </tr>
+               
+                
+                </tbody>
+            <!--    <tfoot>
+                <tr>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Mail</th>
+                  <th>Role</th>
+                  <th>Telephone</th>
+                  <th>actif</th>
+                </tr>
+                </tfoot> -->
+              </table>
+
+
+
+
+    </uib-tab>
+    <uib-tab heading="Maladies" ng-click="onClick(1)" active="tab[1]" >
+    <br>
+    <br>
+
+         <table id="example2" datatable="ng" class="row-border hover">
+                <thead>
+                <tr>
+                	<th colspan="5"> </th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="openNewMaladide('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Nom</th>
+                  <th>Categorie</th>
+                  <th>Liste Symptomes</th>
+                  <th>Seuil</th>
+                   <th>Type Seuil</th>
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="m in listMaladie">
+                  <td>{{m.nom}}</td>
+                  <td>{{m.categorie.nom}}</td>
+                  <td> <button type="button" ng-click="openAjouterSymptomeMaladide('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button></td>
+                   <td>{{m.seuil}}</td>
+                    <td>{{m.typeSeuil}}</td>
+                  <td>
+                  <button type="button" ng-click="openDetailsMaladide('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                    <button type="button" ng-click="openEditMaladide('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDelMaladide('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+
+                </td>
+                </tr>
+               
+                
+                </tbody>
+            <!--    <tfoot>
+                <tr>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Mail</th>
+                  <th>Role</th>
+                  <th>Telephone</th>
+                  <th>actif</th>
+                </tr>
+                </tfoot> -->
+              </table>
+
+
+    </uib-tab>
+    <uib-tab heading="Symptomes" ng-click="onClick(2)" active="tab[2]" >
+   
+
+    <br>
+    <br>
+
+         <table id="example3" datatable="ng" class="row-border hover">
+                <thead>
+                <tr>
+                	<th colspan="2"> </th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="openNewSymptome('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Nom</th>
+                  
+                  <th>Description</th>
+                  
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="m in listSymptome">
+                  <td>{{m.nom}}</td>
+                 
+                  <td>{{m.description}}</td>
+                 
+                  <td>
+                  <button type="button" ng-click="openDetailsSymptome('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                    <button type="button" ng-click="openEditSymptome('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDelSymptome('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+
+                </td>
+                </tr>
+               
+                
+                </tbody>
+            <!--    <tfoot>
+                <tr>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Mail</th>
+                  <th>Role</th>
+                  <th>Telephone</th>
+                  <th>actif</th>
+                </tr>
+                </tfoot> -->
+              </table>
+
+
+
+
+    </uib-tab>
+  </uib-tabset>
+
+
+
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          120 Utilisateur(s)
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+  <!-- /.content-wrapper -->
+<!-- 
+    <div  ng-include='"templates/footer.html"'></div>
+
+    <aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'   ></aside>
+
+     /.control-sidebar
+   Add the sidebar's background. This div must be placed
+       immediately after the control sidebar 
+  <div class="control-sidebar-bg"></div> -->
+
+
+
+
+
+
+
+<footer class="main-footer" ng-include='"templates/footer.html"' ng-show="toshow"> </footer>
+<aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'  ng-show="toshow" ></aside>
+
+     <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg" ng-show="toshow"></div>
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+ 
+
+
+
+
+
