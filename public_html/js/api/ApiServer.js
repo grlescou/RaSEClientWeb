@@ -1,4 +1,6 @@
-
+// Classe CasMaladie
+// author : Gaetan Robert Lescouflair
+//
 
 
 function ApiServer() {
