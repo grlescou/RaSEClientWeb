@@ -29,7 +29,7 @@ app.controller('formCtrl', function($scope,$location, $http ) {
         $location.path('/home');
       }
       else{
-        $scope.message = data.message
+        $scope.message = data.message;
       }
         })
         .error(function (data, status, headers, conf)

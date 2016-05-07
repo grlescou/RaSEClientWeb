@@ -22,8 +22,17 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
     
     // Pages
     .when("/home", {templateUrl: "partials/home.html", controller: "PageCtrl"})
-    .when("/gesUser", {templateUrl: "partials/GestionUtilisateur.html", controller: "userCntr"})
+    
     .when("/ontologie", {templateUrl: "partials/GestionOntologie.html", controller: "ontoCntr"})
+    
+    .when("/donneesReport", {templateUrl: "partials/GestionDonneeReport.html", controller: "DonneeReportCntr"})
+
+
+    .when("/gesUser", {templateUrl: "partials/GestionUtilisateur.html", controller: "userCntr"})
+    .when("/gesAdmin", {templateUrl: "partials/GestionAdministrateur.html", controller: "AdmCntr"})
+    .when("/gesRole", {templateUrl: "partials/GestionRole.html", controller: "roleCntr"})
+    .when("/gesGIndividu", {templateUrl: "partials/GestionGroupeIndividu.html", controller: "groupeIndividuCntr"})
+
 
     .when("/login", {templateUrl: "login.html", controller: "formCtrl"})
     // else 404
@@ -81,4 +90,13 @@ app.controller('PageCtrl', function ($scope, $location, $http ) {
 
 });
 
+
+
+app.controller("collapseMenuCtr",function($scope){
+    
+    $scope.isSecuriteCollapsed = true;
+    
+    console.log("Collapse Filter Search :"+$scope.isFilterCollapsed);
+    
+});
 

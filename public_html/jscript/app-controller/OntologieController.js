@@ -201,7 +201,7 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
 			
 
 
-			console.log("table onClick result "+ $tab)
+			console.log("table onClick result "+ $tab);
 			
 
 

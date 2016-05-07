@@ -12,7 +12,7 @@ app.controller('formCtrl', function($scope,$location, $http ) {
   
   $scope.submitData = function (user)
     {
-    console.log(user)
+    console.log(user);
     
     var conf = {
       headers : {
