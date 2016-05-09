@@ -82,3 +82,13 @@ app.controller("collapseFilterCtr",function($scope){
     console.log("Collapse Filter Search :"+$scope.isFilterCollapsed);
     
 });
+
+
+
+app.controller("collapseHeaderCtr",function($scope){
+    
+    $scope.isProfileCollapsed = true;
+    
+    console.log("Collapse Profile :"+$scope.isProfileCollapsed);
+    
+});

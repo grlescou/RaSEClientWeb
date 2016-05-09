@@ -9,24 +9,27 @@
     <a href="../../index2.html"><b>Admin</b> RaSE</a>
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body" ng-app="loginform" ng-controller="formCtrl" ng-init="message">
+  <div class="login-box-body"  ng-controller="formCtrl" ng-init="message">
     <p class="login-box-msg">Login</p>
 	<p>{{message}}</p>
-    <form name="loginf" novalidate>
+    <form name="loginf">
       <div class="form-group has-feedback">
-        <input type="email" name="mail" ng-model="authUser.mail"  class="form-control" placeholder="Email" required>
+        <input type="email"  ng-model="authUser.mail" name="mail" class="form-control" placeholder="Email" required/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" ng-model="authUser.password"  class="form-control" placeholder="Password" required>
+        <input type="password"  ng-model="authUser.password"  class="form-control" placeholder="Mot de passe" required/>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
-          <div class="checkbox icheck">
+          <div class="checkbox">
+<!--            {{authUser.remember}}-->
             <label>
-              <input type="checkbox"> s'ouvenir de moi
+                <input  type="checkbox" ng-model="authUser.remember"  >
+                s'ouvenir de moi
             </label>
+<!--               <h3 ng-show="authUser.remember" >I will remember you </h3>-->
           </div>
         </div>
         <!-- /.col -->
@@ -47,7 +50,7 @@
 </div>
 <!-- /.login-box -->
 
-<script>
+<!--<script>
   $(function () {
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
@@ -55,6 +58,6 @@
       increaseArea: '20%' // optional
     });
   });
-</script>
+</script>-->
 
 </div>

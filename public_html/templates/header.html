@@ -2,14 +2,82 @@
 <!---============================ header  ===================================  -->
 	
     <!-- Logo -->
-    <a href="#/" class="logo">
+    <a href="#/" class="logo" >
      
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>RaSE-Haiti</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="" role="navigation"  ng-controller="collapseHeaderCtr">
      
+       <div class="nav-menu-rase">
+        <ul class="nav-rase navbar-nav-rase">  
+        
+        
+<!--           User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a  ng-click="isProfileCollapsed = !isProfileCollapsed">
+               <i class="fa fa-user"></i>
+              <span class="">Jules Petit-Homme</span>
+            </a>
+            <ul class="dropdown-menu-rase" uib-collapse="isProfileCollapsed">
+<!--               User image -->
+             <form name="loginf"> 
+              <li class="user-header-rase">
+                <span style="display: inline;"  class="close_icons pull-right"  ng-click="isProfileCollapsed = !isProfileCollapsed">
+                <i class="fa fa-times-circle"></i>
+                </span>
+                
+                <p>
+                  Login
+                 
+                </p>
+              </li>
+<!--               Menu Body -->
+              <li class="user-body-rase">
+                 
+        <div class="form-group has-feedback">
+        <input type="email"  ng-model="authUser.mail" name="mail" class="form-control" placeholder="Email" required/>
+<!--        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>-->
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password"  ng-model="authUser.password"  class="form-control" placeholder="Mot de passe" required/>
+<!--        <span class="glyphicon glyphicon-lock form-control-feedback"></span>-->
+      </div>
+      <div >
+        <div class="col-xs-8">
+          <div class="checkbox">
+<!--            {{authUser.remember}}-->
+            <label>
+                <input  type="checkbox" ng-model="authUser.remember"  >
+                s'ouvenir de moi
+            </label>
+<!--               <h3 ng-show="authUser.remember" >I will remember you </h3>-->
+          </div>
+        </div>
+          </div>
+<!--                 /.row -->
+              </li>
+<!--               Menu Footer-->
+              <li class="user-footer-rase">
+<!--                <div class="pull-left">
+                  <a href="#/" class="btn btn-primary btn-flat">Profile</a>
+                </div>-->
+                <div class="pull-right">
+                 
+                   <button type="submit"   ng-click="submitData(authUser)" ng-disabled="loginf.$invalid" class="btn btn-primary btn-flat">Connexion</button>
+                </div>
+              </li>
+            </ul>
+          </li>
+          
+          </form>   
+<!--           Control Sidebar Toggle Button 
+          <li>
+            <a href="#/" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>-->
+        </ul>
+      </div>
      
     </nav>
  

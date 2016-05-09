@@ -7,6 +7,7 @@ var app = angular.module('RaseApp', [
   'datatables', 
   'ngResource',
   "ngAnimate",
+  "ngCookies",
   'ui.bootstrap'
 ]);
 
@@ -35,6 +36,7 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
 
 
     .when("/login", {templateUrl: "login.html", controller: "formCtrl"})
+     .when("/logout", {templateUrl: "login.html", controller: "formCtrl"})
     // else 404
     .otherwise("/404", {redirectTo: '/new' });
 
@@ -80,7 +82,7 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
 app.controller('PageCtrl', function ($scope, $location, $http ) {
   $scope.toshow = true;
   
-  if($location.path() == "/login"){
+  if($location.path() === "/login"){
     
     
     $location.path("/login");
@@ -100,3 +102,112 @@ app.controller("collapseMenuCtr",function($scope){
     
 });
 
+
+
+app.controller("collapseHeaderCtr",function($scope){
+    
+    $scope.isProfileCollapsed = true;
+    
+    console.log("Collapse Profile :"+$scope.isProfileCollapsed);
+    
+});
+
+
+
+app.controller("sessionCtr", ['$scope','$location', '$http','UserSericeAuth','SessionCookies', function($scope,$location, $http, UserSericeAuth,SessionCookies){
+        
+    
+    
+    $scope.logout = function(){
+        
+        UserSericeAuth.logout();
+        
+         $location.path("/logout");
+         $scope.toshow = false;
+        
+    };
+    
+        
+        
+        
+}]);
+
+
+
+app.run(['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', function($rootScope,$location, $http, UserSericeAuth,SessionCookies){
+        
+         
+ 
+         
+   
+ 
+        UserSericeAuth.refreshSession(function(response){
+         $rootScope.globals = {};
+         //$rootScope.globals.User = null;
+         console.log(response);
+          $rootScope.globals = response  ;
+         
+         if( $rootScope.globals.isLogged){
+           //$rootScope.globals.User = response.User  ;
+           
+//           console.log("Im redirect to home page");
+//                if($location.path() === "/login"){
+//                
+//                $location.path("/home");
+//            }
+         }
+         else
+         {
+              //$rootScope.globals.User = response.User  ;
+//              
+//            if($location.path() !== "/login"){
+//    
+//             //UserSericeAuth.logout();
+//          
+//              $location.path("/login");
+//              console.log("Im redirect to login page");
+//            }
+             
+              
+         }
+            
+            
+        });
+        
+       
+       $rootScope.$on('$locationChangeStart',function(event,next,current){
+           
+         UserSericeAuth.refreshSession(function(response){
+         $rootScope.globals = {};
+         //$rootScope.globals.User = null;
+         console.log("State Refresh");
+         
+          $rootScope.globals = response  ;
+          
+          console.log($rootScope.globals);
+          
+          });
+           
+           
+            if($location.path() !== "/login" &&  $rootScope.globals.isLogged ===false ){
+                 $location.path("/login");
+                  console.log("Im redirect to login by state");
+            }
+            else{
+            
+            if($location.path() === "/login" &&  $rootScope.globals.isLogged){
+                
+                $location.path("/home");
+                console.log("Login page to home page if True by state");
+            }
+            else{
+                console.log("Im redirect to nothing by state");
+            }
+        }
+            
+           
+       });
+       
+        
+        
+}]);

@@ -38,7 +38,7 @@ function ApiServer() {
         
         this.URL_groupeIndividu = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/groupeIndividu/";
         
-        
+        this.URL_personne = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/personne/";
         
         // Recuperation des categories
 	//
@@ -194,6 +194,10 @@ function ApiServer() {
 
          ApiServer.prototype.getURLAdministrateur = function() {
 		return this.URL_administrateur;
+	}
+        
+         ApiServer.prototype.getURLPersonnne = function() {
+		return this.URL_personne;
 	}
 
 
