@@ -12,7 +12,7 @@
     //checkbox par défaut
     $scope.selected='Masculin';
     //checkbox par défaut
-    $scope.checked='Moins5';
+    $scope.checked='Moins_de_5';
 //Liste des départements, des communes en fonction du departement choisi
 $scope.departements={
     'OUEST':{
@@ -47,6 +47,10 @@ $scope.departements={
     //$scope.ages = [{name:'Moins de 5 ans'},{name:'Plus de 5 ans'},{name:'Mixte'}];
     
     console.log("Page controlleur report");
+   
+   $scope.doSomethingWithDate = function (date){
+        //alert(date);
+      };
    
     var conf = {
       headers : {
@@ -180,25 +184,39 @@ $scope.locate=function(){
 }  
 //annuler report
 $scope.annuler=function(){
-    //templateUrl:'partials/GestionReport.html';
+    $scope.reset();
 };     
         //save report
         $scope.Envoyer=function(){
                  
             var data = {};
+            if($scope.nombreCas === undefined || $scope.note ===undefined)
+            {
+                 alert ("Champ obligatoire");
+            }else{
            
                    data.maladie= $scope.maladie;
                    data.mention=$scope.mention;
                    data.sexe= $scope.selected;
                    data.groupeAge= $scope.checked;
-                   data.date=$scope.datepicker;
+                   // tester si le champ date n'est pas rempli
+                   if($scope.datepicker === undefined){
+                       var now= new Date();
+                       var annee= now.getFullYear();
+                       var mois = ('0'+(now.getMonth()+1)).slice(-2);
+                       var jour= now.getDate();
+                       data.date= annee + "-" + mois + "-" + jour ;
+                   }
+                   else{
+                       data.date=$scope.datepicker;
+                   }
                    data.location=[$scope.longitude,$scope.latitude];
                    data.note= $scope.note;
                    data.nombreCas= $scope.cas;
                    data.zone={};
                    data.listeSymptome=[];
                    data.user={"id":"5734ab39fd9c76fbeece9c63"};
-                
+               } 
             var conf = {
              headers : {
              'Content-Type' : 'application/json'
@@ -251,15 +269,3 @@ $scope.annuler=function(){
         };
 });
  
-app.controller('datepickerctl', function() {
-    var that = this;
-
-    this.isOpen = false;
-
-    this.openCalendar = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        that.isOpen = true;
-    };
-});
