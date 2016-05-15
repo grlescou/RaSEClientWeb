@@ -432,6 +432,10 @@ app.controller("collapseMenuCtr",['$rootScope',function($rootScope){
 app.controller("sessionCtr", ['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', function($rootScope,$location, $http, UserSericeAuth,SessionCookies){
         
   
+  if(! $rootScope.uglobals.isLogged){
+        $rootScope.Usermane= "Login";
+  }
+  
     
     $rootScope.logout = function(){
         
@@ -482,7 +486,7 @@ app.run(['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', fu
          {
               //$rootScope.uglobals.User = response.User  ;
               //
-     $rootScope.Usermane= "Login";
+            $rootScope.Usermane= "Login";
 //              
 //            if($location.path() !== "/login"){
 //    
@@ -507,9 +511,16 @@ app.run(['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', fu
          console.log("State Refresh");
          
           $rootScope.uglobals = response  ;
-          
+        if( $rootScope.uglobals.isLogged)
+        {
           $rootScope.Usermane=  $rootScope.uglobals.User.prenom + " " +$rootScope.uglobals.User.nom
           
+
+        }
+        else
+        {
+              $rootScope.Usermane= "Login";
+        }
           console.log($rootScope.uglobals);
           
           });
