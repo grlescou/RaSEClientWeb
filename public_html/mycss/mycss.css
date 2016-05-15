@@ -54,14 +54,30 @@ header .logo {
   padding: 0 15px;
   font-weight: 300;
   overflow: hidden;
+ 
 }
 
 
 header .logo .logo-lg {
   display: block;
-  
+    
 }
 
+header .logo .logo-lg  a{
+  
+    
+    text-decoration: none;
+    
+}
+
+header a:hover,
+a:active,
+a:focus{
+  
+     background-color:  #72afd2;
+    text-decoration: none;
+    
+}
 
 header .nav-menu-rase {
     float: right;
@@ -106,6 +122,7 @@ header .nav-menu-rase  li  a {
     color: whitesmoke;
     #float: left;
     text-align: center;
+    text-decoration: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 0 15px;
   overflow: hidden;
@@ -244,6 +261,80 @@ header .logo a {
 }
 
 
+
+
+#carto-table{
+     position: absolute;
+     background:#3276B1;
+     background:rgba(0,60,113,0.7);
+     box-shadow: none ;
+     z-index: 4030;
+     height: 50%;
+     bottom: 0;
+     width: 100%;
+     
+     
+    
+}
+
+
+#carto-table-head{
+    position: relative;
+    height: 45px;
+    width: 80%; 
+    text-align: center;
+    font-size: 35px;
+    font-weight: 200;
+    color: white;
+    
+}
+
+
+#carto-table-head span i {
+   cursor: pointer;
+   width: 50px;
+   border: 0px red solid;
+  
+}
+
+
+#carto-table-body{
+      position: relative;
+      padding-top: 15px;
+     padding-left: 15px;
+     padding-right: 15px;
+     padding-bottom:  15px;
+    background-color: whitesmoke;
+    height: 400px;  
+    overflow-y: auto;
+}
+
+#carto-table-body thead {
+    background-color: black;
+    color: white;
+}
+
+#carto-table-body tbody  {
+    background-color: white;
+    font-size: 12px;
+
+}
+
+/*#carto-table-body tbody tr td button{
+    height: 25px; 
+      width:  35px; 
+    padding : 5px;
+    text-align: center;
+}
+#carto-table-body tbody tr td button i {
+  height: 10px;
+  border: 1px red solid;
+  font-size: 9px;
+
+}*/
+
+
+
 .main-footer {
   background: #fff;
   padding: 15px;
@@ -287,7 +378,7 @@ header .logo a {
  position: absolute;
  z-index: 1001;
   border:0px red solid;
-  margin-left: 8%;
+  margin-left: 120px;
   margin-top: 8px;  
 }
 
@@ -512,3 +603,19 @@ footer {
 }
 
 
+/*#SideFilter{
+    
+}*/
+
+
+/*#SideFilter button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  
+#SideFilter button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }*/

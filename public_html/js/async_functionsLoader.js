@@ -295,7 +295,7 @@ function clear_markers() {
 function load_demographie_SectionCommnunale(data, map) {
 	console.log("Loading demographie");
 
-
+globalsTransList = data ;
   var geojsonObject = {"type":"FeatureCollection",
       'crs': {
           'type': 'name',
@@ -347,19 +347,57 @@ map.data.setStyle(function(feature) {
     if (feature.getProperty('population')) {
       pop = feature.getProperty('population');
       
-      if (pop< 10000 )
+      var casMaladie = feature.getProperty("casMaladieValue");
+      var seuil = casMaladie.maladie.seuil;
+      var nbCas = casMaladie.count;
+      var typeSeuil = casMaladie.maladie.typeSeuil;
+      
+      if (typeSeuil === "Incidence cumulée")
       {
-          color = "green";
+            if (  ((nbCas/pop)/seuil) >=0 && ((nbCas/pop)/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if(((nbCas/pop)/seuil) >0.25 && ((nbCas/pop)/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if(((nbCas/pop)/seuil) >0.50 && ((nbCas/pop)/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( ((nbCas/pop)/seuil) > 0.75 && ((nbCas/pop)/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+
       }
-      else if(pop >10000 && pop < 40000)
+      else if (typeSeuil === "Incidence")
+      { 
+           if (  (nbCas/seuil) >=0 && (nbCas/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if( (nbCas/seuil) >0.25 && (nbCas/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if( (nbCas/seuil) >0.50 && (nbCas/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( (nbCas/seuil) > 0.75 && (nbCas/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+      }
+      else
       {
-          color = "yellow";
-      }
-      else if(pop >40000 && pop < 60000){
-          color = "orange";
-      }
-      else {
-          color = "red";
+           color = "white";
       }
     
     }
@@ -453,7 +491,7 @@ map.data.setStyle(function(feature) {
 function load_demographie_Departement(data, map) {
 	console.log("Loading demographie");
 
-
+globalsTransList = data ;
   var geojsonObject = {"type":"FeatureCollection",
       'crs': {
           'type': 'name',
@@ -468,6 +506,9 @@ function load_demographie_Departement(data, map) {
     console.log("load_departement");
     if(data){
      console.log(data);
+     console.log("globalsTransLits");
+      console.log(globalsTransList);
+       console.log("End globalsTransLits");
     // geojsonObject.features = data;
       $.each(data, function(key, val) {
        console.log(val);
@@ -507,19 +548,57 @@ map.data.setStyle(function(feature) {
       demogr = feature.getProperty('demographieValue');
       pop = demogr.populationValue.population ;
       
-      if (pop< 100000 )
+      var casMaladie = feature.getProperty("casMaladieValue");
+      var seuil = casMaladie.maladie.seuil;
+      var nbCas = casMaladie.count;
+      var typeSeuil = casMaladie.maladie.typeSeuil;
+      
+      if (typeSeuil === "Incidence cumulée")
       {
-          color = "green";
+            if (  ((nbCas/pop)/seuil) >=0 && ((nbCas/pop)/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if(((nbCas/pop)/seuil) >0.25 && ((nbCas/pop)/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if(((nbCas/pop)/seuil) >0.50 && ((nbCas/pop)/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( ((nbCas/pop)/seuil) > 0.75 && ((nbCas/pop)/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+
       }
-      else if(pop >100000 && pop < 500000)
+      else if (typeSeuil === "Incidence")
+      { 
+           if (  (nbCas/seuil) >=0 && (nbCas/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if( (nbCas/seuil) >0.25 && (nbCas/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if( (nbCas/seuil) >0.50 && (nbCas/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( (nbCas/seuil) > 0.75 && (nbCas/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+      }
+      else
       {
-          color = "yellow";
-      }
-      else if(pop >500000 && pop < 1000000){
-          color = "orange";
-      }
-      else {
-          color = "red";
+           color = "white";
       }
     
     }
@@ -607,7 +686,7 @@ map.data.setStyle(function(feature) {
 
 function load_demographie_Commnune(data, map) {
 	console.log("Loading Commune");
-
+globalsTransList = data ;
 
   var geojsonObject = {"type":"FeatureCollection",
       'crs': {
@@ -662,19 +741,57 @@ map.data.setStyle(function(feature) {
        demogr = feature.getProperty('demographieValue');
       pop = demogr.populationValue.population ;
       
-      if (pop< 10000 )
+      var casMaladie = feature.getProperty("casMaladieValue");
+      var seuil = casMaladie.maladie.seuil;
+      var nbCas = casMaladie.count;
+      var typeSeuil = casMaladie.maladie.typeSeuil;
+      
+      if (typeSeuil === "Incidence cumulée")
       {
-          color = "green";
+            if (  ((nbCas/pop)/seuil) >=0 && ((nbCas/pop)/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if(((nbCas/pop)/seuil) >0.25 && ((nbCas/pop)/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if(((nbCas/pop)/seuil) >0.50 && ((nbCas/pop)/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( ((nbCas/pop)/seuil) > 0.75 && ((nbCas/pop)/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+
       }
-      else if(pop >10000 && pop < 40000)
+      else if (typeSeuil === "Incidence")
+      { 
+           if (  (nbCas/seuil) >=0 && (nbCas/seuil) <=0.25   )
+            {
+                color = "green";
+            }
+            else if( (nbCas/seuil) >0.25 && (nbCas/seuil) <=0.50 )
+            {
+                color = "yellow";
+            }
+            else if( (nbCas/seuil) >0.50 && (nbCas/seuil) <=0.75 ){
+                color = "orange";
+            }
+            else if( (nbCas/seuil) > 0.75 && (nbCas/seuil) <=1 ) {
+                color = "red";
+            }
+             else {
+                  color = "white";
+
+            }
+      }
+      else
       {
-          color = "yellow";
-      }
-      else if(pop >40000 && pop < 60000){
-          color = "orange";
-      }
-      else {
-          color = "red";
+           color = "white";
       }
     
     }

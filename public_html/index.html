@@ -79,7 +79,33 @@
 
         <script src="libs/chosen/chosen.jquery.js" type="text/javascript"></script>
         <script src="libs/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <!-- for dataTable -->
+        
+  <link href="libs/vendor/datatables-select/css/select.dataTables.css" rel="stylesheet" type="text/css"/>
+
+<link rel="stylesheet"  href="libs/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet"  href="libs/vendor/font-awesome-animation/dist/font-awesome-animation.min.css">
+  <link rel="stylesheet"  href="libs/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables/media/css/jquery.dataTables.min.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-colreorder/css/dataTables.colReorder.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-colvis/css/dataTables.colVis.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-responsive/css/dataTables.responsive.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-scroller/css/dataTables.scroller.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-fixedcolumns/css/dataTables.fixedColumns.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-fixedheader/css/fixedHeader.dataTables.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-buttons/css/buttons.dataTables.css">
+  <link rel="stylesheet"  href="libs/vendor/datatables-select/css/select.dataTables.css">
+    <link rel="stylesheet"  href="libs/vendor/backtotop/backtotop.min.css">
+    <link rel="stylesheet"  href="libs/vendor/highlightjs/styles/github.css">
+    <link rel="stylesheet" href="libs/angular-datatables/plugins/bootstrap/datatables.bootstrap.min.css">
+        
+        
 <!--</script> -->
+
+
 
 <script type="text/template" id="infobulle">
   <div id="infobulle" class="panel panel-default">
@@ -144,9 +170,9 @@
 
 </head>
 <body ng-app="RaseClient"  >
-    <header   ng-include='"templates/header.html"' ></header>
+    <header   ng-include='"templates/header.html"' ng-controller="sessionCtr"></header>
        
-    <div id="Container"> 
+    <div id="Container" ng-controller="cartoTablerCtr"> 
     
    
     <!--<div id="upSideMap" class="col-md-9"> -->
@@ -164,9 +190,9 @@
        
  
         
-       <button type="button" class="btn btn-primary"><i class="fa fa-list"></i></button>
+       <button type="button" class="btn btn-primary" ng-click="isCartoTableCollapsed =  ! isCartoTableCollapsed; initTableList();"><i class="fa fa-list"></i></button>
        
-       <button type="button" class="btn btn-primary"><i class="fa fa-bar-chart-o"></i></button>
+<!--       <button type="button" class="btn btn-primary"><i class="fa fa-bar-chart-o"></i></button>-->
        
        <button type="button" class="btn btn-primary"><i class="fa fa-map-marker"></i></button>
         
@@ -305,48 +331,89 @@
         
      
        
-  	<div id="SideFilter" class="col-md-3"  >
+  	<div id="SideFilter" class="col-md-3"   ng-controller='FilterCtrl' >
+          <script type="text/ng-template" id="customTemplate.html">
+            <a>
+
+                <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+            </a>
+          </script>
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
 			<div class="panel-heading">
 				<strong>Affiner la recherche <span class="badge" id="badge-nb"></span></strong>
 			</div>
-
-			<!-- List group -->
-			<ul class="list-group">
-				<li class="list-group-item">
-					<div style="width:45%; float:right;">
-						<label style="display:block;" for="datepickerfin">Date fin :</label>
-						<input class="form-control ng-pristine ng-valid" type="text" id="datepickerfin">
+                           <ul class="list-group"  ng-controller='TypeaheadCtrl' >
+			     <li class="list-group-item">
+				<div class="row" ng-controller='DatepickerPopupCtrl'>
+					
+                                   
+					<div class="form-group col-md-12">
+                                            <label  for="datepickerdeb">Date debut</label>
+                                            <p class="input-group">
+						
+						
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="Matchfilter.dateDebut" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span> 
+                                           
+                                            </p>
+                                             
 					</div>
-					<div style="width:45%;">
-						<label style="display:block;" for="datepickerdeb">Date debut :</label>
-						<input class="form-control ng-pristine ng-valid" type="text" id="datepickerdeb">
-					</div>
-				</li>
+                                    
+                                     <div class="form-group col-md-12">
+						<label  for="datepickerfin">Date fin</label>
+						 <p class="input-group">
+						
+						
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="Matchfilter.dateFin" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span> 
+                                           
+                                            </p>
+				   </div>
+				</div>
+                                <!-- List group -->
+			
+                             </li>
+				
+                                <li class="list-group-item">
+                               <label  for="list_maladie_chosen">Maladie</label>
+<!--                                <pre>Model: {{Matchfilter.maladie.nom | json}}</pre>-->
+                                <input type="text" ng-model="Matchfilter.maladie"  data-placeholder="Choisissez la maladie" placeholder="Choisissez la maladie" uib-typeahead="maladie as maladie.nom for maladie in listMaladie | filter:{nom:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+                                </li>
+                                
 				<li class="list-group-item">
-					<label style="display:block;" for="list_maladie_chosen">Maladie :</label>
-					<select tabindex="1" id="list_maladie_chosen" data-placeholder="Choisissez la maladie" style="width:100%;" class="form-control chosen-select" multiple tabindex="7"></select>
-				</li>
-				<li class="list-group-item">
-					<label style="display:block;" for="list_symtome_chosen">Symptômes :</label>
-					<select tabindex="2" id="list_symtome_chosen" data-placeholder="Choisissez les symtômes" style="width:100%;" multiple class="form-control chosen-select" tabindex="8"></select>
-				</li>
-				<li class="list-group-item">
+                                <label  for="list_maladie_chosen">Symptômes</label>
+<!--                                <pre>Model: {{Matchfilter.maladie.nom | json}}</pre>-->
+                                 <input type="text" ng-model="Matchfilter.symptome"  data-placeholder="Choisissez les symtômes" placeholder="Choisissez les symtômes" uib-typeahead="symptome as symptome.nom for symptome in Matchfilter.maladie.symptomes | filter:{nom:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+                                </li>
+                                
+                                <li class="list-group-item">
+                                <label  for="list_maladie_chosen">Mention Responsabilite</label>
+<!--                                <pre>Model: {{Matchfilter.maladie.nom | json}}</pre>-->
+                                 <input type="text" ng-model="Matchfilter.mention"  data-placeholder="Choisissez la mention" placeholder="Choisissez la mention" uib-typeahead="mention as mention.nom for mention in listMention | filter:{nom:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+                                </li>
+                                
+<!--				<li class="list-group-item">
 					<label style="display:block;" for="list_maladie_chosen">Professions :</label>
 					<select tabindex="1" id="list_profession_chosen" data-placeholder="Choisissez la profession" style="width:100%;" class="form-control chosen-select" multiple tabindex="7"></select>
-				</li>
+				</li>-->
 
-				<li class="list-group-item">
-					<label style="display:block;" for="notation">Notation : </label>
-					<center><input type="text" class="span2" value="" data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="[3,4]" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show" id="notation"></center>
+				<li class="list-group-item" ng-controller='RatingCtrl'>
+					<label for="notation">Notation : </label>
+					<center>    <uib-rating ng-model="Matchfilter.note" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['un','deux','trois']"  aria-labelledby="default-rating"></uib-rating>
+                                                    <span class="label" ng-class="{'label-warning': percent<2, 'label-info': percent>=2 && percent<4, 'label-success': percent>=4}" ng-show="overStar && !isReadonly">{{percent}}</span>
+                                         </center>
 				</li>
 				
 				<li class="list-group-item">
 					<button type="button" class="btn btn-default" id="btn_annuler">
 						Annuler
 					</button>
-					<button type="button" id="search" class="btn btn-primary" style="float:right;">
+					<button type="button" ng-click='FilterRecherche()' id="search" class="btn btn-primary" style="float:right;">
 						Rechercher
 					</button>
 				</li>
@@ -356,10 +423,165 @@
 	</div>
 	
      
+<!--        
+        <div id="carto-table"   uib-collapse="isCartoTableCollapsed">
+        <div>
+            <div id="carto-table-head" >
+                <span ng-click="isCartoTableCollapsed =  ! isCartoTableCollapsed"><i class="fa fa-angle-double-down"></i></span>
+            </div>  -->
+            
+         <div id="carto-table"   uib-collapse="isCartoTableCollapsed">
+        <div>
+            <div id="carto-table-head" >
+                <span ng-click="isCartoTableCollapsed =  ! isCartoTableCollapsed"><i class="fa fa-angle-double-down"></i></span>
+            </div>  
+            <!-- si affichage par departement -->
+          <div id="carto-table-body" ng-show="LimitADMTable === 'departement' ">
+              
+               
+              
+           <table id="example1" datatable="ng" class="row-border hover" >
+                
+               
+               <thead>
+                <tr>
+                 <th>Departement</th>
+                  <th>Maladie</th>
+                  <th>Nombres de cas</th>
+                  <th>Femmes</th>
+                  <th>Hommes</th>
+                   <th>Mixe</th>
+                   <th>Moins de 5 ans</th>
+<!--                  <th>action</th>-->
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="u in listData">
+                    
+                   <td>{{u.properties.adm1}}</td>
+                  <td>{{u.properties.casMaladieValue.maladie.nom}}</td>
+                  <td>{{u.properties.casMaladieValue.count}}</td>
+                  <td>{{u.properties.casMaladieValue.femmes}}</td>
+                  <td>{{u.properties.casMaladieValue.hommes}}</td>
+                  <td>{{u.properties.casMaladieValue.mixe}}</td>
+                  <td>{{u.properties.casMaladieValue.moins_5an}}</td>
+
+
+                </tr>
+               
+                
+                </tbody>
+           
+              </table>
+               
+               </div>
+              
+              <!-- si affichage par commune -->
+              <div id="carto-table-body" ng-show="LimitADMTable === 'commune' ">
+              
+              <table id="example1" datatable="ng" class="row-border hover" >
+                <thead>
+          
+             
+                <tr>
+                 <th>Departement</th>
+                 <th>Commune</th>
+                  <th>Maladie</th>
+                  <th>Nombres de cas</th>
+                  <th>Femmes</th>
+                  <th>Hommes</th>
+                   <th>Mixe</th>
+                   <th>Moins de 5 ans</th>
+<!--                  <th>action</th>-->
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="u in listData">
+                    
+                   <td >{{u.properties.adm1}}</td>
+                    <td>{{u.properties.adm2}}</td>
+                  <td>{{u.properties.casMaladieValue.maladie.nom}}</td>
+                  <td>{{u.properties.casMaladieValue.count}}</td>
+                  <td>{{u.properties.casMaladieValue.femmes}}</td>
+                  <td>{{u.properties.casMaladieValue.hommes}}</td>
+                  <td>{{u.properties.casMaladieValue.mixe}}</td>
+                  <td>{{u.properties.casMaladieValue.moins_5an}}</td>
+
+
+                </tr>
+               
+                
+                </tbody>
+           
+              </table>
+                  </div>
+              
+              
+               <!-- si affichage par Section Communale -->
+               <div id="carto-table-body" ng-show="LimitADMTable === 'sectionCommuale' ">
+               <table id="example1" datatable="ng" class="row-border hover" >
+                <thead>
+          
+             
+                <tr>
+                 <th>Departement</th>
+                 <th>Commune</th>
+                 <th>Section</th>
+                  <th>Maladie</th>
+                  <th>Nombres de cas</th>
+                  <th>Femmes</th>
+                  <th>Hommes</th>
+                   <th>Mixe</th>
+                   <th>Moins de 5 ans</th>
+<!--                  <th>action</th>-->
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="u in listData">
+                    
+                   <td>{{u.properties.departemen}}</td>
+                   <td >{{u.properties.commune}}</td>
+                  <td >{{u.properties.section}}</td>
+                  <td>{{u.properties.casMaladieValue.maladie.nom}}</td>
+                  <td>{{u.properties.casMaladieValue.count}}</td>
+                  <td>{{u.properties.casMaladieValue.femmes}}</td>
+                  <td>{{u.properties.casMaladieValue.hommes}}</td>
+                  <td>{{u.properties.casMaladieValue.mixe}}</td>
+                  <td>{{u.properties.casMaladieValue.moins_5an}}</td>
+
+
+                </tr>
+               
+                
+                </tbody>
+           
+              </table>
+
+                
+            </div>  
+            
+            
+        </div>   
+        
+          <footer class="col-md-12"  ng-include='"templates/footer.html"' ng-show="!isCartoTableCollapsed"> </footer>
+        
+    </div>
+        
+        
+        <footer class="col-md-12"  ng-include='"templates/footer.html"' ng-show="isCartoTableCollapsed"> </footer>
+        
         </div> 
+    
+    
+    
+    
+      
   
         
-   <footer class="col-md-12"  ng-include='"templates/footer.html"' > </footer>
+  
 </body>
 
 <script type="text/javascript">
@@ -456,8 +678,10 @@
 
 
 <!-- my app -->
-
 <script src="jscript/main.js"></script>
+<script src="jscript/app-services/Session_Cookies.js" type="text/javascript"></script>
+<script src="jscript/app-services/UserServiceAuth.js" type="text/javascript"></script>
+
 
 
 

@@ -1,4 +1,6 @@
 var limitAdm = "departement";
+var globalsTransList = [];
+var TempglobalsTransList = [];
 
 function SelectChangeAdmLimit(){
     limitAdm = document.getElementById("IdSelectLimitAdm").value;
@@ -49,6 +51,7 @@ function initialize() {
 		console.log(data);
 		if(data){
 			console.log(data);
+                        //globalsTransList = data ;
                 
 			load_demographie_Departement (data, map);
 			NProgress.done();
@@ -68,7 +71,7 @@ function initialize() {
 		console.log(data);
 		if(data){
 			console.log(data);
-                
+                        // globalsTransList = data ;
 			load_demographie_Commnune (data, map);
 			NProgress.done();
                 
@@ -88,7 +91,7 @@ function initialize() {
 		console.log(data);
 		if(data){
 			console.log(data);
-                
+                        //globalsTransList = data ;
 			load_demographie_SectionCommnunale (data, map);
 			NProgress.done();
                 

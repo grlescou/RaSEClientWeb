@@ -54,23 +54,28 @@ Left side column. contains the sidebar
                     <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Enter Description"></textarea>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
-
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" ng-model="items.m.seuil" id="inputEmail3" placeholder="Email">
-                  </div>
-                </div>
+               
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2  control-label">Type Seuil</label>
                  <div class="col-sm-10">
                  <select class="form-control select2"  ng-model="items.m.typeSeuil"  style="width: 100%;">
                   <option value="" selected="selected">--Choix Type Seuil--</option>
-                  <option value='popolation'>Par % population</option>
-                  <option value='cas'>Par nombre de cas</option>
+                  <option value='Incidence cumulée'>Incidence cumulée - % population</option>
+                  <option value='Incidence'>Incidence - Nombre de cas</option>
                 </select>
                   </div>
                 </div>
+        
+                   <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Seuil</label>
+
+                  <div class="col-sm-10" ng-switch="items.m.typeSeuil">
+                    <input ng-switch-when="Incidence cumulée" type="number"  step="0.01" min="0.00000001" max="1"  class="form-control" ng-model="items.m.seuil" id="inputEmail3">
+                   <input ng-switch-when="Incidence" type="number"   min="1"  class="form-control" ng-model="items.m.seuil" id="inputEmail3">
+                  </div>
+                </div>
+        
+                    
 
 
                  <div class="form-group">

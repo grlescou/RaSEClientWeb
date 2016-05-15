@@ -15,14 +15,17 @@
         
         
 <!--           User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
+          <li class="dropdown user user-menu" ng-controller='formCtrl'>
             <a  ng-click="isProfileCollapsed = !isProfileCollapsed">
                <i class="fa fa-user"></i>
-              <span class="">Jules Petit-Homme</span>
+              <span class="">{{Usermane}}</span>
             </a>
-            <ul class="dropdown-menu-rase" uib-collapse="isProfileCollapsed">
-<!--               User image -->
-             <form name="loginf"> 
+            <ul class="dropdown-menu-rase" ng-show="!uglobals.isLogged" uib-collapse="isProfileCollapsed">
+
+                
+               
+                <!--               User image -->
+             <form name="loginf"  > 
               <li class="user-header-rase">
                 <span style="display: inline;"  class="close_icons pull-right"  ng-click="isProfileCollapsed = !isProfileCollapsed">
                 <i class="fa fa-times-circle"></i>
@@ -68,15 +71,80 @@
                    <button type="submit"   ng-click="submitData(authUser)" ng-disabled="loginf.$invalid" class="btn btn-primary btn-flat">Connexion</button>
                 </div>
               </li>
-            </ul>
+           
           </li>
           
-          </form>   
-<!--           Control Sidebar Toggle Button 
-          <li>
-            <a href="#/" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>-->
+          </form>
+             </ul>   
+
+                
+       
+                
+           <ul class="dropdown-menu-rase" ng-show="uglobals.isLogged" uib-collapse="isProfileCollapsed">
+
+                
+               
+                <!--               User image -->
+             <form name="loginf"  > 
+              <li class="user-header-rase">
+                <span style="display: inline;"  class="close_icons pull-right"  ng-click="isProfileCollapsed = !isProfileCollapsed">
+                <i class="fa fa-times-circle"></i>
+                </span>
+                
+                <p>
+                  Logout
+                 
+                </p>
+              </li>
+<!--               Menu Body -->
+              <li class="user-body-rase">
+                 
+                    
+<!--                 /.row -->
+              </li>
+<!--               Menu Footer-->
+              <li class="user-footer-rase">
+<!--                <div class="pull-left">
+                  <a href="#/" class="btn btn-primary btn-flat">Profile</a>
+                </div>-->
+                <div class="pull-right">
+                 
+                   <button type="submit"   ng-click="logout()" ng-disabled="loginf.$invalid" class="btn btn-primary btn-flat">Logout</button>
+                </div>
+              </li>
+           
+          </li>
+          
+          </form>
+             </ul>   
+
+                
+            
+                    
+                    
+                    
+                
+                
+                
+                
+                
         </ul>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
       </div>
      
     </nav>
