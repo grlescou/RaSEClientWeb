@@ -348,7 +348,7 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
    
    
    //$scope.authUser.remember =false;
-   $rootScope.message= "";
+   $rootScope.messageLogin= "";
    console.log($rootScope.authUser.remember);
    //$scope.remember = false;
    
@@ -398,10 +398,11 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
             //$location.path('/home');
            console.log("After /home in login");
            $rootScope.authUser = {};
+           $rootScope.messageLogin= "";
         }
         else
         {
-             $rootScope.message = response.message;
+             $rootScope.messageLogin = response.message;
              SessionCookies.removeCookie("Rase-user");
              SessionCookies.removeSession("Rase-user");
         }
