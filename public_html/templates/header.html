@@ -26,6 +26,7 @@
                
                 <!--               User image -->
              <form name="loginf"  > 
+                 
               <li class="user-header-rase">
                 <span style="display: inline;"  class="close_icons pull-right"  ng-click="isProfileCollapsed = !isProfileCollapsed">
                 <i class="fa fa-times-circle"></i>
@@ -38,6 +39,8 @@
               </li>
 <!--               Menu Body -->
               <li class="user-body-rase">
+                  
+                  <div>{{messageLogin}}</div>
                  
         <div class="form-group has-feedback">
         <input type="email"  ng-model="authUser.mail" name="mail" class="form-control" placeholder="Email" required/>
