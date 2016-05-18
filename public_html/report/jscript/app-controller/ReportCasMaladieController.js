@@ -51,7 +51,16 @@ $scope.departements={
    $scope.doSomethingWithDate = function (date){
         //alert(date);
       };
-   
+      
+    
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+  
+  $scope.popup2 = {
+    opened: false
+  };
+
     var conf = {
       headers : {
             'Content-Type' : 'application/json'
@@ -190,10 +199,10 @@ $scope.annuler=function(){
         $scope.Envoyer=function(){
                  
             var data = {};
-            if($scope.nombreCas === undefined || $scope.note ===undefined)
-            {
-                 alert ("Champ obligatoire");
-            }else{
+//            if($scope.nombreCas === undefined || $scope.note ===undefined)
+//            {
+//                 alert ("Champ obligatoire");
+//            }else{
            
                    data.maladie= $scope.maladie;
                    data.mention=$scope.mention;
@@ -216,7 +225,7 @@ $scope.annuler=function(){
                    data.zone={};
                    data.listeSymptome=[];
                    data.user={"id":"5734ab39fd9c76fbeece9c63"};
-               } 
+              // } 
             var conf = {
              headers : {
              'Content-Type' : 'application/json'

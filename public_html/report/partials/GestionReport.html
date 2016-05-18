@@ -49,7 +49,7 @@
 
     <div id="panneau_client">
 			<div class="panel panel-primary">
-<!--                            <a href="../templates/header.html"></a>-->
+                            <a href="../templates/header.html"></a>
 				<div class="panel-heading">
 					<center>
 						<h2><i class="fa fa-hospital-o"></i> Report d'un cas de maladie
@@ -67,7 +67,7 @@
 						</div>
                                             <div class="panel-body"> 
                                                 <!--ng-options="item._id as item.nom for item in listeMaladie"-->
-                                                <select tabindex="1"  ng-model="maladie"  ng-options="maladie.nom for maladie in selectMaladies track by maladie.id" style="width:100%;" class="form-control">
+                                                <select tabindex="1"  ng-model="maladie"  ng-options="maladie.nom for maladie in selectMaladies track by maladie.id " style="width:100%;" class="form-control" >
 							<option value="">-- Choisir Maladie --</option>	 
 						</select>
 						</div>
@@ -132,8 +132,8 @@
                                                                 </div>-->
                                                                  <!--<input calendar ng-model='something' class="form-control" />-->
                                                                  <script type="text/javascript" src="../../js/bootstrap-datepicker.js"></script>
-                                                                 <div >
-                                                                     <input type="text" id="datepicker" class="form-control" ng-model="datepicker"></div>
+                                                                 <div class="input-group" >
+<!--                                                                     <input type="text" id="datepicker" class="form-control" ng-model="datepicker"></div>
                                                                         <script type="text/javascript">
                                                                         $('#datepicker').datepicker().on('changeDate', function(ev){
                                                                           var element = angular.element($('#datepicker'));
@@ -144,7 +144,11 @@
 //                                                                            scope.doSomethingWithDate(ev.date);
 //                                                                          });
                                                                         });
-                                                                        </script>
+                                                                        </script>-->
+                                                                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                                                                    <span class="input-group-btn">
+                                                                      <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                                    </span>
 								</div>
                                                            
 <!--                                                            <div class="input-group" ng-controller="datepickerctl">
@@ -152,7 +156,7 @@
                                                                     <span class="input-group-btn">
                                                                         <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button>
                                                                     </span>
-                                                            </div>-->
+                                                            </div>--> <br/>
 
   
                                                            
@@ -161,7 +165,7 @@
                                                             <div class="form-group">
 									<label for="exampleInputEmail1"><i class="fa fa-users"></i> Nombre de cas</label><br/>
 <!--									<select id="select_nb_cas"></select>-->
-                                                                    <input type='number' name='cas' min='1' max='20' value='1' ng-model="cas" required="">
+                                                                    <input type='number' name='cas' min='1' max='20' value='1' ng-model="cas" required="" class="form-control">
 								</div>
                                                             <!-- Sexe -->
                                                             <div class="form-group" style="display:inline-block">
@@ -197,7 +201,7 @@
                                                             <div class="form-group">
 									<label for="exampleInputEmail1"><i class="fa fa-pencil"></i> Note</label><br/>
 <!--									<select id="select_nb_cas"></select>-->
-                                                                    <input type='number' name='note' min='0' max='5' value='0' ng-model="note" required="">
+                                                                    <input type='number' name='note' min='0' max='5' value='0' ng-model="note" required="" class="form-control">
 								</div>
 <!--								<div class="form-group">
 									<label for="exampleInputEmail1"><i class="fa fa-info"></i> Remarque</label>
@@ -247,8 +251,8 @@
 
 
 
-<!--<footer class="main-footer" ng-include='"templates/footer.html"' ng-show="toshow"> </footer>
-<aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'  ng-show="toshow" ></aside>-->
+<footer class="main-footer" ng-include='"templates/footer.html"' ng-show="toshow"> </footer>
+<aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'  ng-show="toshow" ></aside>
 
      <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed

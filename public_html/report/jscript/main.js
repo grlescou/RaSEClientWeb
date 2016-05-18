@@ -17,10 +17,10 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
 
   $routeProvider
     // Home
-    .when("/", {templateUrl: "partials/home.html", controller: "MainCtrl"})
+    .when("/", {templateUrl: "templates/header.html", controller: "MainCtrl"})
     
     // Pages
-    .when("/home", {templateUrl: "partials/home.html", controller: "MainCtrl"})
+    .when("/home", {templateUrl: "templates/header.html", controller: "MainCtrl"})
     .when("/gesReport", {templateUrl: "partials/GestionReport.html", controller: "reportCntr"})
 
    //.when("/login", {templateUrl: "login.html", controller: "formCtrl"})
@@ -67,7 +67,7 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
  * Controls all other Pages
  */
 app.controller('MainCtrl', function ($scope, $location, $http ) {
-//  $scope.toshow = true;
+  $scope.toshow = true;
 //  
 //  if($location.path() == "/login"){
 //    
