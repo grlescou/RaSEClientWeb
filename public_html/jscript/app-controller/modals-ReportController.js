@@ -1,6 +1,22 @@
-  //var app=angular.module('ReportApp');
-        Rapp.controller('reportCntr', function ($scope,$route,$location,$http,$window) {
+
+
+// I control the root of the application.
+     angular.module('RaseClient').controller('ModalReportCtrl', function ($scope,$route, $uibModal, $log,$location,$http,$window) {
     var apiServer = new ApiServer();
+  
+  $scope.CasPost = {};
+  //$scope.CasPost.nom = "google";
+
+
+  $scope.animationsEnabled = true;
+
+ 
+
+
+ 
+   $scope.openReport = function (size) {
+
+      var apiServer = new ApiServer();
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.selectMaladies=[];
     $scope.selectSymptome=[];
@@ -67,7 +83,7 @@ $scope.departements={
         }
     };
   
-    var apiServer = new ApiServer();
+    //var apiServer = new ApiServer();
 
     
        // get maladie
@@ -276,5 +292,133 @@ $scope.annuler=function(){
         });
             
         };
-});
+
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'newmodal.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {
+        items: function () {
+          return  $scope.data;
+        }
+      }
+    });
+
+
+     modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+      
+      //-------------------------
+      
+       console.log('in isntance result Maladie');
+ 	   console.log($scope.selected);
+           
+           
+        var conf = {
+             headers : {
+             'Content-Type' : 'application/json'
+                }
+             };
+          
+          // POST Maladie 
+       $http.post(apiServer.getURLMaladie(),$scope.selected,conf)
+        .success(function (data, status, headers, conf)
+        {
+        	
+          console.log(data);
+         
+        $scope.message= data.message;
+        $scope.success= data.success;
+         
+          if(data.success === true){
+              console.log("most be reload");
+            //$location.path('/ontologie');
+		//$route.reload();
+              //$scope.refresh();
+              
+         
+              
+          // $scope.categorieInstance.api.reloadData(callback,restPaging);
+           
+                 // get Maladie
+                $http.get(apiServer.getURLMaladie(),conf)
+                 .success(function (data, status, headers, conf)
+                 {
+                        
+                   console.log(data);
+                    $scope.listMaladie= data;
+                    
+                    //$scope.categorieInstance.changeData($scope.listCategorie);
+
+            
+                 })
+                 .error(function (data, status, headers, conf)
+                 {
+                   $scope.message = "Erreur de rafraichissement de la table";
+                 });
+
+
+
+        	$scope.tab = [false,false,false];
+        	$scope.tab[1] = true;
+         }
+      
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+           $scope.success= false;
+        });
+
+        $scope.MaladieNew ={};
+         
+      
+      //-----------------------------------
+      
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+
+
  
+
+  $scope.toggleAnimation = function () {
+    $scope.animationsEnabled = !$scope.animationsEnabled;
+  };
+
+});
+
+// Please note that $uibModalInstance represents a modal window (instance) dependency.
+// It is not the same as the $uibModal service used above.
+
+angular.module('RaseClient').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+
+
+
+$scope.EditSave= function(){
+ 		console.log("edit save action");
+    	console.log($scope.items);
+    	 $uibModalInstance.close($scope.items);
+    };
+ 
+
+});

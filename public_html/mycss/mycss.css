@@ -18,6 +18,8 @@ body {
 }
 
 
+
+
 /* General Links */
 a {
   color: #3c8dbc;
@@ -91,6 +93,17 @@ header .nav-menu-rase {
 }
 
 
+header .nav-menu-rase-2 {
+    float: left;
+    border:0px red solid;
+    height: 50px;
+    padding-left: 2px;
+    padding-right: 2px;
+    display: block;
+    margin-right: 2px;
+}
+
+
 .nav-rase {
     
 }
@@ -103,13 +116,31 @@ header .nav-menu-rase {
     
 }
 
+.navbar-nav-rase-2{
+    margin: 0;
+    float: left;
+    
+}
+
 header .nav-menu-rase ul {
+    list-style-type: none;
+    
+}
+
+header .nav-menu-rase-2 ul {
     list-style-type: none;
     
 }
 
 
 header .nav-menu-rase  li{
+    
+    display: block;
+    
+}
+
+
+header .nav-menu-rase-2  li{
     
     display: block;
     
@@ -132,6 +163,23 @@ header .nav-menu-rase  li  a {
  
 }
 
+header .nav-menu-rase-2  li  a {
+     display: block;
+     line-height: 50px;
+    color: whitesmoke;
+    #float: left;
+    text-align: center;
+    text-decoration: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0 15px;
+  overflow: hidden;
+  height: 50px;
+  #width: 100px;
+  cursor: pointer;
+ 
+}
+
+
 header .nav-menu-rase  li  a:hover {
      background-color:  #72afd2;
       position: relative;
@@ -141,7 +189,20 @@ header .nav-menu-rase  li  a:hover {
 }
 
 
+header .nav-menu-rase-2  li  a:hover {
+     background-color:  #72afd2;
+      position: relative;
+     box-shadow: none;
+     border-color: #eee;
+     z-index: 8030;
+}
+
 header .nav-menu-rase  li  a i {
+  margin-right: 5px;
+}
+
+
+header .nav-menu-rase-2  li  a i {
   margin-right: 5px;
 }
 
@@ -619,3 +680,64 @@ footer {
     border-radius: 32px;
     color: black;
   }*/
+
+
+
+#report-form{
+     position: absolute;
+     background:#3276B1;
+     background:rgba(0,60,113,0.7);
+     box-shadow: none ;
+     z-index: 4030;
+     height: 75%;
+     top: 52px;
+     width: 50%;
+     
+     overflow-y: scroll;
+     
+     max-height: 85%;
+    
+}
+
+
+#report-form-head{
+    position: relative;
+    height: 45px;
+    width: 100%; 
+    text-align: center;
+    font-size: 35px;
+    font-weight: 200;
+    color: white;
+    
+}
+
+
+#report-form-head span i {
+   cursor: pointer;
+   width: 50px;
+   border: 0px red solid;
+  
+}
+
+
+#report-form-body{
+      position: relative;
+      padding-top: 15px;
+     padding-left: 15px;
+     padding-right: 15px;
+     padding-bottom:  15px;
+    background-color: whitesmoke;
+    height: 400px;  
+    overflow-y: auto;
+}
+
+#report-form-body thead {
+    background-color: black;
+    color: white;
+}
+
+#report-form-body tbody  {
+    background-color: white;
+    font-size: 12px;
+
+}

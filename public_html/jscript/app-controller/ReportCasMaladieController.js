@@ -1,5 +1,5 @@
   //var app=angular.module('ReportApp');
-        Rapp.controller('reportCntr', function ($scope,$route,$location,$http,$window) {
+        app.controller('reportCntr', function ($scope,$route,$location,$http,$window) {
     var apiServer = new ApiServer();
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.selectMaladies=[];
@@ -107,7 +107,7 @@ $scope.departements={
         //$location.path('/home');
       }
       else{
-        $scope.message = data.message
+        $scope.message = data.message;
       }
  // } 
         })
@@ -129,7 +129,7 @@ $scope.departements={
         //$location.path('/home');
       }
       else{
-        $scope.message = data.message
+        $scope.message = data.message;
       }
  // } 
         })
@@ -150,7 +150,7 @@ $scope.departements={
             }
             
             
-        }
+        };
         
 //        // get profession
 //       $http.get(apiServer.getURLProfession(),conf)
@@ -190,7 +190,7 @@ $scope.locate=function(){
             alert(error);
         });
         console.log(position);
-}  
+}  ;
 //annuler report
 $scope.annuler=function(){
     $scope.reset();

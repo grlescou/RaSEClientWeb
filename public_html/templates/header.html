@@ -7,13 +7,63 @@
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>RaSE-Haiti</b></span>
     </a>
+    
+     
+        
+    
+      <nav class="" role="navigation" style="margin-left: 7%;" ng-controller="collapseMenuCtr"  >
+        
+          
+          <div class="nav-menu-rase-2">
+        <ul class="nav-rase navbar-nav-rase-2"> 
+            <li class="">
+                <a >
+                   <i class="fa fa-bell-o"></i>
+                  <span class="">Notification</span>
+                </a> 
+             </li>
+        </ul>
+        </div>
+        <div class="nav-menu-rase-2" uib-collapse="!isMenuOrganismeSanteCollapsed" >
+        <ul class="nav-rase navbar-nav-rase-2"> 
+            <li class="">
+                <a >
+                   <i class="fa fa-bell"></i>
+                  <span class="">Confirmation Alerte</span>
+                </a> 
+             </li>
+        </ul>
+        </div>
+        
+          
+         <div class="nav-menu-rase-2" uib-collapse="!isMenuPersonelSanteCollapsed">
+        <ul class="nav-rase navbar-nav-rase-2"> 
+            <li class="">
+                <a ng-click="reportCollapse()">
+                   <i class="fa fa-plus-circle"></i>
+                  <span class="">Report</span>
+                </a> 
+             </li>
+        </ul>
+        </div>
+          
+          
+         
+        
+        </nav>
+        
+        
+    
+    
+    
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="" role="navigation"  ng-controller="collapseHeaderCtr">
      
+        
        <div class="nav-menu-rase">
-        <ul class="nav-rase navbar-nav-rase">  
-        
-        
+        <ul class="nav-rase navbar-nav-rase"> 
+      
+         
 <!--           User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu" ng-controller='formCtrl'>
             <a  ng-click="isProfileCollapsed = !isProfileCollapsed">
@@ -149,6 +199,18 @@
            
            
       </div>
+        
+        
+        
+        
+        
+        
+        
+        
+      
+        
+        
+        
      
     </nav>
  

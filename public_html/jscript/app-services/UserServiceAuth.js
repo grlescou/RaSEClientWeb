@@ -46,6 +46,8 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
             Rdata.User.nom = data.t.nom;
             Rdata.User.isActive = data.t.actif;
             Rdata.User.privilege = data.t.role.privilege;
+            Rdata.User.groupeIndividu = data.t.mentionResponsabilite.groupeIndividu.nomGroupe;
+            
             //Rdata.User.typeAdmin = data.t.typeAdmin;
             }
             else {
@@ -58,6 +60,7 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
             Rdata.User.nom = "";
             Rdata.User.isActive = false;
             Rdata.User.privilege = "public";
+            Rdata.User.groupeIndividu = "";
            // Rdata.User.typeAdmin = "";
             }
          
@@ -75,6 +78,7 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
             Rdata.User.nom = "";
             Rdata.User.isActive = false;
             Rdata.User.privilege = "public";
+            Rdata.User.groupeIndividu = "";
             //Rdata.User.typeAdmin = "";
            
            callback(Rdata);
@@ -94,6 +98,7 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
             Rdata.User.nom = "";
             Rdata.User.isActive = false;
             Rdata.User.privilege = "public";
+            Rdata.User.groupeIndividu = "";
            // Rdata.User.typeAdmin = "";
               
            
@@ -117,7 +122,8 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
             Rdata.User.nom = "";
             Rdata.User.isActive = false;
            Rdata.User.privilege = "public";
-           Rdata.User.typeAdmin = "";
+            Rdata.User.groupeIndividu = "";
+           //Rdata.User.typeAdmin = "";
            SessionCookies.removeSession("Rase-user");
            SessionCookies.removeCookie("Rase-user");
            
@@ -149,7 +155,8 @@ app.factory('UserSericeAuth',['$cookieStore','$http','SessionCookies',function($
                 Rdata.User.nom = "";
                 Rdata.User.isActive = false;
                 Rdata.User.privilege = "public";
-                Rdata.User.typeAdmin = "";
+                Rdata.User.groupeIndividu = "";
+                //Rdata.User.typeAdmin = "";
             }
             else{
                 

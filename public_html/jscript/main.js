@@ -28,9 +28,10 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
     //.when("/gesUser", {templateUrl: "partials/GestionUtilisateur.html", controller: "userCntr"})
    // .when("/ontologie", {templateUrl: "partials/GestionOntologie.html", controller: "ontoCntr"})
    
+   .when("/gesReport", {templateUrl: "report/partials/GestionReport.html", controller: "reportCntr"})
    
     .when("/logout", {templateUrl: "login.html", controller: "formCtrl"})
-   
+    
 
    // .when("/login", {templateUrl: "login.html", controller: "formCtrl"})
     // else 404
@@ -78,6 +79,8 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
 app.controller('PageClientCtr', function ($scope, $location, $http ) {
   
   console.log("Page Client Controller reporting for duty.");
+  
+  
 
 });
 
@@ -97,7 +100,7 @@ app.controller("collapseHeaderCtr",function($scope){
     $scope.isProfileCollapsed = true;
     
     console.log("Collapse Profile :"+$scope.isProfileCollapsed);
-    
+ 
 });
 
 
@@ -127,6 +130,8 @@ app.controller("cartoTablerCtr",function($scope){
     
     console.log($scope.listData);
     console.log("Collapse Table :"+$scope.isProfileCollapsed);
+    
+    
     
 });
 
@@ -391,6 +396,23 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
            else{
                 SessionCookies.setSession("Rase-user",angular.toJson(response.User));
            }
+           
+           
+           if($rootScope.uglobals.User.groupeIndividu === "PersonnelSante")
+           {
+              $rootScope.isMenuPersonelSanteCollapsed = true;
+    
+              $rootScope.isMenuOrganismeSanteCollapsed = false;
+    
+           }
+           if($rootScope.uglobals.User.groupeIndividu === "OrganismeSante")
+           {
+                   $rootScope.isMenuPersonelSanteCollapsed = false;
+    
+                     $rootScope.isMenuOrganismeSanteCollapsed = true;
+    
+                 
+           }
 
 
             console.log("Befor /home in login");
@@ -420,13 +442,39 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
 
 app.controller("collapseMenuCtr",['$rootScope',function($rootScope){
     
+   if(! $rootScope.uglobals.isLogged){
+       
+    
     $rootScope.isMenuPersonelSanteCollapsed = false;
     
     $rootScope.isMenuOrganismeSanteCollapsed = false;
     
-   
+    }
     
 }]);
+
+
+app.controller("collapseReportCtr",['$rootScope',function($rootScope){
+    
+     $rootScope.isReportCollapsed = false;
+    
+   if(! $rootScope.uglobals.isLogged){
+       
+    
+      $rootScope.isReportCollapsed = true;
+    
+    }
+    
+    $rootScope.reportCollapse = function(){
+         $rootScope.isReportCollapsed = !  $rootScope.isReportCollapsed ;
+    }
+    
+    
+    
+    
+    
+}]);
+
 
 
 app.controller("sessionCtr", ['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', function($rootScope,$location, $http, UserSericeAuth,SessionCookies){
@@ -513,13 +561,32 @@ app.run(['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', fu
           $rootScope.uglobals = response  ;
         if( $rootScope.uglobals.isLogged)
         {
-          $rootScope.Usermane=  $rootScope.uglobals.User.prenom + " " +$rootScope.uglobals.User.nom
+          $rootScope.Usermane=  $rootScope.uglobals.User.prenom + " " +$rootScope.uglobals.User.nom;
           
+          if($rootScope.uglobals.User.groupeIndividu === "PersonnelSante")
+           {
+              $rootScope.isMenuPersonelSanteCollapsed = true;
+    
+              $rootScope.isMenuOrganismeSanteCollapsed = false;
+    
+           }
+           if($rootScope.uglobals.User.groupeIndividu === "OrganismeSante")
+           {
+                   $rootScope.isMenuPersonelSanteCollapsed = false;
+    
+                     $rootScope.isMenuOrganismeSanteCollapsed = true;
+    
+                 
+           }
+
 
         }
         else
         {
               $rootScope.Usermane= "Login";
+              $rootScope.isMenuPersonelSanteCollapsed = false;
+    
+              $rootScope.isMenuOrganismeSanteCollapsed = false;
         }
           console.log($rootScope.uglobals);
           
