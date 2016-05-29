@@ -269,12 +269,12 @@
         <tr>
         <td><span class="yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
         
-        <td>Faible</td>
+        <td>Moyen</td>
         </tr>
          <tr>
         <td><span class="red">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
         
-        <td>Faible</td>
+        <td>Fort</td>
         </tr>
         </tbody>
         </table>
@@ -352,7 +352,7 @@
                 
 			
 
-                                       <i class="fa fa-hospital-o"></i> Report d'un cas de maladie 
+                    <i class="fa fa-hospital-o"></i> Report d'un cas de maladie 
              
      </div>
 
@@ -399,10 +399,9 @@
 									<!--<input type="text" class="form-control" placeholder="Ex: Port-au-Prince, Haïti" ng-model="zone" style="display: inline;width: 90%;">-->
                                                                          
                                                                             Département: 
-                                                                            <select id="country" class="form-control"  ng-model="communes" ng-options="departement for (departement, communes) in departements">
+                                                                            <select id="country" class="form-control"  ng-model="communes" ng-options="departement for (departement, communes) in selectZone">
                                                                                 <option value=''>Select</option>
                                                                             </select>
-                                                                       
                                                                             Commune: 
                                                                             <select id="state"  class="form-control"  ng-disabled="!communes" ng-model="sections" ng-options="commune for (commune,section) in communes">
                                                                                 <option value=''>Select</option></select>
