@@ -11,7 +11,7 @@ function ApiServer() {
 	//this.IP = "localhost";
      
         //this.prefix = "http://";
-	this.IP = "192.168.127.142";
+	this.IP = "192.168.127.143";
         
 	this.PORT = "8080";
 	this.ressources = "/rasehtserver/api/v1";

@@ -456,7 +456,7 @@ app.controller("collapseMenuCtr",['$rootScope',function($rootScope){
 
 app.controller("collapseReportCtr",['$rootScope',function($rootScope){
     
-     $rootScope.isReportCollapsed = false;
+     $rootScope.isReportCollapsed = true;
     
    if(! $rootScope.uglobals.isLogged){
        

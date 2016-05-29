@@ -696,18 +696,20 @@ footer {
      overflow-y: scroll;
      
      max-height: 85%;
-    
+    padding:10px;
+    margin-left: 25px;
 }
 
 
 #report-form-head{
     position: relative;
-    height: 45px;
+    height: 55px;
     width: 100%; 
     text-align: center;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 200;
     color: white;
+    
     
 }
 
