@@ -6,6 +6,7 @@
     $scope.selectSymptome=[];
     $scope.selectProfession=[];
     $scope.selectMention=[];
+    $scope.selectZone=[];
     $scope.listCasMaladie={};
     $scope.m={};
     $scope.m.nom={};
@@ -35,15 +36,15 @@ $scope.departements={
     }
      
 };
-//    $scope.sexes = [{name:'Féminin',checked:false},{name:'Masculin',checked:false},{name:'Mixte',checked:false}];
-//    $scope.checkDevice = function (sexe) {
-//    for (var i = 0, len = $scope.sexes.length; i < len; ++i) {
-//        if ($scope.sexes[i] !== sexe){
-//             $scope.sexes[i].checked = false;
-//         }
-//           
-//    }
-//};
+    $scope.sexes = [{name:'Féminin',checked:false},{name:'Masculin',checked:false},{name:'Mixte',checked:false}];
+    $scope.checkDevice = function (sexe) {
+    for (var i = 0, len = $scope.sexes.length; i < len; ++i) {
+        if ($scope.sexes[i] !== sexe){
+             $scope.sexes[i].checked = false;
+         }
+           
+    }
+};
     //$scope.ages = [{name:'Moins de 5 ans'},{name:'Plus de 5 ans'},{name:'Mixte'}];
     
     console.log("Page controlleur report");
@@ -137,7 +138,30 @@ $scope.departements={
         {
           $scope.message = "SUBMIT ERROR";
         });  
-        
+    
+  // get departement
+       $http.get(apiServer.getURLZone(),conf)
+        .success(function (data, status, headers, conf)
+        {
+           $scope.message= " i'm in";
+           console.log(data);
+           $scope.selectZone= data;
+     // $scope.symptomefilter=function(selectSymptome){   
+      if (data.length){
+        console.log(data);
+        $scope.message = "read";
+        //$location.path('/home');
+      }
+      else{
+        $scope.message = data.message
+      }
+ // } 
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+        });  
+ 
  // Check if symptome is checked       
         $scope.CheckSymptome=function()
         {
