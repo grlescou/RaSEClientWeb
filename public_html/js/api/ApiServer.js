@@ -8,10 +8,10 @@ function ApiServer() {
 	// Constantes des URLS avec le ApiServer
 	//
 	this.prefix = "http://";
-	//this.IP = "localhost";
+	this.IP = "localhost";
      
         //this.prefix = "http://";
-	this.IP = "192.168.127.142";
+	//this.IP = "192.168.127.142";
         
 	this.PORT = "8080";
 	this.ressources = "/rasehtserver/api/v1";
