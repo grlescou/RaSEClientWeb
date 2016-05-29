@@ -130,7 +130,7 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
                      //$location.path('/home');
                    }
                    else{
-                     $scope.message = data.message
+                     $scope.message = data.message;
                    }
                      })
                      .error(function (data, status, headers, conf)
@@ -201,7 +201,7 @@ app.controller('ontoCntr', function($scope,$route,$location, $http ) {
 			
 
 
-			console.log("table onClick result "+ $tab)
+			console.log("table onClick result "+ $tab);
 			
 
 
