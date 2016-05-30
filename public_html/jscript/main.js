@@ -512,9 +512,9 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
            {
               $rootScope.isMenuPersonelSanteCollapsed = true;
     
-             //$rootScope.isMenuOrganismeSanteCollapsed = false;
+             $rootScope.isMenuOrganismeSanteCollapsed = false;
               
-               $rootScope.isMenuOrganismeSanteCollapsed = true;
+               //$rootScope.isMenuOrganismeSanteCollapsed = true;
     
            }
            if($rootScope.uglobals.User.groupeIndividu === "OrganismeSante")

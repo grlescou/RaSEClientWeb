@@ -8,10 +8,10 @@ function ApiServer() {
 	// Constantes des URLS avec le ApiServer
 	//
 	this.prefix = "http://";
-	//this.IP = "localhost";
+	this.IP = "localhost";
      
         //this.prefix = "http://";
-	this.IP = "192.168.127.143";
+	//this.IP = "192.168.127.142";
         
 	this.PORT = "8080";
 	this.ressources = "/rasehtserver/api/v1";
@@ -39,6 +39,7 @@ function ApiServer() {
         this.URL_groupeIndividu = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/groupeIndividu/";
         
         this.URL_personne = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/personne/";
+        this.URL_zone = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/zonelist/";
         
         // Recuperation des categories
 	//
@@ -116,7 +117,11 @@ function ApiServer() {
 		$.getJSON(this.URL_administrateur, callback);
 	}
         
-        
+            // Recupération des zones géographiqies
+	//
+	ApiServer.prototype.getZone = function(callback) {
+		$.getJSON(this.URL_zone, callback);
+	}
 
 	// Recupération des demographie par point
 	//
@@ -200,7 +205,9 @@ function ApiServer() {
 		return this.URL_personne;
 	}
 
-
+        ApiServer.prototype.getURLZone = function() {
+		return this.URL_zone;
+	}
 
 
 	ApiServer.prototype.setIp = function(ip) {
