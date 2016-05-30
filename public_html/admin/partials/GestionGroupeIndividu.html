@@ -17,7 +17,7 @@ Left side column. contains the sidebar
 <div  ng-include='"templates/side.html"'> </div>
  -->
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"   ng-controller="ModalDemoCtrl">
+  <div class="content-wrapper"   ng-controller="ModalGroupeIndividuCtrl">
    
    
 <div >
@@ -107,14 +107,14 @@ Left side column. contains the sidebar
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                    <input type="text" class="form-control" ng-model="items.m.id" id="inputNom" placeholder="Id" readonly="">
                   </div>
                 </div>
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Nom Groupe</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nomGroupe" id="inputNom" placeholder="Nom Groupe">
+                    <input type="text" class="form-control" ng-model="items.m.nomGroupe" id="inputNom" placeholder="Nom Groupe">
                   </div>
                 </div>
                  <div class="form-group">
@@ -122,9 +122,19 @@ Left side column. contains the sidebar
 
                    <div class="col-sm-10">
                   
-                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
+                    <textarea class="form-control" rows="6" ng-model="items.m.description" placeholder="Description"></textarea>
                   </div>
                 </div>
+        
+<!--                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Mention</label>
+
+                   <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.m.listeMention"  ng-options="c.nom for c in items.listMention"  style="width: 100%;">
+               
+                </select>
+                  </div>
+                </div>-->
   	  </div>
 					  
 			</div>
@@ -142,7 +152,7 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Ajouter</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok()">Ajouter</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -169,26 +179,20 @@ Left side column. contains the sidebar
                     <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
                   </div>
                 </div>
+                </div>
                <div class="form-group">
-                  <label for="inputNom" class="col-sm-2 control-label">Nom</label>
+                  <label for="inputNom" class="col-sm-2 control-label">Nom Groupe</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                    <input type="text" class="form-control" ng-model="items.nomGroupe" id="inputNom" placeholder="Nom Groupe">
                   </div>
                 </div>
                  <div class="form-group">
-                  <label for="inputprenom" class="col-sm-2 control-label">Prenom</label>
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
 
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.prenom" id="inputprenom" placeholder="Prenom" readonly="">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputprenom" class="col-sm-2 control-label">Role</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.role" id="inputprenom" placeholder="Role" readonly="">
+                   <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
                   </div>
                 </div>
 
@@ -198,8 +202,8 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">Supprimer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Snnuler</button>
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok()">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
 

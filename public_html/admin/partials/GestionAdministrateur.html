@@ -17,7 +17,7 @@ Left side column. contains the sidebar
 <div  ng-include='"templates/side.html"'> </div>
  -->
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"   ng-controller="ModalDemoCtrl">
+  <div class="content-wrapper"   ng-controller="ModalAdmCtrl">
    
    
 <div >
@@ -41,7 +41,7 @@ Left side column. contains the sidebar
 
      <script type="text/ng-template" id="editmodal.html">
         <div class="modal-header">
-            <h3 class="modal-title"> Edit- Utilisateur</h3>
+            <h3 class="modal-title"> Edit- Administrateur</h3>
         </div>
         <div class="modal-body">
           
@@ -93,23 +93,6 @@ Left side column. contains the sidebar
                     <input type="text" class="form-control" ng-model="items.adresse.rue" id="inputEmail3" placeholder="Rue">
                   </div>
                 </div>
-
-                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
-
-                  <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
-                  <option selected="selected">Port-au-Prince</option>
-                  <option value='Delmas'>Delmas</option>
-                  <option value="Cap-Haitien">Cap-Haitien</option>
-                  <option value="Carrefour">Carrefour</option>
-                  <option value="Leogane">Leogane</option>
-                  <option value="Saint-Marc">Saint-Marc</option>
-                  <option value="etc">etc</option>
-                </select>
-                  </div>
-                </div>
-
                  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label"  ng-model="items.adresse.departement">Departement</label>
 
@@ -129,6 +112,23 @@ Left side column. contains the sidebar
                 </select>
                   </div>
                 </div>
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
+
+                  <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
+                  <option selected="selected">Port-au-Prince</option>
+                  <option value='Delmas'>Delmas</option>
+                  <option value="Cap-Haitien">Cap-Haitien</option>
+                  <option value="Carrefour">Carrefour</option>
+                  <option value="Leogane">Leogane</option>
+                  <option value="Saint-Marc">Saint-Marc</option>
+                  <option value="etc">etc</option>
+                </select>
+                  </div>
+                </div>
+
+                 
 
 
 
@@ -163,7 +163,7 @@ Left side column. contains the sidebar
 					  <div ng-switch-when="PersonnelSante">
 					    <!-- select -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Profession</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.profession.nom">
                     <option value="" selected="true">--choix profession--</option>
@@ -173,7 +173,7 @@ Left side column. contains the sidebar
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Status</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.status">
                     <option value="" selected="true">--choix Status--</option>
@@ -261,22 +261,7 @@ Left side column. contains the sidebar
                   </div>
                 </div>
 
-                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
-
-                  <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
-                  <option selected="selected">Port-au-Prince</option>
-                  <option value='Delmas'>Delmas</option>
-                  <option value="Cap-Haitien">Cap-Haitien</option>
-                  <option value="Carrefour">Carrefour</option>
-                  <option value="Leogane">Leogane</option>
-                  <option value="Saint-Marc">Saint-Marc</option>
-                  <option value="etc">etc</option>
-                </select>
-                  </div>
-                </div>
-
+                
                  <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label"  ng-model="items.adresse.departement">Departement</label>
 
@@ -297,6 +282,20 @@ Left side column. contains the sidebar
                   </div>
                 </div>
 
+ <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
+
+                  <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
+                  <option selected="selected">Port-au-Prince</option>
+                  <option value='Delmas'>Delmas</option>
+                  <option value="Cap-Haitien">Cap-Haitien</option>
+                  <option value="Carrefour">Carrefour</option>
+                  <option value="Leogane">Leogane</option>
+                  <option value="Saint-Marc">Saint-Marc</option>
+                </select>
+                  </div>
+                </div>
 
 
                 <div class="form-group">
@@ -330,7 +329,7 @@ Left side column. contains the sidebar
 					  <div ng-switch-when="PersonnelSante">
 					    <!-- select -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Profession</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.profession.nom">
                     <option value="" selected="true">--choix profession--</option>
@@ -340,7 +339,7 @@ Left side column. contains the sidebar
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Status</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.status">
                     <option value="" selected="true">--choix Status--</option>
@@ -425,7 +424,7 @@ Left side column. contains the sidebar
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">Supprimer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Snnuler</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
 
@@ -485,23 +484,7 @@ Left side column. contains the sidebar
                   </div>
                 </div>
 
-                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
-
-                  <div class="col-sm-10">
-                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
-                  <option selected="selected">Port-au-Prince</option>
-                  <option value='Delmas'>Delmas</option>
-                  <option value="Cap-Haitien">Cap-Haitien</option>
-                  <option value="Carrefour">Carrefour</option>
-                  <option value="Leogane">Leogane</option>
-                  <option value="Saint-Marc">Saint-Marc</option>
-                  <option value="etc">etc</option>
-                </select>
-                  </div>
-                </div>
-
-                 <div class="form-group">
+          <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label"  ng-model="items.adresse.departement">Departement</label>
 
                   <div class="col-sm-10">
@@ -520,8 +503,20 @@ Left side column. contains the sidebar
                 </select>
                   </div>
                 </div>
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
 
-
+                  <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
+                  <option selected="selected">Port-au-Prince</option>
+                  <option value='Delmas'>Delmas</option>
+                  <option value="Cap-Haitien">Cap-Haitien</option>
+                  <option value="Carrefour">Carrefour</option>
+                  <option value="Leogane">Leogane</option>
+                  <option value="Saint-Marc">Saint-Marc</option>
+                </select>
+                  </div>
+                </div>
 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
@@ -554,7 +549,7 @@ Left side column. contains the sidebar
 					  <div ng-switch-when="PersonnelSante">
 					    <!-- select -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Profession</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.profession.nom">
                     <option value="" selected="true">--choix profession--</option>
@@ -564,7 +559,7 @@ Left side column. contains the sidebar
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Status</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.status">
                     <option value="" selected="true">--choix Status--</option>
@@ -650,7 +645,7 @@ Left side column. contains the sidebar
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Gestion des Administrateur
+        Gestion des Administrateurs
         <small></small>
       </h1>
       <ol class="breadcrumb">

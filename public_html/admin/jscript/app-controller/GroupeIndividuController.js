@@ -20,7 +20,7 @@ app.controller('groupeIndividuCntr', function($scope,$location, $http ) {
     
     
 
-
+//Get Groupe Individu
     $http.get(apiServer.getURLGroupeIndividu(),conf)
         .success(function (data, status, headers, conf)
         {

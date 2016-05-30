@@ -1,7 +1,5 @@
 
 
-
-
 app.controller('userCntr', function($scope,$location, $http ) {
   
   $scope.toshow = true;

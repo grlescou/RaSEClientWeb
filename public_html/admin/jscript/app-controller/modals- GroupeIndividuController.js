@@ -1,16 +1,23 @@
 
-
 // I control the root of the application.
-    angular.module('RaseApp').controller('ModalUserCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
-        var apiServer = new ApiServer();
-        $scope.items = ['item1', 'item2', 'item3'];
-        $scope.userNew={}
-        $scope.userEdit = {};
-        $scope.userEdit.nom = "google";
+     angular.module('RaseApp').controller('ModalGroupeIndividuCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
+         var apiServer = new ApiServer();
+  $scope.items = ['item1', 'item2', 'item3'];
+  $scope.groupeNew={}
+  $scope.groupeEdit = {};
+  $scope.groupeEdit.nom = "google";
+  
+  $scope.listMention=[];
+  
+  $scope.groupeNew.m={};
+  $scope.groupeNew.m.mention={};
+  $scope.groupeNew.listMention=[];
+   
 
 
   $scope.animationsEnabled = true;
-$scope.open = function (size) {
+
+  $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -36,23 +43,26 @@ $scope.open = function (size) {
   };
 
  
-   $scope.openEdit = function (size, user) {
+   $scope.openEdit = function (size, role) {
 
-     $scope.userEdit = user;
+     $scope.roleEdit = role;
      //console.log(user);
      //console.log($scope.userEdit);
 
-    var modalInstance = $uibModal.open({
+   var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'editmodal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {
         items: function () {
-          return $scope.userEdit;
+          return $scope.roleEdit;
         }
       }
     });
+
+
+
 
 
 
@@ -69,8 +79,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // PUT utilisateur 
-       $http.put(apiServer.getURLUtilisateur()+$scope.selected.id,$scope.selected,conf)
+          // PUT GroupeIndividu 
+       $http.put(apiServer.getURLGroupeIndividu()+$scope.selected.id,$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -98,8 +108,35 @@ $scope.open = function (size) {
     });
   };
 
-
   $scope.openNew = function (size) {
+      $scope.groupeNew.m={};
+      $scope.groupeNew.m.mention = {};
+    
+        var conf = {
+             headers : {
+             'Content-Type' : 'application/json'
+                }
+             };
+    
+                // get Mention
+                $http.get(apiServer.getURLMention(),conf)
+                 .success(function (data, status, headers, conf)
+                 {
+                        
+                   console.log("listMention");
+                   console.log(data);
+                    $scope.groupeNew.listMention= data;
+                    
+                    //$scope.categorieInstance.changeData($scope.listCategorie);
+
+            
+                 })
+                 .error(function (data, status, headers, conf)
+                 {
+                   $scope.message = "Erreur de rafraichissement de la table";
+                 });
+
+
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -108,7 +145,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userNew;
+          return $scope.groupeNew;
         }
       }
     });
@@ -120,7 +157,7 @@ $scope.open = function (size) {
     
       //-------------------------
       
-       console.log('in isntance result Utilisateur');
+       console.log('in isntance result Groupe Individu');
        console.log($scope.selected);
            
            
@@ -130,8 +167,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // POST Utilisateur 
-       $http.post(apiServer.getURLUtilisateur(),$scope.selected,conf)
+          // POST Groupe Individu 
+       $http.post(apiServer.getURLGroupeIndividu(),$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -150,13 +187,13 @@ $scope.open = function (size) {
               
           // $scope.categorieInstance.api.reloadData(callback,restPaging);
            
-            // get Symptome
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get GroupeIndividu
+                $http.get(apiServer.getURLGroupeIndividu(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                     $scope.listUser= data;
+                     $scope.listGIndividu= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -168,9 +205,9 @@ $scope.open = function (size) {
                  });
 
 
-
-        	$scope.tab = [false,false,false];
-        	$scope.tab[2] = true;
+//
+//        	$scope.tab = [false,false,false];
+//        	$scope.tab[2] = true;
          }
       
         })
@@ -180,16 +217,16 @@ $scope.open = function (size) {
            $scope.success= false;
         });
 
-        $scope.userNew ={};
+        $scope.roleNew ={};
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
 
 
- $scope.openDel = function (size,userDel) {
+ $scope.openDel = function (size,groupeDel) {
 
- 	$scope.userDel = userDel;
+ 	$scope.groupeDel = groupeDel;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -198,12 +235,13 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDel;
+          return $scope.groupeDel;
         }
       }
     });
 
-  modalInstance.result.then(function (selectedItem) {
+
+     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
       
       console.log('in isntance result categorie');
@@ -216,8 +254,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // delete Utilisateur 
-       $http.delete(apiServer.getURLUtilisateur()+$scope.selected.id,conf)
+          // delete role 
+       $http.delete(apiServer.getURLGroupeIndividu()+$scope.selected.id,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -229,13 +267,13 @@ $scope.open = function (size) {
           if(data.success === true){
               console.log("most be reload");
             
-            // get Utilisateur
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get Role
+                $http.get(apiServer.getURLGroupeIndividu(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                    $scope.listUser= data;
+                    $scope.listGIndividu= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -259,7 +297,7 @@ $scope.open = function (size) {
            $scope.success= false;
         });
 
-        $scope.userNew ={};
+        $scope.roleNew ={};
          
          
 
@@ -270,10 +308,9 @@ $scope.open = function (size) {
   };
 
 
+  $scope.openDetails = function (size,groupeDetails) {
 
-  $scope.openDetails = function (size,userDetails) {
-
- 	$scope.userDetails = userDetails;
+ 	$scope.groupeDetails = groupeDetails;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -282,7 +319,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDetails;
+          return $scope.groupeDetails;
         }
       }
     });

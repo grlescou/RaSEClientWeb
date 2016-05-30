@@ -8,6 +8,7 @@ app.controller('AdmCntr', function($scope,$location, $http ) {
 
   $scope.message= "loading...";
   $scope.listAmin= [];
+  $scope.listZone= [];
    console.log("Page Controller Utilisateur");
 
   var conf = {
@@ -43,7 +44,28 @@ app.controller('AdmCntr', function($scope,$location, $http ) {
         });
 
  
-  
+   // get departement
+       $http.get(apiServer.getURLZone(),conf)
+        .success(function (data, status, headers, conf)
+        {
+           $scope.message= " i'm in";
+           console.log(data);
+           $scope.listZone= data;
+     // $scope.symptomefilter=function(selectSymptome){   
+      if (data.length){
+        console.log(data);
+        $scope.message = "read";
+        //$location.path('/home');
+      }
+      else{
+        $scope.message = data.message
+      }
+ // } 
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+        });  
 
 
 

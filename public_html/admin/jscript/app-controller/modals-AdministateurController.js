@@ -1,15 +1,16 @@
 
 
 // I control the root of the application.
-    angular.module('RaseApp').controller('ModalUserCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
-        var apiServer = new ApiServer();
-        $scope.items = ['item1', 'item2', 'item3'];
-        $scope.userNew={}
-        $scope.userEdit = {};
-        $scope.userEdit.nom = "google";
+    angular.module('RaseApp').controller('ModalAdmCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
+var apiServer = new ApiServer();
+  $scope.items = ['item1', 'item2', 'item3'];
+  $scope.adminNew={}
+  $scope.adminEdit = {};
+  $scope.adminEdit.nom = "google";
 
 
-  $scope.animationsEnabled = true;
+  
+$scope.animationsEnabled = true;
 $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
@@ -36,9 +37,9 @@ $scope.open = function (size) {
   };
 
  
-   $scope.openEdit = function (size, user) {
+   $scope.openEdit = function (size, admin) {
 
-     $scope.userEdit = user;
+     $scope.adminEdit = admin;
      //console.log(user);
      //console.log($scope.userEdit);
 
@@ -49,7 +50,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userEdit;
+          return $scope.adminEdit;
         }
       }
     });
@@ -69,8 +70,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // PUT utilisateur 
-       $http.put(apiServer.getURLUtilisateur()+$scope.selected.id,$scope.selected,conf)
+          // PUT administrateur 
+       $http.put(apiServer.getURLAdministrateur()+$scope.selected.id,$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -108,7 +109,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userNew;
+          return $scope.adminNew;
         }
       }
     });
@@ -130,8 +131,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // POST Utilisateur 
-       $http.post(apiServer.getURLUtilisateur(),$scope.selected,conf)
+          // POST Administrateur 
+       $http.post(apiServer.getURLAdministrateur(),$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -150,13 +151,13 @@ $scope.open = function (size) {
               
           // $scope.categorieInstance.api.reloadData(callback,restPaging);
            
-            // get Symptome
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get Administrateur
+                $http.get(apiServer.getURLAdministrateur(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                     $scope.listUser= data;
+                     $scope.listAdmin= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -187,9 +188,9 @@ $scope.open = function (size) {
   };
 
 
- $scope.openDel = function (size,userDel) {
+ $scope.openDel = function (size,adminDel) {
 
- 	$scope.userDel = userDel;
+ 	$scope.adminDel = adminDel;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -198,7 +199,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDel;
+          return $scope.adminDel;
         }
       }
     });
@@ -216,8 +217,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // delete Utilisateur 
-       $http.delete(apiServer.getURLUtilisateur()+$scope.selected.id,conf)
+          // delete Administrateur 
+       $http.delete(apiServer.getURLAdministrateur()+$scope.selected.id,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -229,13 +230,13 @@ $scope.open = function (size) {
           if(data.success === true){
               console.log("most be reload");
             
-            // get Utilisateur
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get Administrateur
+                $http.get(apiServer.getURLAdministrateur(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                    $scope.listUser= data;
+                    $scope.listAdmin= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -271,9 +272,9 @@ $scope.open = function (size) {
 
 
 
-  $scope.openDetails = function (size,userDetails) {
+  $scope.openDetails = function (size,adminDetails) {
 
- 	$scope.userDetails = userDetails;
+ 	$scope.adminDetails = adminDetails;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -282,7 +283,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDetails;
+          return $scope.adminDetails;
         }
       }
     });

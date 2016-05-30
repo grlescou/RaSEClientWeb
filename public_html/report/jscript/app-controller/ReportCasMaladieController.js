@@ -1,5 +1,5 @@
   //var app=angular.module('ReportApp');
-        Rapp.controller('reportCntr', function ($scope,$route,$location,$http,$window) {
+        app.controller('reportCntr', function ($scope,$route,$location,$http,$window) {
     var apiServer = new ApiServer();
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.selectMaladies=[];

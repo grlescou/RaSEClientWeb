@@ -1,16 +1,18 @@
 
 
 // I control the root of the application.
-    angular.module('RaseApp').controller('ModalUserCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
-        var apiServer = new ApiServer();
-        $scope.items = ['item1', 'item2', 'item3'];
-        $scope.userNew={}
-        $scope.userEdit = {};
-        $scope.userEdit.nom = "google";
+    angular.module('RaseApp').controller('ModalRoleCtrl', function ($scope,$route, $uibModal, $log,$location,$http) {
+
+var apiServer = new ApiServer();
+  $scope.items = ['item1', 'item2', 'item3'];
+  $scope.roleNew={}
+  $scope.roleEdit = {};
+  $scope.roleEdit.nom = "google";
 
 
   $scope.animationsEnabled = true;
-$scope.open = function (size) {
+
+  $scope.open = function (size) {
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -36,23 +38,26 @@ $scope.open = function (size) {
   };
 
  
-   $scope.openEdit = function (size, user) {
+   $scope.openEdit = function (size, role) {
 
-     $scope.userEdit = user;
+     $scope.roleEdit = role;
      //console.log(user);
      //console.log($scope.userEdit);
 
-    var modalInstance = $uibModal.open({
+   var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'editmodal.html',
       controller: 'ModalInstanceCtrl',
       size: size,
       resolve: {
         items: function () {
-          return $scope.userEdit;
+          return $scope.roleEdit;
         }
       }
     });
+
+
+
 
 
 
@@ -69,8 +74,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // PUT utilisateur 
-       $http.put(apiServer.getURLUtilisateur()+$scope.selected.id,$scope.selected,conf)
+          // PUT categorie 
+       $http.put(apiServer.getURLRole()+$scope.selected.id,$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -98,7 +103,6 @@ $scope.open = function (size) {
     });
   };
 
-
   $scope.openNew = function (size) {
 
     var modalInstance = $uibModal.open({
@@ -108,7 +112,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userNew;
+          return $scope.roleNew;
         }
       }
     });
@@ -120,7 +124,7 @@ $scope.open = function (size) {
     
       //-------------------------
       
-       console.log('in isntance result Utilisateur');
+       console.log('in isntance result Role');
        console.log($scope.selected);
            
            
@@ -130,8 +134,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // POST Utilisateur 
-       $http.post(apiServer.getURLUtilisateur(),$scope.selected,conf)
+          // POST Role 
+       $http.post(apiServer.getURLRole(),$scope.selected,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -150,13 +154,13 @@ $scope.open = function (size) {
               
           // $scope.categorieInstance.api.reloadData(callback,restPaging);
            
-            // get Symptome
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get Role
+                $http.get(apiServer.getURLRole(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                     $scope.listUser= data;
+                     $scope.listRole= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -168,9 +172,9 @@ $scope.open = function (size) {
                  });
 
 
-
-        	$scope.tab = [false,false,false];
-        	$scope.tab[2] = true;
+//
+//        	$scope.tab = [false,false,false];
+//        	$scope.tab[2] = true;
          }
       
         })
@@ -180,16 +184,16 @@ $scope.open = function (size) {
            $scope.success= false;
         });
 
-        $scope.userNew ={};
+        $scope.roleNew ={};
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
 
 
- $scope.openDel = function (size,userDel) {
+ $scope.openDel = function (size,roleDel) {
 
- 	$scope.userDel = userDel;
+ 	$scope.roleDel = roleDel;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -198,12 +202,13 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDel;
+          return $scope.roleDel;
         }
       }
     });
 
-  modalInstance.result.then(function (selectedItem) {
+
+     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
       
       console.log('in isntance result categorie');
@@ -216,8 +221,8 @@ $scope.open = function (size) {
                 }
              };
           
-          // delete Utilisateur 
-       $http.delete(apiServer.getURLUtilisateur()+$scope.selected.id,conf)
+          // delete role 
+       $http.delete(apiServer.getURLRole()+$scope.selected.id,conf)
         .success(function (data, status, headers, conf)
         {
         	
@@ -229,13 +234,13 @@ $scope.open = function (size) {
           if(data.success === true){
               console.log("most be reload");
             
-            // get Utilisateur
-                $http.get(apiServer.getURLUtilisateur(),conf)
+            // get Role
+                $http.get(apiServer.getURLRole(),conf)
                  .success(function (data, status, headers, conf)
                  {
                         
                    console.log(data);
-                    $scope.listUser= data;
+                    $scope.listRole= data;
                     
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
@@ -259,7 +264,7 @@ $scope.open = function (size) {
            $scope.success= false;
         });
 
-        $scope.userNew ={};
+        $scope.roleNew ={};
          
          
 
@@ -270,10 +275,9 @@ $scope.open = function (size) {
   };
 
 
+  $scope.openDetails = function (size,roleDetails) {
 
-  $scope.openDetails = function (size,userDetails) {
-
- 	$scope.userDetails = userDetails;
+ 	$scope.roleDetails = roleDetails;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -282,7 +286,7 @@ $scope.open = function (size) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.userDetails;
+          return $scope.roleDetails;
         }
       }
     });
