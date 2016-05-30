@@ -1,0 +1,306 @@
+
+<div ng-controller="reportCntr">
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"   >
+   
+   
+<div >
+
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+             <i class="fa fa-hospital-o"></i>Formulaire de report de cas de maladie 
+        <small></small>
+      </h1>
+     
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">   Report de cas de maladie </h3>
+
+          <div class="box-tools pull-right">
+           
+          </div>
+        </div>
+        <div class="box-body">
+
+
+
+
+          <div class="report-form-body" >
+
+					<!-- Saisie d'une maladie -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">Maladie rencontr&eacute;e </h4>
+						</div>
+                                            <div class="panel-body"> 
+                                                <!--ng-options="item._id as item.nom for item in listeMaladie"-->
+                                                <select tabindex="1"  ng-model="maladie"  ng-options="maladie.nom for maladie in selectMaladies track by maladie.id " style="width:100%;" class="form-control" >
+							<option value="">-- Choisir Maladie --</option>	 
+						</select>
+						</div>
+					</div>
+                                        
+					<!-- Saisie des symtômes -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+                                                    <h4 class="panel-title">Sympt&ocirc;mes visibles </h4>
+						</div>
+						<div  style='height:200px;overflow-x:scroll;display:block'  > <!--class="panel-body"-->
+                                            
+                                                    <label ng-repeat="symptome in selectSymptome">
+                                                        <input type="checkbox"  ng-model="symptome.isTrue" ng-change="CheckSymptome()">{{symptome.nom}} &nbsp; <!--selectSymptome[0].nom-->
+                                                    </label>
+                                                    
+                                                </div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-plus"></i> El&eacute;ments suppl&eacute;mentaires </a></h4>
+						</div>
+                                            
+                                            <!-- Liste des départements, des communes, sections communales -->
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body">
+
+								<div class="form-group">
+									<label for="adresspicker_sup" style="display:block;"><i class="fa fa-map-marker"></i> Lieu</label>
+									<!--<input type="text" class="form-control" placeholder="Ex: Port-au-Prince, Haïti" ng-model="zone" style="display: inline;width: 90%;">-->
+                                                                         
+                                                                            Département: 
+                                                                            <select id="country" class="form-control"  ng-model="communes" ng-options="departement for (departement, communes) in departements">
+                                                                                <option value=''>Select</option>
+                                                                            </select>
+                                                                       
+                                                                            Commune: 
+                                                                            <select id="state"  class="form-control"  ng-disabled="!communes" ng-model="sections" ng-options="commune for (commune,section) in communes">
+                                                                                <option value=''>Select</option></select>
+                                                                        
+                                                                            Section Communale: 
+                                                                            <select id="city" class="form-control"  ng-disabled="!sections || !communes" ng-model="section">
+                                                                                <option value=''>Select</option> <option ng-repeat="section in sections" value='{{section}}'>{{section}}</option></select> <br/>       
+                                                                       
+									
+									<input type="text" class="form-control" placeholder="Latitude" ng-model="latitude" style="display: inline;width: 39%;">
+									<input type="text" class="form-control" placeholder="Longitude" ng-model="longitude" style="display: inline;width: 50%;">
+                                                                        <h3 style="display:inline;"><button style="cursor:pointer;" class="fa fa-crosshairs" ng-click="locate()" title="Cherchez votre position automatiquement"></button></h3>
+									<input type="text" class="form-control" placeholder="Longitude" style="display: none;width: 50%;">
+								</div>
+                                                                <!-- Date -->
+								<div class="form-group">
+									<label for="datepicker_sup"><i class="fa fa-calendar"></i> Date</label>
+									<!--<input type="text"   ng-model="datePicker" class="form-control" placeholder="Ex: 2016-06-06" id="datepicker_sup" daypicker>-->
+<!--                                                                <div class='input-group date'  datetimez ng-model="var1">
+                                                                    <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" id="input1" name="input1"  class="form-control" ng-model="datepicker" placeholder="2016-04-06" required=""/>
+                                                                    <span class="input-group-addon">
+                                                                        <span class="fa fa-calendar">
+                                                                        </span>
+                                                                    </span>
+                                                                
+                                                                </div>-->
+                                                                 <!--<input calendar ng-model='something' class="form-control" />-->
+                                                                 <script type="text/javascript" src="../../js/bootstrap-datepicker.js"></script>
+                                                                 <div class="input-group" >
+<!--                                                                     <input type="text" id="datepicker" class="form-control" ng-model="datepicker"></div>
+                                                                        <script type="text/javascript">
+                                                                        $('#datepicker').datepicker().on('changeDate', function(ev){
+                                                                          var element = angular.element($('#datepicker'));
+                                                                          var controller = element.controller();
+                                                                          var scope = element.scope();
+
+//                                                                          scope.$apply(function(){
+//                                                                            scope.doSomethingWithDate(ev.date);
+//                                                                          });
+                                                                        });
+                                                                        </script>-->
+                                                                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                                                                    <span class="input-group-btn">
+                                                                      <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                                    </span>
+								</div>
+                                                           
+<!--                                                            <div class="input-group" ng-controller="datepickerctl">
+                                                                 <input type="text" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="myDate" is-open="isOpen"  />
+                                                                    <span class="input-group-btn">
+                                                                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button>
+                                                                    </span>
+                                                            </div>--> <br/>
+
+  
+                                                           
+
+                                                            <!-- Nombre de cas -->
+                                                            <div class="form-group">
+									<label for="exampleInputEmail1"><i class="fa fa-users"></i> Nombre de cas</label><br/>
+<!--									<select id="select_nb_cas"></select>-->
+                                                                    <input type='number' name='cas' min='1' max='20' value='1' ng-model="cas" required="" class="form-control">
+								</div>
+                                                            <!-- Sexe -->
+                                                            <div class="form-group" style="display:inline-block">
+                                                                <label for="exampleInputEmail1"><i class="fa fa-male"></i> Sexe</label><br/>
+                                                                         <div>
+                                                                            <input type="checkbox" ng-checked="selected=='Masculin'" ng-true-value="'Masculin'" ng-model="selected">Masculin
+                                                                            <input type="checkbox" ng-checked="selected=='Feminin'" ng-true-value="'Feminin'" ng-model="selected">Féminin
+                                                                            <input type="checkbox" ng-checked="selected=='Mixte'" ng-true-value="'Mixte'" ng-model="selected" checked="true">Mixte
+                                                                          </div>
+
+
+                                                            </div> <br/>
+                                                            <!-- Age -->
+                                                            <div class="form-group" style="display:inline-block">
+                                                                <label for="exampleInputEmail1"><i class="fa fa-male"></i> Groupe d'âge</label><br/>
+<!--                                                                 <li style='list-style-type: none;display:inline-block' ng-repeat="age in ages">
+                                                                     <input type="checkbox" ng-model="age.checked" value={{age.name}} />{{age.name}}
+                                                                    </li>-->
+                                                                    <div>
+                                                                            <input type="checkbox" ng-checked="checked=='Moins_de_5'" ng-true-value="'Moins5'" ng-model="checked">Moins de 5 ans
+                                                                            <input type="checkbox" ng-checked="checked=='Plus_de_5'" ng-true-value="'Plus5'" ng-model="checked">Plus de 5 ans
+                                                                            <input type="checkbox" ng-checked="checked=='Mixte'" ng-true-value="'Mixte'" ng-model="checked" checked="true">Mixte
+                                                                    </div>
+                                                            </div>
+                                                            <!-- Mention -->
+								<div class="form-group">
+									<label for="list_profession_chose2"><i class="fa fa-eye"></i> Observateur</label>
+                                                                        <select tabindex="100" ng-model='mention' ng-options="c.nom for c in selectMention track by c.id" style="width:100%;" class="form-control chosen-select">
+                                                                            <option value="">-- Choisir mention --</option>	
+                                                                        </select>
+								</div>
+                                                            <!-- Note -->
+                                                            <div class="form-group">
+									<label for="exampleInputEmail1"><i class="fa fa-pencil"></i> Note</label><br/>
+<!--									<select id="select_nb_cas"></select>-->
+                                                                    <input type='number' name='note' min='0' max='5' value='0' ng-model="note" required="" class="form-control">
+								</div>
+<!--								<div class="form-group">
+									<label for="exampleInputEmail1"><i class="fa fa-info"></i> Remarque</label>
+									<textarea class="form-control" rows="3" id="remarque"></textarea>
+								</div>-->
+							</div>
+						</div>
+					</div>
+
+					<!-- Notation -->
+<!--					<div class="panel panel-default" id="panel_notation">
+						<div class="panel-heading">
+							<h4 class="panel-title">Notation</h4>
+						</div>
+						<center>
+							<div id="notation" tabindex="3"></div>
+						</center>
+					</div>-->
+
+					<button  id="btn_annuler"  class="btn btn-default enabled" ng-click='Annuler()'  role="button">Annuler</button>
+                                        <button tabindex="4" style="float: right;" id="btn_envoyer" ng-click='Envoyer()'   class="btn btn-primary enabled" role="button">Envoyer</button>
+
+				</div>
+                        </div>
+            
+            
+            
+
+
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+        
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+  <!-- /.content-wrapper -->
+<!-- 
+    <div  ng-include='"templates/footer.html"'></div>
+
+    <aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'   ></aside>
+
+     /.control-sidebar
+   Add the sidebar's background. This div must be placed
+       immediately after the control sidebar 
+  <div class="control-sidebar-bg"></div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+
+</div>

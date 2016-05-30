@@ -13,10 +13,21 @@
     
       <nav class="" role="navigation" style="margin-left: 7%;" ng-controller="collapseMenuCtr"  >
         
-          
-          <div class="nav-menu-rase-2">
+         <div class="nav-menu-rase-2">
         <ul class="nav-rase navbar-nav-rase-2"> 
-            <li class="">
+            <li class="" ng-click='MapMenu()'>
+                <a >
+                   <i class="fa fa-map-marker"></i>
+                  <span class="">Map</span>
+                </a> 
+             </li>
+        </ul>
+        </div> 
+          
+          
+        <div class="nav-menu-rase-2">
+        <ul class="nav-rase navbar-nav-rase-2"> 
+            <li class=""  ng-click="NotificationMenu()">
                 <a >
                    <i class="fa fa-bell-o"></i>
                   <span class="">Notification</span>
@@ -24,16 +35,30 @@
              </li>
         </ul>
         </div>
+          
         <div class="nav-menu-rase-2" uib-collapse="!isMenuOrganismeSanteCollapsed" >
         <ul class="nav-rase navbar-nav-rase-2"> 
             <li class="">
-                <a >
+                <a  ng-click="AnalyseMenu()">
                    <i class="fa fa-bell"></i>
-                  <span class="">Confirmation Alerte</span>
+                  <span class="">Données de reports</span>
                 </a> 
              </li>
         </ul>
         </div>
+          
+          <div class="nav-menu-rase-2" uib-collapse="!isMenuOrganismeSanteCollapsed" >
+        <ul class="nav-rase navbar-nav-rase-2"> 
+            <li class=""  ng-click="AlerteMenu()">
+                <a >
+                   <i class="fa fa-bell"></i>
+                  <span class="">Alerte</span>
+                </a> 
+             </li>
+        </ul>
+        </div>
+          
+          
         
           
          <div class="nav-menu-rase-2" uib-collapse="!isMenuPersonelSanteCollapsed">
@@ -111,14 +136,18 @@
 <!--               <h3 ng-show="authUser.remember" >I will remember you </h3>-->
           </div>
         </div>
+          
+         
+          
+          
           </div>
 <!--                 /.row -->
               </li>
 <!--               Menu Footer-->
               <li class="user-footer-rase">
-<!--                <div class="pull-left">
-                  <a href="#/" class="btn btn-primary btn-flat">Profile</a>
-                </div>-->
+             <div class="pull-left">
+                    <button type="button" ng-click="EnregistreMenu()" class="btn btn-primary btn-flat" > Nouveau Compte</button>
+                </div>
                 <div class="pull-right">
                  
                    <button type="submit"   ng-click="submitData(authUser)" ng-disabled="loginf.$invalid" class="btn btn-primary btn-flat">Connexion</button>

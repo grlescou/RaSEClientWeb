@@ -12,7 +12,7 @@ var app = angular.module('RaseClient', [
 ]);
 
 
-
+   
 /**
  * Configure the Routes
  */
@@ -30,7 +30,7 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
    
    .when("/gesReport", {templateUrl: "report/partials/GestionReport.html", controller: "reportCntr"})
    
-    .when("/logout", {templateUrl: "login.html", controller: "formCtrl"})
+    .when("/logout", {templateUrl: "index.html", controller: "formCtrl"})
     
 
    // .when("/login", {templateUrl: "login.html", controller: "formCtrl"})
@@ -73,16 +73,126 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
  
  
 
+ 
+ 
+
 /**
  * Controls all other Pages
  */
-app.controller('PageClientCtr', function ($scope, $location, $http ) {
+app.controller('PageClientCtr', function ($rootScope, $location, $http ) {
   
   console.log("Page Client Controller reporting for duty.");
   
-  
+ 
 
 });
+
+
+
+app.controller("collapseMenuCtr",['$rootScope',function($rootScope){
+    
+   
+       
+        if(! $rootScope.uglobals.isLogged){
+       
+    
+    $rootScope.isMenuPersonelSanteCollapsed = false;
+    
+    $rootScope.isMenuOrganismeSanteCollapsed = false;
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+}]);
+
+
+app.controller("collapseReportCtr",['$rootScope',function($rootScope){
+    
+     $rootScope.isReportCollapsed = true;
+    
+    
+   if(! $rootScope.uglobals.isLogged){
+       
+    
+      $rootScope.isReportCollapsed = true;
+        $rootScope.isPagerCollapsed = true;
+         $rootScope.isAnalyseCollapsed = true;
+    
+    }
+    
+    $rootScope.reportCollapse = function(){
+        $rootScope.isAnalyseCollapsed = true;
+        $rootScope.isPagerCollapsed = false;
+         $rootScope.isReportCollapsed = false ;
+    };
+    
+    
+      $rootScope.isPagerCollapsed = true;
+   $rootScope.AnalyseMenu = function(){
+       $rootScope.isReportCollapsed = true ;
+         $rootScope.isPagerCollapsed = false;
+         $rootScope.isAnalyseCollapsed = false;
+          
+    };
+  
+  
+   
+  $rootScope.MapMenu = function(){
+       $rootScope.isPagerCollapsed = true;
+        $rootScope.isReportCollapsed = true ;
+      $rootScope.isAnalyseCollapsed = true;
+      $rootScope.isEnregistreCollapsed = true;
+      $rootScope.isNotificationCollapsed = true;
+  };
+  
+  
+  $rootScope.EnregistreMenu= function(){
+       $rootScope.isPagerCollapsed = false;
+       $rootScope.isEnregistreCollapsed = false;
+       
+        $rootScope.isReportCollapsed = true ;
+      $rootScope.isAnalyseCollapsed = true;
+      $rootScope.isEnregistreCollapsed = true;
+      $rootScope.isNotificationCollapsed = true;
+  };
+  
+  
+  $rootScope.NotificationMenu= function(){
+       $rootScope.isPagerCollapsed = false;
+       $rootScope.isNotificationCollapsed = false;
+       
+        $rootScope.isReportCollapsed = true ;
+      $rootScope.isAnalyseCollapsed = true;
+      $rootScope.isEnregistreCollapsed = true;
+      $rootScope.isNotificationCollapsed = true;
+       
+  };
+  
+  
+   
+  $rootScope.AlerteMenu= function(){
+      $rootScope.isPagerCollapsed = false;
+        $rootScope.isAlerteCollapsed = false;
+        
+       $rootScope.isReportCollapsed = true ;
+      $rootScope.isAnalyseCollapsed = true;
+      $rootScope.isEnregistreCollapsed = true;
+      $rootScope.isNotificationCollapsed = true;
+  };
+    
+      $rootScope.isPagerCollapsed = true;
+      $rootScope.isReportCollapsed = true ;
+      $rootScope.isAnalyseCollapsed = true;
+      $rootScope.isEnregistreCollapsed = true;
+      $rootScope.isNotificationCollapsed = true;
+}]);
+
+
 
 
 app.controller("collapseFilterCtr",function($scope){
@@ -402,7 +512,9 @@ app.controller('formCtrl', ['$rootScope','$location', '$http','UserSericeAuth','
            {
               $rootScope.isMenuPersonelSanteCollapsed = true;
     
-              $rootScope.isMenuOrganismeSanteCollapsed = false;
+             //$rootScope.isMenuOrganismeSanteCollapsed = false;
+              
+               $rootScope.isMenuOrganismeSanteCollapsed = true;
     
            }
            if($rootScope.uglobals.User.groupeIndividu === "OrganismeSante")
@@ -453,7 +565,7 @@ app.controller("collapseMenuCtr",['$rootScope',function($rootScope){
     
 }]);
 
-
+/*
 app.controller("collapseReportCtr",['$rootScope',function($rootScope){
     
      $rootScope.isReportCollapsed = true;
@@ -467,14 +579,14 @@ app.controller("collapseReportCtr",['$rootScope',function($rootScope){
     
     $rootScope.reportCollapse = function(){
          $rootScope.isReportCollapsed = !  $rootScope.isReportCollapsed ;
-    }
+    };
     
     
     
     
     
 }]);
-
+*/
 
 
 app.controller("sessionCtr", ['$rootScope','$location', '$http','UserSericeAuth','SessionCookies', function($rootScope,$location, $http, UserSericeAuth,SessionCookies){

@@ -1,0 +1,398 @@
+
+<div ng-controller="AnalyseReportCntr">
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"   >
+   
+   
+<div >
+
+
+
+    <script type="text/ng-template" id="detailsmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Details- Utilisateur</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Prenom</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.prenom" id="inputprenom" placeholder="Prenom">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" ng-model="items.mail" id="inputEmail3" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2  control-label">Telephone</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.telephone" id="inputEmail3" placeholder="Telephone">
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Rue</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.adresse.rue" id="inputEmail3" placeholder="Rue">
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
+
+                  <div class="col-sm-10">
+                  <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
+                  <option selected="selected">Port-au-Prince</option>
+                  <option value='Delmas'>Delmas</option>
+                  <option value="Cap-Haitien">Cap-Haitien</option>
+                  <option value="Carrefour">Carrefour</option>
+                  <option value="Leogane">Leogane</option>
+                  <option value="Saint-Marc">Saint-Marc</option>
+                  <option value="etc">etc</option>
+                </select>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label"  ng-model="items.adresse.departement">Departement</label>
+
+                  <div class="col-sm-10">
+                  <select class="form-control select2" style="width: 100%;">
+                  <option selected="selected">Ouest</option>
+                  <option>Artibonite</option>
+                  <option>Nord</option>
+                  <option>Nord-Est</option>
+                  <option>Nord-Ouest</option>
+                  <option>Centre</option>
+                  <option>Sud</option>
+                  <option>Sud-Est</option>
+                  <option>Sud-Ouest</option>
+                  <option>Grande-Anse</option>
+                  <option>Nippes</option>
+                </select>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="items.actif" >Actif
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+                 <!-- select -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Role</label>
+                   <div class="col-sm-10">
+                  <select class="form-control" ng-model="items.role">
+                    <option value="" selected="true">--choix role--</option>
+                    <option value="Administrateur">Administrateur</option>
+                    <option value="PersonnelSante">Personnel Sante</option>
+                  </select>
+                  </div>
+                </div>
+
+
+                <div ng-switch="items.role">
+					  <div ng-switch-when="Administrateur">
+					     
+					  </div>
+					  <div ng-switch-when="PersonnelSante">
+					    <!-- select -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Prefession</label>
+                   <div class="col-sm-10">
+                  <select class="form-control" ng-model="items.profession.nom">
+                    <option value="" selected="true">--choix profession--</option>
+                   <option value="Medecin" >Medecin</option>
+                   <option value="Infirmiere" >Infirmiere</option>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Prefession</label>
+                   <div class="col-sm-10">
+                  <select class="form-control" ng-model="items.status">
+                    <option value="" selected="true">--choix Status--</option>
+                   <option value="En Cours" >En Cours</option>
+                   <option value="Accepter" >Accepter</option>
+                   <option value="Rejeter" >Rejeter</option>
+                  </select>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Derniere Location</label>
+
+                  
+                  
+
+                  <div class="col-sm-5">
+                  <label for="inputEmail3" class="col-sm-2 control-label">lon:</label>
+                    <input type="text" class="form-control col-sm-10" ng-model="items.dernierLocation[0]" id="inputEmail3" placeholder="Lon">
+                    </div>
+                   
+
+                   
+                  
+                     <div class="col-sm-5">
+                     <label for="inputEmail3" class="col-sm-2 control-label">lat:</label>
+                     <input type="text" class="form-control col-sm-10" ng-model="items.dernierLocation[1]" id="inputEmail3" placeholder="Lat">
+                  </div>
+                
+
+
+                </div>
+
+
+
+
+					  </div>
+					  
+			</div>
+
+			 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">IP</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.ip" id="inputEmail3" placeholder="IP">
+                  </div>
+                </div>
+
+
+           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Liste des données de reports
+        <small></small>
+      </h1>
+     
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Les cas de maladie reportés</h3>
+
+          <div class="box-tools pull-right">
+           
+          </div>
+        </div>
+        <div class="box-body">
+
+
+
+
+         <table id="example1" datatable="ng" class="row-border hover">
+                <thead>
+                <tr>
+                	<th colspan="11"></th>
+                	<th>
+                    <div class="form-group">
+<!--                        <button type="submit" ng-click="openNew('lg')" class="btn btn-success"><i class="fa fa-search"></i></button>-->
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>Maladie</th>
+                  <th>Categorie</th>
+                  <th>Date</th>
+                  <th>Groupe</th>
+                  <th>Mention</th>
+                  <th>Sexe</th>
+                  <th>Age</th>
+                  <th>Nombre Cas</th>
+                  <th>Departement</th>
+                  <th>Commune</th>
+                  <th>Section Communale</th>
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="u in listCasMaladie">
+                  <td>{{u.maladie.nom}}</td>
+                  <td>{{u.maladie.categorie.nom}}</td>
+                  <td>{{u.date}}</td>
+                  <td>{{u.mention.groupeIndividu.nomGroupe}}</td>
+                  <td>{{u.mention.nom}}</td>
+                  <td>{{u.sexe}}</td>
+                  <td>{{u.groupeAge}}</td>
+                  <td>{{u.nombreCas}}</td>
+                  <td>{{u.zone.departement}}</td>
+                  <td>{{u.zone.commune}}</td>
+                  <td>{{u.zone.sectionCommunale}}</td>
+                  <td>
+                    <button type="button" ng-click="openDetails('lg',u)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                  
+
+                </td>
+                </tr>
+               
+                
+                </tbody>
+            <!--    <tfoot>
+                <tr>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Mail</th>
+                  <th>Role</th>
+                  <th>Telephone</th>
+                  <th>actif</th>
+                </tr>
+                </tfoot> -->
+              </table>
+
+
+
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+        
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+  <!-- /.content-wrapper -->
+<!-- 
+    <div  ng-include='"templates/footer.html"'></div>
+
+    <aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'   ></aside>
+
+     /.control-sidebar
+   Add the sidebar's background. This div must be placed
+       immediately after the control sidebar 
+  <div class="control-sidebar-bg"></div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+
+</div>
