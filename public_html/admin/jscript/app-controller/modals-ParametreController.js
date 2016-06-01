@@ -5,7 +5,7 @@
 
 var apiServer = new ApiServer();
   $scope.items = ['item1', 'item2', 'item3'];
-  $scope.paramNew={}
+  $scope.paramNew={};
   $scope.paramEdit = {};
   $scope.paramEdit.nom = "google";
 

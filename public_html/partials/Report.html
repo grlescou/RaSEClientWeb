@@ -50,7 +50,11 @@
 
           <div class="report-form-body" >
 
-					<!-- Saisie d'une maladie -->
+				
+              <div class="col-md-6">
+                  
+           
+                                    <!-- Saisie d'une maladie -->
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">Maladie rencontr&eacute;e </h4>
@@ -69,15 +73,48 @@
                                                     <h4 class="panel-title">Sympt&ocirc;mes visibles </h4>
 						</div>
 						<div  style='height:200px;overflow-x:scroll;display:block'  > <!--class="panel-body"-->
-                                            
-                                                    <label ng-repeat="symptome in selectSymptome">
+                                                    <table>
+                                                    
+                                                        <tr ng-repeat="symptome in selectSymptome">
+                                                            <td>
+                                                    <label>
                                                         <input type="checkbox"  ng-model="symptome.isTrue" ng-change="CheckSymptome()">{{symptome.nom}} &nbsp; <!--selectSymptome[0].nom-->
                                                     </label>
-                                                    
+                                                            </td>
+                                                       </tr> 
+                                                    </table>
                                                 </div>
 					</div>
+                                        
+                       </div>
+              
+              <div class="col-md-6">
+                   <!-- Sexe -->
+            <div class="form-group" style="display:inline-block">
+                <label for="exampleInputEmail1"><i class="fa fa-male"></i> Sexe</label><br/>
+                         <div>
+                            <input type="checkbox" ng-checked="selected=='Masculin'" ng-true-value="'Masculin'" ng-model="selected">Masculin
+                            <input type="checkbox" ng-checked="selected=='Feminin'" ng-true-value="'Feminin'" ng-model="selected">Féminin
+                            <input type="checkbox" ng-checked="selected=='Mixte'" ng-true-value="'Mixte'" ng-model="selected" checked="true">Mixte
+                          </div>
 
-					<div class="panel panel-default">
+
+            </div> <br/>
+            <!-- Age -->
+            <div class="form-group" style="display:inline-block">
+                <label for="exampleInputEmail1"><i class="fa fa-male"></i> Groupe d'âge</label><br/>
+<!--                                                                 <li style='list-style-type: none;display:inline-block' ng-repeat="age in ages">
+                     <input type="checkbox" ng-model="age.checked" value={{age.name}} />{{age.name}}
+                    </li>-->
+                    <div>
+                            <input type="checkbox" ng-checked="checked=='Moins_de_5'" ng-true-value="'Moins5'" ng-model="checked">Moins de 5 ans
+                            <input type="checkbox" ng-checked="checked=='Plus_de_5'" ng-true-value="'Plus5'" ng-model="checked">Plus de 5 ans
+                            <input type="checkbox" ng-checked="checked=='Mixte'" ng-true-value="'Mixte'" ng-model="checked" checked="true">Mixte
+                    </div>
+            </div>
+              </div>
+
+					<div class="col-md-12 panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-plus"></i> El&eacute;ments suppl&eacute;mentaires </a></h4>
 						</div>
@@ -192,7 +229,7 @@
                                                             <div class="form-group">
 									<label for="exampleInputEmail1"><i class="fa fa-pencil"></i> Note</label><br/>
 <!--									<select id="select_nb_cas"></select>-->
-                                                                    <input type='number' name='note' min='0' max='5' value='0' ng-model="note" required="" class="form-control">
+                                                                    <input type='number' name='note' min="'1'" max="'5'"   ng-model="note" required="" class="form-control">
 								</div>
 <!--								<div class="form-group">
 									<label for="exampleInputEmail1"><i class="fa fa-info"></i> Remarque</label>

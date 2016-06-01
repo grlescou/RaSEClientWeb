@@ -81,7 +81,7 @@ Left side column. contains the sidebar
                 <tr ng-repeat="u in listCasMaladie">
                   <td>{{u.maladie.nom}}</td>
                   <td>{{u.maladie.categorie.nom}}</td>
-                  <td>{{u.date}}</td>
+                  <td>{{u.date | date:'yyyy-MM-dd' }}</td>
                   <td>{{u.mention.groupeIndividu.nomGroupe}}</td>
                   <td>{{u.mention.nom}}</td>
                   <td>{{u.sexe}}</td>
