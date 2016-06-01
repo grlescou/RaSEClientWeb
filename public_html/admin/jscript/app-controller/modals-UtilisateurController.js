@@ -7,7 +7,8 @@
         $scope.userNew={}
         $scope.userEdit = {};
         $scope.userEdit.nom = "google";
-
+        $scope.emailFormat = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+         $scope.ph_numbr = /^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/;
 
   $scope.animationsEnabled = true;
 $scope.open = function (size) {
