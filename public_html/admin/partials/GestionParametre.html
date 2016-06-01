@@ -1,0 +1,412 @@
+
+
+
+<!-- Site wrapper -->
+<div class="wrapper"   ng-controller="paramCntr"  ng-init="message">
+<header class="main-header" ng-include='"templates/header.html"' ng-show="toshow" >  </header>
+
+<aside class="main-sidebar" ng-include='"templates/side.html"' ng-show="toshow"> </aside>
+
+
+
+<!-- 
+<div ng-include='"templates/header.html"'>  </div>
+
+
+Left side column. contains the sidebar
+<div  ng-include='"templates/side.html"'> </div>
+ -->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper"   ng-controller="ModalParamCtrl">
+   
+   
+<div >
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="editmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Edit- Paramètre</h3>
+        </div>
+        <div class="modal-body">
+          
+
+
+            <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+                  <label for="inputNom" class="col-sm-2 control-label">Nom </label>
+
+               <div class="form-group">
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+            <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="items.actif" >Actif
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="newmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Nouveau Paramètre</h3>
+        </div>
+        <div class="modal-body">
+           
+           
+           <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+            <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="items.actif" >Actif
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+           
+             
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok()">Ajouter</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+   
+
+    
+    <script type="text/ng-template" id="delmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Supprimer Paramètre</h3>
+        </div>
+        <div class="modal-body">
+           
+
+
+		<div class="form-horizontal">
+              <div class="box-body">
+
+         <div class="form-group">
+        <h4 class="col-sm-10">Voulez-vous supprimer ce paramètre?</h4>
+        </div>
+
+			<div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                  </div>
+                </div>
+                 
+
+       </div>
+       </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok()">Supprimer</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+    
+
+    <script type="text/ng-template" id="detailsmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Details- Role</h3>
+        </div>
+        <div class="modal-body">
+          
+
+        <form class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
+                  </div>
+                </div>
+            <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="items.actif" >Actif
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+           
+
+
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </script>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Gestion des Paramètres
+        <small></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Blank page</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Paramètre</h3>
+
+          <div class="box-tools pull-right">
+           
+          </div>
+        </div>
+        <div class="box-body">
+
+
+
+
+         <table id="example1" datatable="ng" class="row-border hoverr">
+                <thead>
+                <tr>
+                	<th colspan="2"></th>
+                	<th>
+                    <div class="form-group">
+                        <button type="submit" ng-click="openNew('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                    </div>
+                </th>
+                </tr>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Valeur</th>
+                  <th>Actif</th>
+                  <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="u in listRole">
+                  <td>{{u.id}}</td>
+                  <td>{{u.nom}}</td>
+                  <td>{{u.value}}</td>
+                  <td>{{u.actif}}</td>
+                  <td>
+                  <button type="button" ng-click="openDetails('lg',u)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                    <button type="button" ng-click="openEdit('lg',u)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDel('lg',u)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+
+                </td>
+                </tr>
+               
+                
+                </tbody>
+            <!--    <tfoot>
+                <tr>
+                  <th>Prenom</th>
+                  <th>Nom</th>
+                  <th>Mail</th>
+                  <th>Role</th>
+                  <th>Telephone</th>
+                  <th>actif</th>
+                </tr>
+                </tfoot> -->
+              </table>
+
+
+
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          120 Utilisateur(s)
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+
+
+
+      </div>
+  <!-- /.content-wrapper -->
+<!-- 
+    <div  ng-include='"templates/footer.html"'></div>
+
+    <aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'   ></aside>
+
+     /.control-sidebar
+   Add the sidebar's background. This div must be placed
+       immediately after the control sidebar 
+  <div class="control-sidebar-bg"></div> -->
+
+
+
+
+
+
+
+<footer class="main-footer" ng-include='"templates/footer.html"' ng-show="toshow"> </footer>
+<aside class="control-sidebar control-sidebar-dark"  ng-include='"templates/sideControl.html"'  ng-show="toshow" ></aside>
+
+     <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg" ng-show="toshow"></div>
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+<!-- ./wrapper -->
+
+
+ 
+
+
+
+
+

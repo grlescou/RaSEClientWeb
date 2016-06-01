@@ -1,14 +1,11 @@
 
-
-
-
-app.controller('DonneeReportCntr', function($scope,$location, $http ) {
+app.controller('paramCntr', function($scope,$location, $http ) {
   
   $scope.toshow = true;
 
   $scope.message= "loading...";
-  $scope.listCasMaladie= [];
-   console.log("Page Controller données de report");
+  $scope.listParametre= [];
+   console.log("Page Controller Paramètre");
 
   var conf = {
       headers : {
@@ -21,12 +18,12 @@ app.controller('DonneeReportCntr', function($scope,$location, $http ) {
     
 
 
-    $http.get(apiServer.getURLCasMaladie(),conf)
+    $http.get(apiServer.getURLParametre(),conf)
         .success(function (data, status, headers, conf)
         {
         	 $scope.message= " i'm in";
           console.log(data);
-          $scope.listCasMaladie= data;
+          $scope.listParametre= data;
          
       if (data.leng){
         console.log(data);

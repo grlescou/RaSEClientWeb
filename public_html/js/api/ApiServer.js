@@ -33,7 +33,7 @@ function ApiServer() {
         this.URL_administrateur = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/administrateur/";
         
         this.URL_role = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/role/";
-        
+         this.URL_parametre = this.prefix + this.IP + ":" + this.PORT + this.ressources+ "/parametre/";
         this.URL_souscription = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/souscription/";
         
         this.URL_groupeIndividu = this.prefix + this.IP + ":" + this.PORT + this.ressources+"/groupeIndividu/";
@@ -95,6 +95,11 @@ function ApiServer() {
 	ApiServer.prototype.getRole = function(callback) {
 		$.getJSON(this.URL_role, callback);
 	}
+        // Recupération des paramètres
+	//
+	ApiServer.prototype.getParametre = function(callback) {
+		$.getJSON(this.URL_parametre, callback);
+	}
         
         
         // Recupération des Souscriptions
@@ -131,12 +136,6 @@ function ApiServer() {
 	}
 
 
-
-
-
-
-
-
 	// Récupération des tous les cas de maladie
 	//
 	ApiServer.prototype.getCasMaladieAll  = function() {
@@ -144,8 +143,6 @@ function ApiServer() {
 			console.log(data);
 		});
 	}
-
-
 
 
 	// *** Accesseurs de consultation *** //
@@ -188,7 +185,9 @@ function ApiServer() {
         ApiServer.prototype.getURLRole = function() {
 		return this.URL_role;
 	}
-        
+         ApiServer.prototype.getURLParametre = function() {
+		return this.URL_parametre;
+	}
         ApiServer.prototype.getURLSouscription = function() {
 		return this.URL_souscription;
 	}
