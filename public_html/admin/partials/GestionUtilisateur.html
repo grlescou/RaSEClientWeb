@@ -70,6 +70,13 @@ Left side column. contains the sidebar
                          <input type="text" class="form-control" ng-model="items.prenom" id="inputprenom" placeholder="Prenom" ng-required="true" />
                        </div>
                     </div>
+                     <div class="form-group">
+                       <label for="inputprenom" class="col-sm-2 control-label" hidden="true">Mot de passe</label>
+
+                       <div class="col-sm-10">
+                         <input type="hidden" class="form-control" ng-model="items.password" id="inputprenom" placeholder="passwrod" ng-required="true" value="pass1234"  />
+                       </div>
+                    </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 
@@ -122,7 +129,7 @@ Left side column. contains the sidebar
                        <label for="inputEmail3" class="col-sm-2 control-label">Commune</label>
 
                        <div class="col-sm-10">
-                       <select class="form-control select2"  ng-model="items.adress.commune"  style="width: 100%;">
+                       <select class="form-control select2"  ng-model="items.adresse.commune"  style="width: 100%;">
                        <option selected="selected">Port-au-Prince</option>
                        <option value='Delmas'>Delmas</option>
                        <option value="Cap-Haitien">Cap-Haitien</option>
@@ -146,29 +153,27 @@ Left side column. contains the sidebar
                  <!-- select -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Role</label>
-                         <div class="col-sm-10">
-                        <select class="form-control" ng-model="items.role">
-                          <option value="" selected="true">--choix role--</option>
-                          <option value="Administrateur">Administrateur</option>
-                          <option value="PersonnelSante">Personnel Sante</option>
-                        </select>
-                        </div>
+                          <div class="col-sm-10">
+                            <select class="form-control" ng-model="items.role" ng-options="c.privilege for c in items.selectRole track by c.id" >
+                              <option value="" selected="true">--choix role--</option>
+
+                            </select>
+                          </div>
                     </div>
 
 
-                <div ng-switch="items.role">
+                <div ng-switch="items.role.privilege">
 					  <div ng-switch-when="Administrateur">
 					     
 					  </div>
-                    <div ng-switch-when="PersonnelSante">
+                    <div ng-switch-when="Utilisateur">
 					    <!-- select -->
                         <div class="form-group">
-                                <label class="col-sm-2 control-label">Profession</label>
+                                <label class="col-sm-2 control-label">Mention</label>
                                  <div class="col-sm-10">
-                                <select class="form-control" ng-model="items.profession.nom">
-                                  <option value="" selected="true">--choix profession--</option>
-                                 <option value="Medecin" >Medecin</option>
-                                 <option value="Infirmiere" >Infirmiere</option>
+                                <select class="form-control" ng-model="items.mentionResponsabilite.nom" ng-options="c.nom for c in items.selectMention track by c.id" >
+                                  <option value="" selected="true">--choix mention--</option>
+                                 
                                 </select>
                                 </div>
                         </div>
@@ -204,7 +209,8 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button  class="btn btn-primary" type="button" ng-click="myForm.$valid &&EditSave(items)">Modifer</button>
+            <button  class="btn btn-primary" type="button" ng-click="selected.item= items; ok();">Modifer</button>
+    <!-- myForm.$valid &&EditSave(items) -->
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -214,7 +220,7 @@ Left side column. contains the sidebar
             <h3 class="modal-title"> Nouveau Utilisateur</h3>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal">
+            <form name="myForm" class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
@@ -241,14 +247,17 @@ Left side column. contains the sidebar
                   <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" ng-model="items.mail" id="inputEmail3" placeholder="Email">
-                  </div>
+                          <input type="email" name="email" class="form-control" ng-model="items.mail" id="inputEmail3" ng-pattern="emailFormat" placeholder="Email" ng-required="true" />
+                          <span class="error" ng-show="myForm.email.$error.email">Email invalide!</span>
+                        </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2  control-label">Telephone</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.telephone" id="inputEmail3" placeholder="Telephone">
+                    <input type="tel" class="form-control" ng-model="items.telephone" id="inputEmail3" placeholder="Telephone" pattern="^(\(?([0-9]{3})\)?)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$" required="" >
+                    
+
                   </div>
                 </div>
 
@@ -311,33 +320,31 @@ Left side column. contains the sidebar
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Role</label>
                    <div class="col-sm-10">
-                  <select class="form-control" ng-model="items.role">
+                  <select class="form-control" ng-model="items.role" ng-options="c.privilege for c in items.selectRole track by c.id" >
                     <option value="" selected="true">--choix role--</option>
-                    <option value="Administrateur">Administrateur</option>
-                    <option value="PersonnelSante">Personnel Sante</option>
+                   
                   </select>
                   </div>
                 </div>
 
 
-                <div ng-switch="items.role">
+                <div ng-switch="items.role.privilege">
 					  <div ng-switch-when="Administrateur">
 					     
 					  </div>
-					  <div ng-switch-when="PersonnelSante">
+					  <div ng-switch-when="Utilisateur">
 					    <!-- select -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Profession</label>
                    <div class="col-sm-10">
-                  <select class="form-control" ng-model="items.profession.nom">
-                    <option value="" selected="true">--choix profession--</option>
-                   <option value="Medecin" >Medecin</option>
-                   <option value="Infirmiere" >Infirmiere</option>
-                  </select>
+                 <select class="form-control" ng-model="items.nom" ng-options="c.nom for c in items.selectMention track by c.id" >
+                                  <option value="" selected="true">--choix mention--</option>
+                                 
+                 </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Prefession</label>
+                  <label class="col-sm-2 control-label">Status</label>
                    <div class="col-sm-10">
                   <select class="form-control" ng-model="items.status">
                     <option value="" selected="true">--choix Status--</option>
@@ -701,6 +708,8 @@ Left side column. contains the sidebar
           <div class="box-tools pull-right">
            
           </div>
+           <div class="alert alert-success" role="alert" ng-show="success===true" ng-bind="message" ></div>
+          <div class="alert alert-danger" role="alert" ng-show="success===false" ng-bind="message" ></div>s
         </div>
         <div class="box-body">
 
