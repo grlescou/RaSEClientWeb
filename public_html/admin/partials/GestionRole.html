@@ -47,7 +47,7 @@ Left side column. contains the sidebar
           
 
 
-            <form class="form-horizontal">
+            <form name="myForm" class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
@@ -60,7 +60,8 @@ Left side column. contains the sidebar
                   <label for="inputNom" class="col-sm-2 control-label">Privilège</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.privilege" id="inputNom" placeholder="Nom">
+                    <input type="text" class="form-control" name="privilege" ng-model="items.privilege" id="inputNom" placeholder="Privilege" ng-required="true">                    
+                    <span  ng-show="myForm.privilege.$invalid " class="help-block">Nom Privilège obligatoire.</span>
                   </div>
                 </div>
             
@@ -79,7 +80,7 @@ Left side column. contains the sidebar
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
+            <button class="btn btn-primary" ng-disabled="myForm.$invalid" type="button" ng-click="EditSave(items)">Modifer</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
@@ -91,7 +92,7 @@ Left side column. contains the sidebar
         <div class="modal-body">
            
            
-            <form class="form-horizontal">
+            <form name="myForm" class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
@@ -104,7 +105,8 @@ Left side column. contains the sidebar
                   <label for="inputNom" class="col-sm-2 control-label">Privilège</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.m.privilege" id="inputNom" placeholder="Privilège">
+                    <input type="text" class="form-control" name="privilege" ng-model="items.m.privilege" id="inputNom" placeholder="Privilège" required />
+                    <span  ng-show="myForm.privilege.$invalid && !myForm.privilege.$pristine" class="help-block">Nom Privilège obligatoire.</span>
                   </div>
                 </div>
                
@@ -125,7 +127,7 @@ Left side column. contains the sidebar
            
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="selected.item= items.m; ok()">Ajouter</button>
+            <button class="btn btn-primary" ng-disabled="myForm.$invalid" type="button" ng-click="selected.item= items.m; ok()">Ajouter</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>

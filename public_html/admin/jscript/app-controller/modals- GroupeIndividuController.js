@@ -126,7 +126,7 @@
                    console.log("listMention");
                    console.log(data);
                     $scope.groupeNew.listMention= data;
-                    
+                    //window.location.reload();
                     //$scope.categorieInstance.changeData($scope.listCategorie);
 
             
@@ -194,9 +194,9 @@
                         
                    console.log(data);
                      $scope.listGIndividu= data;
-                    
+                   
                     //$scope.categorieInstance.changeData($scope.listCategorie);
-
+                    //$route.reload();
             
                  })
                  .error(function (data, status, headers, conf)
@@ -204,7 +204,7 @@
                    $scope.message = "Erreur de rafraichissement de la table";
                  });
 
-
+                 
 //
 //        	$scope.tab = [false,false,false];
 //        	$scope.tab[2] = true;
