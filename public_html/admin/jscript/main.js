@@ -32,6 +32,7 @@ app.config(['$routeProvider','$locationProvider', function ($routeProvider,$loca
     .when("/gesUser", {templateUrl: "partials/GestionUtilisateur.html", controller: "userCntr"})
     .when("/gesAdmin", {templateUrl: "partials/GestionAdministrateur.html", controller: "AdmCntr"})
     .when("/gesRole", {templateUrl: "partials/GestionRole.html", controller: "roleCntr"})
+    .when("/gesMention", {templateUrl: "partials/GestionMention.html", controller: "mentionCntr"})
     .when("/gesGIndividu", {templateUrl: "partials/GestionGroupeIndividu.html", controller: "groupeIndividuCntr"})
     .when("/gesParam", {templateUrl: "partials/GestionParametre.html", controller: "paramCntr"})
 

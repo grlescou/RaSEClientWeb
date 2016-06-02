@@ -1,8 +1,6 @@
 
-
-
 <!-- Site wrapper -->
-<div class="wrapper"   ng-controller="paramCntr"  ng-init="message">
+<div class="wrapper"   ng-controller="mentionCntr"  ng-init="message">
 <header class="main-header" ng-include='"templates/header.html"' ng-show="toshow" >  </header>
 
 <aside class="main-sidebar" ng-include='"templates/side.html"' ng-show="toshow"> </aside>
@@ -17,7 +15,7 @@ Left side column. contains the sidebar
 <div  ng-include='"templates/side.html"'> </div>
  -->
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper"   ng-controller="ModalParamCtrl">
+  <div class="content-wrapper"   ng-controller="ModalMentionCtrl">
    
    
 <div >
@@ -41,72 +39,13 @@ Left side column. contains the sidebar
 
      <script type="text/ng-template" id="editmodal.html">
         <div class="modal-header">
-            <h3 class="modal-title"> Edit- Paramètre</h3>
+            <h3 class="modal-title"> Edit- Mention Responsabilité</h3>
         </div>
         <div class="modal-body">
           
 
 
-            <form class="form-horizontal">
-              <div class="box-body">
-               <div class="form-group">
-                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
-                  </div>
-                </div>
-                 
-
-               <div class="form-group">
-                <label for="inputNom" class="col-sm-2 control-label">Nom </label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
-                  </div>
-                </div>
-            <div class="form-group">
-                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" ng-model="items.actif" >Actif
-                      </label>
-                    </div>
-                  </div>
-                </div>
-      
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                
-              </div>
-              <!-- /.box-footer -->
-            </form>
-
-
-
-
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="EditSave(items)">Modifer</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
-        </div>
-    </script>
-
-     <script type="text/ng-template" id="newmodal.html">
-        <div class="modal-header">
-            <h3 class="modal-title"> Nouveau Paramètre</h3>
-        </div>
-        <div class="modal-body">
-           
-           
-           <form class="form-horizontal">
+            <form name="myForm" class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
@@ -119,26 +58,36 @@ Left side column. contains the sidebar
                   <label for="inputNom" class="col-sm-2 control-label">Nom </label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" >
-                  </div>
-                </div>
-            <div class="form-group">
-                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
+                    <input type="text" class="form-control" name="mention" ng-model="items.nom" id="inputNom" placeholder="Nom ">
+                    <span  ng-show="myForm.mention.$invalid " class="help-block">Nom  obligatoire.</span>
                   </div>
                 </div>
                  <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" ng-model="items.actif" >Actif
-                      </label>
-                    </div>
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                   <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
                   </div>
                 </div>
-      
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">Groupe Individu</label>
+                          <div class="col-sm-10">
+                            <select class="form-control" ng-model="items.groupeIndividu" ng-options="c.nomGroupe for c in items.selectGIndividu track by c.id" >
+                              <option value="" selected="true">--choix groupe individu--</option>
+
+                            </select>
+                          </div>
+                    </div>
+                
+                
+  	  </div>
+					  
+			</div>
+
+
+
+           
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -146,21 +95,84 @@ Left side column. contains the sidebar
               </div>
               <!-- /.box-footer -->
             </form>
-           
-             
+
+
+
+
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="selected.item= items; ok()">Ajouter</button>
+            <button class="btn btn-primary" ng-disabled="myForm.$invalid" type="button" ng-click="EditSave(items)">Modifer</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
 
-   
-
-    
-    <script type="text/ng-template" id="delmodal.html">
+     <script type="text/ng-template" id="newmodal.html">
         <div class="modal-header">
-            <h3 class="modal-title"> Supprimer Paramètre</h3>
+            <h3 class="modal-title"> Nouvelle Mention Responsabilité</h3>
+        </div>
+        <div class="modal-body">
+            
+            <form name="myForm" class="form-horizontal">
+              <div class="box-body">
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Id</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
+                  </div>
+                </div>
+               <div class="form-group">
+                  <label for="inputNom" class="col-sm-2 control-label">Nom </label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="mention" ng-model="items.nom" id="inputNom" placeholder="Nom ">
+                    <span  ng-show="myForm.mention.$invalid " class="help-block">Nom  obligatoire.</span>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                   <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">Groupe Individu</label>
+                          <div class="col-sm-10">
+                              <select class="form-control" ng-model="items.groupeIndividu" ng-options="c.nomGroupe for c in items.selectGIndividu track by c.id" >
+                              <option value="" selected="true">--choix groupe individu--</option>
+
+                            </select>
+                          </div>
+                    </div>
+                
+                
+  	  </div>
+					  
+			</div>
+
+
+
+           
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-disabled="myForm.$invalid" type="button" ng-click="selected.item= items; ok()">Ajouter</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
+        </div>
+    </script>
+
+     <script type="text/ng-template" id="delmodal.html">
+        <div class="modal-header">
+            <h3 class="modal-title"> Supprimer Mention Responsabilité</h3>
         </div>
         <div class="modal-body">
            
@@ -170,7 +182,7 @@ Left side column. contains the sidebar
               <div class="box-body">
 
          <div class="form-group">
-        <h4 class="col-sm-10">Voulez-vous supprimer ce paramètre?</h4>
+        <h4 class="col-sm-10">Voulez-vous supprimer cette mention  ?</h4>
         </div>
 
 			<div class="form-group">
@@ -180,14 +192,22 @@ Left side column. contains the sidebar
                     <input type="text" class="form-control" ng-model="items.id" id="inputNom" placeholder="Id" readonly="">
                   </div>
                 </div>
+                </div>
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Nom </label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom" readonly="">
+                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom ">
                   </div>
                 </div>
-                 
+                 <div class="form-group">
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                   <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
+                  </div>
+                </div>
 
        </div>
        </div>
@@ -199,16 +219,17 @@ Left side column. contains the sidebar
             <button class="btn btn-warning" type="button" ng-click="cancel()">Annuler</button>
         </div>
     </script>
-    
+
 
     <script type="text/ng-template" id="detailsmodal.html">
         <div class="modal-header">
-            <h3 class="modal-title"> Details- Role</h3>
+            <h3 class="modal-title"> Details- Mention Responsabilité</h3>
         </div>
         <div class="modal-body">
           
 
-        <form class="form-horizontal">
+            
+            <form name="myForm" class="form-horizontal">
               <div class="box-body">
                <div class="form-group">
                   <label for="inputNom" class="col-sm-2 control-label">Id</label>
@@ -221,26 +242,36 @@ Left side column. contains the sidebar
                   <label for="inputNom" class="col-sm-2 control-label">Nom </label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.nom" id="inputNom" placeholder="Nom">
-                  </div>
-                </div>
-            <div class="form-group">
-                  <label for="inputNom" class="col-sm-2 control-label">Valeur </label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="items.value" id="inputNom" placeholder="Valeur">
+                    <input type="text" class="form-control" name="mention" ng-model="items.nom" id="inputNom" placeholder="Nom ">
+                    <span  ng-show="myForm.mention.$invalid " class="help-block">Nom  obligatoire.</span>
                   </div>
                 </div>
                  <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" ng-model="items.actif" >Actif
-                      </label>
-                    </div>
+                  <label for="inputprenom" class="col-sm-2 control-label">Description</label>
+
+                   <div class="col-sm-10">
+                  
+                    <textarea class="form-control" rows="6" ng-model="items.description" placeholder="Description"></textarea>
                   </div>
                 </div>
-      
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">Groupe Individu</label>
+                          <div class="col-sm-10">
+                             <select class="form-control" ng-model="items.groupeIndividu.nomGroupe" ng-options="c.nomGroupe for c in items.selectGIndividu track by c.id" >
+                              <option value="" selected="true">--choix groupe individu--</option>
+
+                            </select>
+                          </div>
+                    </div>
+                
+                
+  	  </div>
+					  
+			</div>
+
+
+
+           
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
@@ -248,7 +279,6 @@ Left side column. contains the sidebar
               </div>
               <!-- /.box-footer -->
             </form>
-           
 
 
 
@@ -272,10 +302,11 @@ Left side column. contains the sidebar
 
 
 
+
  <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Gestion des Paramètres
+        Gestion des Mentions Responsabilités
         <small></small>
       </h1>
       <ol class="breadcrumb">
@@ -291,23 +322,23 @@ Left side column. contains the sidebar
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Paramètre</h3>
+          <h3 class="box-title">Mention</h3>
 
           <div class="box-tools pull-right">
            
           </div>
-           <div class="alert alert-success" role="alert" ng-show="success===true" ng-bind="message" ></div>
+          <div class="alert alert-success" role="alert" ng-show="success===true" ng-bind="message" ></div>
           <div class="alert alert-danger" role="alert" ng-show="success===false" ng-bind="message" ></div>
         </div>
         <div class="box-body">
 
 
+       
 
-
-         <table id="example1" datatable="ng" class="row-border hoverr">
+         <table id="example1" datatable="ng" class="row-border hover">
                 <thead>
                 <tr>
-                	<th colspan="4"></th>
+                	<th colspan="3"></th>
                 	<th>
                     <div class="form-group">
                         <button type="submit" ng-click="openNew('lg')" class="btn btn-success"><i class="fa fa-plus"></i></button>
@@ -315,24 +346,22 @@ Left side column. contains the sidebar
                 </th>
                 </tr>
                 <tr>
-                  <th>ID</th>
-                  <th>Nom</th>
-                  <th>Valeur</th>
-                  <th>Actif</th>
+                  <th>Nom </th>
+                  <th>Description</th>
+                  <th>Groupe Individu</th>
                   <th>action</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr ng-repeat="u in listParametre">
-                  <td>{{u.id}}</td>
-                  <td>{{u.nom}}</td>
-                  <td>{{u.value}}</td>
-                  <td>{{u.actif}}</td>
+                <tr ng-repeat="m in listMention">
+                  <td>{{m.nom}}</td>
+                  <td>{{m.description}}</td>
+                  <td>{{m.groupeIndividu.nomGroupe}}</td>
                   <td>
-                  <button type="button" ng-click="openDetails('lg',u)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
-                    <button type="button" ng-click="openEdit('lg',u)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-                    <button type="button" ng-click="openDel('lg',u)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" ng-click="openDetails('lg',m)" class="btn btn-info"><i class="fa fa-chevron-right"></i></button>
+                    <button type="button" ng-click="openEdit('lg',m)" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    <button type="button" ng-click="openDel('lg',m)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 
                 </td>
                 </tr>
@@ -353,6 +382,7 @@ Left side column. contains the sidebar
 
 
 
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -364,6 +394,40 @@ Left side column. contains the sidebar
 
     </section>
     <!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
