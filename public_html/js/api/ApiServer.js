@@ -45,95 +45,103 @@ function ApiServer() {
 	//
 	ApiServer.prototype.getcategorie = function(callback) {
 		$.getJSON(this.URL_categorie, callback);
-	}
+	};
 
 	// Recuperation des maladies
 	//
 	ApiServer.prototype.getMaladie = function(callback) {
 		$.getJSON(this.URL_maladie, callback);
-	}
+	};
 	// Recupération des symtômes
 	//
 	ApiServer.prototype.getSymptomes = function(callback) {
 		$.getJSON(this.URL_symptome, callback);
-	}
+	};
 	// Recupération des mentions
 	//
 	ApiServer.prototype.getMentions = function(callback) {
 		$.getJSON(this.URL_mention, callback);
-	}
+	};
 	// Recupération des cas Maladie
 	//
 	ApiServer.prototype.getCasMaladie = function(callback) {
 		$.getJSON(this.URL_casMaladie, callback);
-	}
+	};
 
 	// Recupération des cas Maladie
 	//
 	ApiServer.prototype.getMaladieSymptomes = function(callback) {
 		$.getJSON(this.URL_maladieSymptomes, callback);
-	}
+	};
 
 	// Recupération des demographie
 	//
 	ApiServer.prototype.getDemographieDepartement = function(id,callback) {
 		$.getJSON(this.URL_demographieDepartement+id, callback);
-	}
+	};
         
         
         ApiServer.prototype.getDemographieCommune = function(id,callback) {
 		$.getJSON(this.URL_demographieCommune+id, callback);
-	}
+	};
         
         
         ApiServer.prototype.getDemographieSectionCommunale = function(id,callback) {
 		$.getJSON(this.URL_demographieSectionCommunale+id, callback);
-	}
+	};
         
         // Recupération des Roles
 	//
 	ApiServer.prototype.getRole = function(callback) {
 		$.getJSON(this.URL_role, callback);
-	}
+	};
         // Recupération des paramètres
 	//
 	ApiServer.prototype.getParametre = function(callback) {
 		$.getJSON(this.URL_parametre, callback);
-	}
+	};
+        
+        
+         // Recupération des paramètres
+	//
+	ApiServer.prototype.getParametreById = function(id,callback) {
+		$.getJSON(this.URL_parametre+id, callback);
+	};
+        
         
         
         // Recupération des Souscriptions
 	//
 	ApiServer.prototype.getSouscription = function(callback) {
 		$.getJSON(this.URL_souscription, callback);
-	}
+	};
         
         
          // Recupération des GroupeIndividus
 	//
 	ApiServer.prototype.getGroupeIndividu = function(callback) {
 		$.getJSON(this.URL_groupeIndividu, callback);
-	}
+	};
         
         
          // Recupération des Administrateurs
 	//
 	ApiServer.prototype.getAdministrateur = function(callback) {
 		$.getJSON(this.URL_administrateur, callback);
-	}
+	};
         
             // Recupération des zones géographiqies
 	//
 	ApiServer.prototype.getZone = function(callback) {
 		$.getJSON(this.URL_zone, callback);
-	}
+	};
 
 	// Recupération des demographie par point
 	//
 	ApiServer.prototype.getDemographieByCoordonnee = function(lat,lon,callback) {
 		 var demographie_lonlat = this.URL_demographie+lon+"/"+lat+"/";
 		$.getJSON(demographie_lonlat, callback);
-	}
+	};
 
 
 	// Récupération des tous les cas de maladie
@@ -142,88 +150,88 @@ function ApiServer() {
 		$.getJSON(this.URL_casMaladie, function(data) {
 			console.log(data);
 		});
-	}
+	};
 
 
 	// *** Accesseurs de consultation *** //
         // 
         ApiServer.prototype.getURLCategeorie = function() {
 		return this.URL_categorie;
-	}
+	};
 	ApiServer.prototype.getURLMaladie = function() {
 		return this.URL_maladie;
-	}
+	};
 	ApiServer.prototype.getURLSymptome  = function() {
 		return this.URL_symptome;
-	}
+	};
 	ApiServer.prototype.getURLMention = function() {
 		return this.URL_mention;
-	}
+	};
 	
 	ApiServer.prototype.getURLCasMaladie = function() {
 		return this.URL_casMaladie;
-	}
+	};
 	
 
 	ApiServer.prototype.getURLDemographieDepartement = function() {
 		return this.URL_demographieDepartement;
-	}
+	};
         
         ApiServer.prototype.getURLDemographieCommune = function() {
 		return this.URL_demographieCommune;
-	}
+	};
         
         ApiServer.prototype.getURLDemographieSectionCommunale = function() {
 		return this.URL_demographieSectionCommunale;
-	}
+	};
         
         ApiServer.prototype.getURLUtilisateur = function() {
 		return this.URL_utilisateur;
-	}
+	};
 
 
         ApiServer.prototype.getURLRole = function() {
 		return this.URL_role;
-	}
+	};
          ApiServer.prototype.getURLParametre = function() {
 		return this.URL_parametre;
-	}
+	};
         ApiServer.prototype.getURLSouscription = function() {
 		return this.URL_souscription;
-	}
+	};
         
         ApiServer.prototype.getURLGroupeIndividu = function() {
 		return this.URL_groupeIndividu;
-	}
+	};
 
          ApiServer.prototype.getURLAdministrateur = function() {
 		return this.URL_administrateur;
-	}
+	};
         
          ApiServer.prototype.getURLPersonnne = function() {
 		return this.URL_personne;
-	}
+	};
 
         ApiServer.prototype.getURLZone = function() {
 		return this.URL_zone;
-	}
+	};
 
 
 	ApiServer.prototype.setIp = function(ip) {
 		this.IP = ip;
-	}
+	};
 	ApiServer.prototype.setPort = function(port) {
 		this.PORT = port;
-	}
+	};
 	ApiServer.prototype.getIp = function() {
 		return this.IP;
-	}
+	};
 	ApiServer.prototype.getPort = function() {
 		return this.PORT;
-	}
+	};
 	ApiServer.prototype.getPrefixURL = function() {
 		return this.prefix + this.IP + ":" + this.PORT + this.ressources;
-	}
+	};
 
 
 

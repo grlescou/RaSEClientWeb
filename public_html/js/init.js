@@ -43,11 +43,120 @@ function initialize() {
 	// 		$("#center").click();
 	// 	}
 	// });
+        
+        
+        
+        
+        var idMaladie= "";
+        var periode = 1;
+        
+        function callData(callback){
+        
+        apiServer.getParametreById("headmaladieId/nom",function(data){
+            console.log(data);
+		if(data){
+			console.log(data);
+                      
+                     idMaladie = data.value;
+			
+			//NProgress.done();
+                        
+            apiServer.getParametreById("periode/nom",function(data){
+            console.log(data);
+		if(data){
+			console.log(data);
+                      
+                     periode = data.value;
+			
+			callback();
+                     
+                    
+		} else{
+			
+                        
+                        
+		}
+                
+            
+        });
+                        
+                        
+                
+                    
+		} else{
+			
+                        
+                        
+		}
+            
+        });
+        
+        
+      
+       
+         
+    
+      
+        }
+        
+     callData(function(){
+      
+        
+        var dateDebut = new Date();
+        var dateFin = new Date();
+        
+        
+        
+        dateFin.setDate(dateFin.getDate() - periode);
+        
+        
+      
+    
+    var dd1 = dateDebut.getDate();
+    var mm1 = dateDebut.getMonth() + 1;
+    var y1 = dateDebut.getFullYear();
+    
+    
+     if(mm1 <10){
+        mm1= "0"+mm1;
+    }
+    
+    if(dd1 <10){
+        dd1= "0"+dd1;
+    }
+    
 
+    var FormattedDateDebut = y1 + '-' +mm1  + '-' + dd1;
+        
+    console.log(FormattedDateDebut);   
+    
+    
+     var dd = dateFin.getDate();
+    var mm = dateFin.getMonth() + 1;
+    var y = dateFin.getFullYear();
+    
+    if(mm <10){
+        mm= "0"+mm;
+    }
+    
+    if(dd <10){
+        dd= "0"+dd;
+    }
+    
+    
+    
+    
+
+    var FormattedDateFin = y + '-' + mm + '-' + dd;
+        console.log(FormattedDateFin);
+      
+        var queryMAp = idMaladie+"/"+FormattedDateDebut+"/"+FormattedDateFin+"/0/0/";
+        
+        console.log(queryMAp);
 
           if (limitAdm === "departement") {
 	
-        apiServer.getDemographieDepartement(2,function(data){
+        apiServer.getDemographieDepartement(queryMAp,function(data){
 		console.log(data);
 		if(data){
 			console.log(data);
@@ -67,7 +176,7 @@ function initialize() {
        }
           if (limitAdm === "commune"){
            
-             apiServer.getDemographieCommune(2,function(data){
+             apiServer.getDemographieCommune(queryMAp,function(data){
 		console.log(data);
 		if(data){
 			console.log(data);
@@ -87,7 +196,7 @@ function initialize() {
                     
           if(limitAdm === "sectionCommuale"){
                    
-         apiServer.getDemographieSectionCommunale(2,function(data){
+         apiServer.getDemographieSectionCommunale(queryMAp,function(data){
 		console.log(data);
 		if(data){
 			console.log(data);
@@ -105,7 +214,7 @@ function initialize() {
       }
                     
 
-
+        });
 	
 
 
