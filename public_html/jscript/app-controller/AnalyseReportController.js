@@ -2,12 +2,12 @@
 
 
 
-app.controller('AnalyseReportCntr', function($scope,$location, $http ) {
+app.controller('AnalyseReportCntr', function($rootScope,$location, $http ) {
   
-  $scope.toshow = true;
+  //$scope.toshow = true;
 
-  $scope.message= "loading...";
-  $scope.listCasMaladie= [];
+  $rootScope.message= "loading...";
+  $rootScope.listCasMaladie= [];
    console.log("Page Controller Utilisateur");
 
   var conf = {
@@ -19,31 +19,32 @@ app.controller('AnalyseReportCntr', function($scope,$location, $http ) {
     var apiServer = new ApiServer();
     
     
+    $rootScope.onClickAnalyse = function(){
 
 
     $http.get(apiServer.getURLCasMaladie(),conf)
         .success(function (data, status, headers, conf)
         {
-        	 $scope.message= " i'm in";
+        	 $rootScope.message= " i'm in";
           console.log(data);
-          $scope.listCasMaladie= data;
+          $rootScope.listCasMaladie= data;
          
       if (data.leng){
         console.log(data);
-        $scope.message = "read";
+        $rootScope.message = "read";
         //$location.path('/home');
       }
       else{
-        $scope.message = data.message
+        $rootScope.message = data.message
       }
         })
         .error(function (data, status, headers, conf)
         {
-          $scope.message = "SUBMIT ERROR";
+          $rootScope.message = "SUBMIT ERROR";
         });
 
  
-  
+    };
 
 
 

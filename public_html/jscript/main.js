@@ -137,6 +137,7 @@ app.controller("collapseReportCtr",['$rootScope',function($rootScope){
        $rootScope.isReportCollapsed = true ;
          $rootScope.isPagerCollapsed = false;
          $rootScope.isAnalyseCollapsed = false;
+         $rootScope.onClickAnalyse();
           
     };
   
@@ -148,6 +149,7 @@ app.controller("collapseReportCtr",['$rootScope',function($rootScope){
       $rootScope.isAnalyseCollapsed = true;
       $rootScope.isEnregistreCollapsed = true;
       $rootScope.isNotificationCollapsed = true;
+      $rootScope.listCasMaladie= [];
   };
   
   
@@ -300,8 +302,8 @@ app.controller('DatepickerPopupCtrl', function ($scope) {
     $scope.dt = new Date(year, month, day);
   };
 
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
+  $scope.formats = ['dd-MMMM-yyyy','yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[1];
   $scope.altInputFormats = ['M!/d!/yyyy'];
 
   $scope.popup1 = {
@@ -439,6 +441,84 @@ app.controller('FilterCtrl', function($scope, $http) {
          console.log("Filter de recherche");
          console.log($scope.Matchfilter);
            console.log("End Filter de recherche");
+           
+           
+           
+           
+           
+           var dd1 = $scope.Matchfilter.dateDebut.getDate();
+    var mm1 = $scope.Matchfilter.dateDebut.getMonth() + 1;
+    var y1 = $scope.Matchfilter.dateDebut.getFullYear();
+    
+    
+     if(mm1 <10){
+        mm1= "0"+mm1;
+    }
+    
+    if(dd1 <10){
+        dd1= "0"+dd1;
+    }
+    
+
+    var FormattedDateDebut = y1 + '-' +mm1  + '-' + dd1;
+        
+    console.log(FormattedDateDebut);   
+    
+    
+     var dd = $scope.Matchfilter.dateFin.getDate();
+    var mm = $scope.Matchfilter.dateFin.getMonth() + 1;
+    var y = $scope.Matchfilter.dateFin.getFullYear();
+    
+    if(mm <10){
+        mm= "0"+mm;
+    }
+    
+    if(dd <10){
+        dd= "0"+dd;
+    }
+    
+    
+    
+    
+
+    var FormattedDateFin = y + '-' + mm + '-' + dd;
+        console.log(FormattedDateFin);
+        
+        
+           
+           
+           
+           
+           
+           
+           
+           
+         queryMAp = $scope.Matchfilter.maladie.id+"/"+  FormattedDateDebut+"/"+ FormattedDateFin; //+"/0/0/";  
+         
+         if($scope.Matchfilter.mention){
+            queryMAp += "/" + $scope.Matchfilter.mention.nom;
+         }
+         else
+         {
+              queryMAp += +"/0";
+         }
+         
+         
+         
+           if($scope.Matchfilter.note === null || $scope.Matchfilter.note ===0){
+            queryMAp += "/" + $scope.Matchfilter.note;
+         }
+         else
+         {
+              queryMAp +="/0";
+         }
+         
+         
+         
+         
+           SelectChangeAdmLimitFomFilter();
+           
+           
      };
      
     

@@ -477,11 +477,11 @@
                                 <input type="text" ng-model="Matchfilter.maladie"  data-placeholder="Choisissez la maladie" placeholder="Choisissez la maladie" uib-typeahead="maladie as maladie.nom for maladie in listMaladie | filter:{nom:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
                                 </li>
                                 
-				<li class="list-group-item">
+<!--				<li class="list-group-item">
                                 <label  for="list_maladie_chosen">Symptômes</label>
-<!--                                <pre>Model: {{Matchfilter.maladie.nom | json}}</pre>-->
+                                <pre>Model: {{Matchfilter.maladie.nom | json}}</pre>
                                  <input type="text" ng-model="Matchfilter.symptome"  data-placeholder="Choisissez les symtômes" placeholder="Choisissez les symtômes" uib-typeahead="symptome as symptome.nom for symptome in Matchfilter.maladie.symptomes | filter:{nom:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
-                                </li>
+                                </li>-->
                                 
                                 <li class="list-group-item">
                                 <label  for="list_maladie_chosen">Mention Responsabilite</label>

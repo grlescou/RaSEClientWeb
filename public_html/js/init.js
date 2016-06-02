@@ -2,6 +2,9 @@ var limitAdm = "departement";
 var globalsTransList = [];
 var TempglobalsTransList = [];
 
+var queryMAp = "";
+
+
 function SelectChangeAdmLimit(){
     limitAdm = document.getElementById("IdSelectLimitAdm").value;
     console.log("choix :"+ limitAdm);
@@ -9,6 +12,17 @@ function SelectChangeAdmLimit(){
     initialize();
      console.log("all done!!");
 }
+
+
+function SelectChangeAdmLimitFomFilter(){
+    limitAdm = document.getElementById("IdSelectLimitAdm").value;
+    console.log("choix :"+ limitAdm);
+    console.log("add evnet to map");
+    initialize();
+     console.log("all done!!");
+}
+
+
 
 // initialiser 
 console.log("in init file");
@@ -98,8 +112,10 @@ function initialize() {
     
       
         }
-        
-     callData(function(){
+    
+    
+     
+    callData(function(){
       
         
         var dateDebut = new Date();
@@ -107,7 +123,7 @@ function initialize() {
         
         
         
-        dateFin.setDate(dateFin.getDate() - periode);
+        dateDebut.setDate(dateDebut.getDate() - periode);
         
         
       
@@ -149,8 +165,12 @@ function initialize() {
 
     var FormattedDateFin = y + '-' + mm + '-' + dd;
         console.log(FormattedDateFin);
+        
+        if(queryMAp === ""){
       
-        var queryMAp = idMaladie+"/"+FormattedDateDebut+"/"+FormattedDateFin+"/0/0/";
+         queryMAp = idMaladie+"/"+FormattedDateDebut+"/"+FormattedDateFin+"/0/0/";
+         
+        }
         
         console.log(queryMAp);
 
