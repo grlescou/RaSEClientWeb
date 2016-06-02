@@ -1,4 +1,7 @@
 
+
+
+
 app.controller('mentionCntr', function($scope,$location, $http ) {
   
   $scope.toshow = true;
@@ -17,23 +20,28 @@ app.controller('mentionCntr', function($scope,$location, $http ) {
     
     
 
-//Get Mention
-  // get Mention
-                $http.get(apiServer.getURLMention(),conf)
-                 .success(function (data, status, headers, conf)
-                 {
-                        
-                   console.log(data);
-                     $scope.listMention= data;
-                   
-                    //$scope.categorieInstance.changeData($scope.listCategorie);
-                    //$route.reload();
-            
-                 })
-                 .error(function (data, status, headers, conf)
-                 {
-                   $scope.message = "Erreur de rafraichissement de la table";
-                 });
+
+    $http.get(apiServer.getURLMention(),conf)
+        .success(function (data, status, headers, conf)
+        {
+        	 $scope.message= " i'm in";
+          console.log(data);
+          $scope.listMention= data;
+         
+      if (data.leng){
+        console.log(data);
+        $scope.message = "read";
+        //$location.path('/home');
+      }
+      else{
+        $scope.message = data.message
+      }
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+        });
+
  
   
 

@@ -7,7 +7,22 @@ var apiServer = new ApiServer();
   $scope.adminNew={}
   $scope.adminEdit = {};
   $scope.adminEdit.nom = "google";
-
+ $scope.adminNew.selectRole=[];
+        $scope.adminNew.m={};
+        $scope.adminNew.m.role = {};
+        
+        $scope.adminEdit.selectRole = [];//[{id:"1232",nom:"c1",description:"c1"},{id:"123232",nom:"c2",description:"c2"},{id:"12787732",nom:"c3",description:"c3"}];
+        $scope.adminEdit.m={};
+        $scope.adminEdit.m.role = {};
+        
+        //mention
+        $scope.adminNew.selectMention=[];
+        $scope.adminNew.m={};
+        $scope.adminNew.m.nom = {};
+        
+        $scope.adminEdit.selectMention = [];//[{id:"1232",nom:"c1",description:"c1"},{id:"123232",nom:"c2",description:"c2"},{id:"12787732",nom:"c3",description:"c3"}];
+        $scope.adminEdit.m={};
+        $scope.adminEdit.m.nom = {};
 
   
 $scope.animationsEnabled = true;
@@ -101,6 +116,37 @@ $scope.open = function (size) {
 
 
   $scope.openNew = function (size) {
+        $scope.adminNew.m={};
+        $scope.adminNew.m.role = {};
+        //get role
+        var conf = {
+      headers : {
+            'Content-Type' : 'application/json'
+        }
+    };
+    
+    var apiServer = new ApiServer();
+    //get Role
+     $http.get(apiServer.getURLRole(),conf)
+        .success(function (data, status, headers, conf)
+        {
+        	 $scope.message= " i'm in";
+          console.log(data);
+          $scope.adminNew.selectRole= data;
+         
+      if (data.leng){
+        console.log(data);
+        $scope.message = "read";
+        //$location.path('/home');
+      }
+      else{
+        $scope.message = data.message
+      }
+        })
+        .error(function (data, status, headers, conf)
+        {
+          $scope.message = "SUBMIT ERROR";
+        });
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
